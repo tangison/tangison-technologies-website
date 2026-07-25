@@ -1,0 +1,487 @@
+{
+  "prompt_name": "Tangison Technologies Website Rebuild",
+  "version": "1.0",
+  "mode": "Audit and plan first. Do not edit, commit, push or deploy until the user approves the implementation plan.",
+  "role": {
+    "identity": "Act as a senior strategy, design and engineering team operating at COLLINS-level strategic discipline.",
+    "instruction": "Do not imitate COLLINS layouts, copy, animations or identity. Apply the principles of one memorable idea, strong art direction, decisive typography, restraint, proof and commercial clarity."
+  },
+  "mission": {
+    "primary": "Rebuild tangison.com as the flagship multi-page website for Tangison Technologies.",
+    "brand_idea": "Intelligence for imperfect conditions.",
+    "visual_idea": "Vast conditions. Precise intelligence.",
+    "desired_impression": "A credible Namibian technology company building applied intelligence systems for real operational environments.",
+    "avoid_impression": [
+      "generic AI startup",
+      "fictional defence contractor",
+      "design-agency portfolio",
+      "dark cyberpunk laboratory",
+      "collection of unrelated services"
+    ]
+  },
+  "repository": {
+    "template_candidate": "https://github.com/tangison/agent",
+    "strategy": "Use the Agent repository as a technical donor or GitHub template only if it passes the audit. Never overwrite or repurpose the existing Agent product repository.",
+    "recommended_destination": "Create a separate repository for the Tangison Technologies website.",
+    "decision_rule": {
+      "reuse_template_when": [
+        "the project builds successfully from a clean install",
+        "routing and layouts are understandable",
+        "TypeScript is strict or can be made strict without major breakage",
+        "dependencies are maintained and necessary",
+        "there are reusable header, motion, image, metadata and accessibility primitives",
+        "product-specific Agent code can be removed cleanly",
+        "the template does not lock the new website into a single-page architecture"
+      ],
+      "start_fresh_when": [
+        "the clean build fails because of structural debt",
+        "the codebase contains tightly coupled product logic",
+        "the route structure is unsuitable for a marketing website",
+        "the accessibility foundation is materially broken",
+        "the dependency graph is bloated or obsolete",
+        "removing Agent-specific code would take longer than recreating the shared shell"
+      ],
+      "preferred_outcome": "A hybrid rebuild: start from a separate copy of the Agent technical foundation, remove all Agent-specific product content, and rebuild the information architecture, components, copy and visual experience from zero."
+    }
+  },
+  "phase_0_repository_audit": {
+    "required_checks": [
+      "Confirm repository visibility, default branch and clean working tree.",
+      "Read README, package manifest, lockfile, framework configuration, TypeScript configuration and deployment configuration.",
+      "Inventory routes, layouts, components, styles, fonts, images, motion utilities and metadata helpers.",
+      "Identify product-specific Agent code that must not be inherited.",
+      "Run the documented clean installation.",
+      "Run lint, typecheck, tests and production build.",
+      "Inspect the desktop and mobile interface.",
+      "Check keyboard navigation, focus states, contrast, reduced motion and overlay accessibility.",
+      "Measure dependency weight and identify packages that can be removed.",
+      "Report what should be reused, rewritten, removed or replaced."
+    ],
+    "required_output": {
+      "template_score_out_of_10": true,
+      "reuse_decision": [
+        "reuse",
+        "hybrid",
+        "start_fresh"
+      ],
+      "file_level_reuse_map": true,
+      "risk_register": true,
+      "implementation_plan": true,
+      "estimated_page_and_component_scope": true
+    },
+    "stop_condition": "Present the audit and plan to the user. Wait for explicit approval before implementation."
+  },
+  "required_inputs": {
+    "logo": {
+      "status": "required before final visual implementation",
+      "preferred_files": [
+        "SVG wordmark",
+        "SVG icon or monogram",
+        "transparent PNG fallback"
+      ],
+      "rules": [
+        "Never regenerate, redraw or approximate the Tangison logo.",
+        "Do not bake the logo into generated website imagery.",
+        "Preserve clear space and aspect ratio.",
+        "Use the SVG for header, footer, favicon source and social composition."
+      ]
+    },
+    "asset_package": {
+      "name": "Tangison_Web_Assets_Lite.zip",
+      "destination": "public/images/tangison",
+      "manifest": "asset-manifest.json"
+    }
+  },
+  "positioning": {
+    "primary_headline": "Intelligence for imperfect conditions.",
+    "primary_support": "Tangison Technologies designs operational intelligence systems for environments where connectivity, data and infrastructure cannot be assumed.",
+    "primary_cta": "Start a conversation",
+    "secondary_cta": "Explore the system",
+    "message_framework": {
+      "observe": "Connect fragmented signals without pretending the underlying environment is perfect.",
+      "decide": "Turn incomplete operational information into useful, accountable decisions.",
+      "operate": "Automate repeatable action while preserving human control and clear boundaries."
+    },
+    "copy_rules": [
+      "Express one ideology rather than advertising a long catalogue of services.",
+      "Sound technically sophisticated but remain understandable.",
+      "Use concrete nouns and active verbs.",
+      "Keep paragraphs under 70 words.",
+      "Do not repeat the headline in the supporting copy.",
+      "Do not use fabricated metrics, clients, testimonials or deployment claims.",
+      "Avoid revolutionise, cutting-edge, game-changing, seamless, unlock and next-generation.",
+      "Avoid vague phrases such as solutions for tomorrow.",
+      "Use Namibian business English.",
+      "No em dashes."
+    ]
+  },
+  "information_architecture": {
+    "architecture": "True multi-page website with route-level pages. Do not build a single-page website.",
+    "primary_navigation": [
+      {
+        "label": "Technology",
+        "route": "/technology"
+      },
+      {
+        "label": "Company",
+        "route": "/company"
+      },
+      {
+        "label": "Contact",
+        "route": "/contact"
+      }
+    ],
+    "pages": [
+      {
+        "route": "/",
+        "name": "Home",
+        "purpose": "State the ideology, show the system visually and create one clear conversion path.",
+        "sections": [
+          "Minimal header",
+          "Full-bleed Skeleton Coast hero",
+          "One-idea positioning statement",
+          "Observe, Decide, Operate system",
+          "Horizontal editorial image rail",
+          "Short Namibia context",
+          "Quiet ecosystem index",
+          "Direct final contact statement",
+          "Minimal footer"
+        ]
+      },
+      {
+        "route": "/technology",
+        "name": "Technology",
+        "purpose": "Explain Tangison as one operational intelligence system rather than many disconnected services.",
+        "sections": [
+          "Technology thesis",
+          "Observe layer",
+          "Decide layer",
+          "Operate layer",
+          "Human control and boundaries",
+          "Deployment conditions",
+          "Contact route"
+        ]
+      },
+      {
+        "route": "/company",
+        "name": "Company",
+        "purpose": "Explain Tangison Technologies, its Namibian origin, working principles and ecosystem.",
+        "sections": [
+          "Company statement",
+          "Built in Namibia",
+          "Principles",
+          "Tangison Studio, Agent and Labs ecosystem",
+          "Contact route"
+        ],
+        "team_policy": "Do not create a visible team gallery for now. Include the known members only in Organization structured data."
+      },
+      {
+        "route": "/contact",
+        "name": "Contact",
+        "purpose": "Provide a short, low-friction enquiry route.",
+        "sections": [
+          "Direct statement",
+          "Name, email, organisation and message form",
+          "Direct email alternative",
+          "Expected response time",
+          "Privacy note"
+        ]
+      },
+      {
+        "route": "/privacy",
+        "name": "Privacy",
+        "purpose": "Legal and form-data disclosure."
+      },
+      {
+        "route": "/terms",
+        "name": "Terms",
+        "purpose": "Website terms."
+      }
+    ],
+    "future_routes_not_in_primary_navigation": [
+      "/field-notes",
+      "/work"
+    ],
+    "future_route_rule": "Do not publish Work or Field Notes until there is real, honest content."
+  },
+  "visual_system": {
+    "direction": "Hyper-minimal, hyper-real and image-led.",
+    "asset_rule": "Every raster image must contain no more than two dominant visual elements.",
+    "composition": [
+      "Use large editorial images rather than repeated small cards.",
+      "Use negative space as an active design element.",
+      "Allow alternating light and dark sections.",
+      "Do not cover every image with a heavy black overlay.",
+      "Do not place more than two major content blocks in one viewport.",
+      "Keep interfaces calm enough that each image can carry the narrative."
+    ],
+    "palette": {
+      "ocean_black": "#0B0D0F",
+      "warm_white": "#F3F0E8",
+      "signal_teal": "#00888A",
+      "controlled_rust": "#8A4331",
+      "fog_grey": "#C9CBC8"
+    },
+    "typography": {
+      "display": "Cabinet Grotesk or the existing verified Tangison display face",
+      "body": "Satoshi or the existing verified Tangison body face",
+      "technical": "JetBrains Mono used only for limited metadata",
+      "rules": [
+        "Use large decisive headings.",
+        "Body text must remain comfortably readable.",
+        "Do not use tiny 8px labels.",
+        "Do not apply extreme letter spacing to ordinary navigation or buttons.",
+        "Keep technical monospace text below 10 percent of visible copy."
+      ]
+    },
+    "buttons": {
+      "style": "Text links or compact rounded pills",
+      "avoid": [
+        "large rectangular CTA blocks",
+        "multiple competing button styles",
+        "tiny low-contrast links"
+      ]
+    }
+  },
+  "asset_mapping": [
+    {
+      "file": "01-skeleton-coast-hero-1920x1080.webp",
+      "usage": "Homepage desktop hero",
+      "priority": true
+    },
+    {
+      "file": "01-skeleton-coast-hero-mobile-1080x1350.webp",
+      "usage": "Homepage mobile hero",
+      "priority": true
+    },
+    {
+      "file": "02-skeleton-coast-signal-og-1200x630.webp",
+      "usage": "Default Open Graph image",
+      "priority": true
+    },
+    {
+      "file": "03-ai-operations-node.webp",
+      "usage": "Observe or operate layer"
+    },
+    {
+      "file": "04-data-decision-planes.webp",
+      "usage": "Decide layer"
+    },
+    {
+      "file": "05-resilient-platform-monolith.webp",
+      "usage": "Technology thesis"
+    },
+    {
+      "file": "06-strategy-deployment-ring.webp",
+      "usage": "Deployment or human-control section"
+    },
+    {
+      "file": "07-ecosystem-studio.webp",
+      "usage": "Studio ecosystem item"
+    },
+    {
+      "file": "08-ecosystem-agent.webp",
+      "usage": "Agent ecosystem item"
+    },
+    {
+      "file": "09-ecosystem-labs.webp",
+      "usage": "Labs ecosystem item"
+    },
+    {
+      "file": "10-about-namibia-signal.webp",
+      "usage": "Company desktop hero"
+    },
+    {
+      "file": "10-about-namibia-signal-mobile-1080x1350.webp",
+      "usage": "Company mobile hero"
+    },
+    {
+      "file": "11-contact-coast-horizon.webp",
+      "usage": "Contact desktop hero"
+    },
+    {
+      "file": "11-contact-coast-horizon-mobile-1080x1350.webp",
+      "usage": "Contact mobile hero"
+    },
+    {
+      "file": "12-carousel-fog-vessel.webp",
+      "usage": "Editorial horizontal rail"
+    },
+    {
+      "file": "13-carousel-dune-continuity.webp",
+      "usage": "Editorial horizontal rail"
+    },
+    {
+      "file": "14-carousel-rust-threshold.webp",
+      "usage": "Editorial horizontal rail"
+    }
+  ],
+  "horizontal_rail": {
+    "purpose": "Create an image-led narrative break without turning the site into a card grid.",
+    "interaction": [
+      "Use native horizontal scrolling with CSS scroll snap.",
+      "Support mouse, touch, trackpad and keyboard.",
+      "Do not autoplay.",
+      "Do not hijack vertical scrolling.",
+      "Show a subtle progress indicator.",
+      "Respect reduced motion.",
+      "Keep headings and captions as live HTML outside the images."
+    ]
+  },
+  "header": {
+    "desktop": [
+      "Authentic Tangison logo on the left",
+      "Technology, Company and Contact on the right",
+      "One compact contact pill",
+      "No full-screen mega menu"
+    ],
+    "mobile": [
+      "Logo",
+      "One accessible menu button",
+      "Simple full-height list only when opened"
+    ],
+    "accessibility": [
+      "When closed, mobile navigation must use inert or be unmounted.",
+      "When open, apply focus management, Escape close and focus return.",
+      "Do not leave invisible links in the accessibility tree."
+    ]
+  },
+  "footer": {
+    "maximum_visual_height": "Approximately 240px on desktop, content dependent",
+    "content": [
+      "Tangison wordmark",
+      "Intelligence for imperfect conditions.",
+      "Windhoek, Namibia",
+      "contact@tangison.com",
+      "Technology",
+      "Company",
+      "Contact",
+      "Privacy",
+      "Terms",
+      "Made by Tangison Studio"
+    ],
+    "rules": [
+      "No background image.",
+      "No repeated navigation directory.",
+      "No large newsletter form.",
+      "No oversized empty area.",
+      "Use one hairline divider and generous but controlled spacing."
+    ]
+  },
+  "team_metadata": {
+    "visible_team_section": false,
+    "schema_type": "Organization.member",
+    "members": [
+      "Tanguy",
+      "Son",
+      "Paulus",
+      "Margreta",
+      "Nangula"
+    ],
+    "rule": "Do not invent surnames, titles, biographies, portraits or credentials."
+  },
+  "technical_requirements": {
+    "architecture": [
+      "Use route-level server-rendered or statically generated pages.",
+      "Do not build the website as a single-page application.",
+      "Prefer server components and progressive enhancement.",
+      "Do not initialise essential content at opacity zero.",
+      "The core website must remain readable if animation JavaScript fails."
+    ],
+    "images": [
+      "Use the supplied WebP assets.",
+      "Use responsive sizes and explicit width-height or aspect-ratio.",
+      "Preload only the homepage hero.",
+      "Lazy-load below-the-fold images.",
+      "Use object-position values from asset-manifest.json.",
+      "Never upscale a source beyond its useful resolution."
+    ],
+    "motion": [
+      "Motion communicates hierarchy and continuity only.",
+      "Use subtle transforms and opacity transitions.",
+      "No scroll-jacking.",
+      "No continuous decorative animation.",
+      "Respect prefers-reduced-motion."
+    ],
+    "forms": [
+      "Every control requires a visible label and name attribute.",
+      "Use real POST handling with server-side validation.",
+      "Provide loading, success and error states.",
+      "Prevent spam without displaying a visible honeypot.",
+      "Do not expose secrets in the client."
+    ],
+    "seo": [
+      "Unique title and description per page.",
+      "Canonical URL per indexable page.",
+      "Open Graph and Twitter metadata using the supplied OG image.",
+      "Organization, WebSite and relevant Service structured data.",
+      "Include the known team members only in Organization.member metadata.",
+      "Generate robots.txt and sitemap.xml from the production domain.",
+      "Redirect retired Tangison routes rather than leaving stale indexed pages.",
+      "Noindex internal brand-system or staging routes."
+    ],
+    "accessibility": [
+      "WCAG 2.2 AA target.",
+      "Visible keyboard focus.",
+      "Minimum comfortable body size.",
+      "Sufficient contrast for all text and controls.",
+      "Semantic landmarks and one logical H1 per page.",
+      "Descriptive links.",
+      "Accessible horizontal rail instructions and controls."
+    ],
+    "performance_targets": {
+      "lighthouse_performance": 90,
+      "lighthouse_accessibility": 100,
+      "lighthouse_best_practices": 95,
+      "lighthouse_seo": 100,
+      "lcp_seconds_mobile": 2.5,
+      "cls": 0.1,
+      "inp_milliseconds": 200
+    }
+  },
+  "content_boundaries": [
+    "Do not publish fake case studies.",
+    "Do not imply products are active if they are still in development.",
+    "Do not invent clients, certifications, partnerships, deployment numbers or impact metrics.",
+    "Do not create a visible team section until approved.",
+    "Do not add a blog, pricing page, careers page or dashboard without a real requirement.",
+    "Do not turn Observe, Decide and Operate into three separate companies or unrelated service cards."
+  ],
+  "verification": {
+    "required_commands": [
+      "clean install",
+      "lint",
+      "typecheck",
+      "tests if present",
+      "production build"
+    ],
+    "required_visual_checks": [
+      "desktop homepage",
+      "mobile homepage",
+      "desktop technology page",
+      "mobile navigation",
+      "horizontal rail interaction",
+      "contact form states",
+      "footer at short and long viewport heights"
+    ],
+    "required_audits": [
+      "keyboard-only navigation",
+      "reduced-motion behaviour",
+      "automated accessibility scan",
+      "broken-link scan",
+      "metadata and structured-data validation",
+      "image size and loading validation"
+    ]
+  },
+  "delivery": {
+    "after_plan_approval": [
+      "Implement the approved multi-page website.",
+      "Use the authentic supplied logo.",
+      "Import the lean WebP asset package.",
+      "Remove unused dependencies and inherited Agent content.",
+      "Run all verification checks.",
+      "Provide a page inventory, changed-file summary, test evidence and remaining content gaps.",
+      "Do not deploy or modify DNS unless the user explicitly asks."
+    ]
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Tangison Technologies",
+  "url": "https://tangison.com/",
+  "email": "contact@tangison.com",
+  "location": {
+    "@type": "Place",
+    "name": "Windhoek, Namibia"
+  },
+  "member": [
+    {
+      "@type": "Person",
+      "name": "Tanguy"
+    },
+    {
+      "@type": "Person",
+      "name": "Son"
+    },
+    {
+      "@type": "Person",
+      "name": "Paulus"
+    },
+    {
+      "@type": "Person",
+      "name": "Margreta"
+    },
+    {
+      "@type": "Person",
+      "name": "Nangula"
+    }
+  ]
+}
+

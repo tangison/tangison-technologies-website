@@ -1,0 +1,115 @@
+{
+  "system": {
+    "name": "Tangison Hyper-Minimal Visual System",
+    "ideology": "Vast conditions. Precise intelligence.",
+    "maximum_dominant_elements_per_image": 2,
+    "logo_policy": "Overlay the authentic Tangison logo in HTML or CSS. Do not bake generated logos into raster images.",
+    "footer_policy": "No footer image. Use typography, spacing, a hairline divider and one direct contact route."
+  },
+  "assets": [
+    {
+      "id": "hero",
+      "file": "webp/01-skeleton-coast-hero-1920x1080.webp",
+      "mobile_file": "mobile/01-skeleton-coast-hero-mobile-1080x1350.webp",
+      "placement": "Homepage hero",
+      "alt": "The Namib Desert meeting the Atlantic Ocean through coastal fog on the Skeleton Coast",
+      "focal_position": "center",
+      "overlay": "Optional subtle left-to-right graphite gradient at no more than 35 percent"
+    },
+    {
+      "id": "og",
+      "file": "webp/02-skeleton-coast-signal-og-1200x630.webp",
+      "placement": "Open Graph and social preview",
+      "alt": "A solitary dark signal monolith on the fog-softened Skeleton Coast",
+      "focal_position": "center",
+      "overlay": "Place the authentic Tangison logo and live title in the social metadata renderer, not in the source image"
+    },
+    {
+      "id": "ai_operations",
+      "file": "webp/03-ai-operations-node.webp",
+      "placement": "AI Operations or core capability",
+      "alt": "A minimal graphite control node with a single teal status light",
+      "focal_position": "right center"
+    },
+    {
+      "id": "data_decision",
+      "file": "webp/04-data-decision-planes.webp",
+      "placement": "Data and Decision Systems",
+      "alt": "Intersecting smoke-glass planes joined by a precise teal seam",
+      "focal_position": "left center"
+    },
+    {
+      "id": "resilient_platform",
+      "file": "webp/05-resilient-platform-monolith.webp",
+      "placement": "Resilient Digital Platforms",
+      "alt": "A dark stone monolith with a narrow light seam emerging through coastal fog",
+      "focal_position": "left center"
+    },
+    {
+      "id": "strategy_deployment",
+      "file": "webp/06-strategy-deployment-ring.webp",
+      "placement": "Strategy and Deployment",
+      "alt": "A weathered metal ring aligned with one line across pale coastal sand",
+      "focal_position": "center"
+    },
+    {
+      "id": "ecosystem_studio",
+      "file": "webp/07-ecosystem-studio.webp",
+      "placement": "Tangison Studio ecosystem tile",
+      "alt": "A tactile teal pigment circle pressed into black mineral sand",
+      "focal_position": "center"
+    },
+    {
+      "id": "ecosystem_agent",
+      "file": "webp/08-ecosystem-agent.webp",
+      "placement": "Tangison Agent ecosystem tile",
+      "alt": "A smooth graphite stone with one small teal signal on pale sand",
+      "focal_position": "left bottom"
+    },
+    {
+      "id": "ecosystem_labs",
+      "file": "webp/09-ecosystem-labs.webp",
+      "placement": "Tangison Labs ecosystem tile",
+      "alt": "A brushed aluminium disc emerging from dark wet coastal sand",
+      "focal_position": "right top"
+    },
+    {
+      "id": "about",
+      "file": "webp/10-about-namibia-signal.webp",
+      "mobile_file": "mobile/10-about-namibia-signal-mobile-1080x1350.webp",
+      "placement": "Company or Namibia page hero",
+      "alt": "A single distant signal mast on a vast Namibian gravel horizon",
+      "focal_position": "right center"
+    },
+    {
+      "id": "contact",
+      "file": "webp/11-contact-coast-horizon.webp",
+      "mobile_file": "mobile/11-contact-coast-horizon-mobile-1080x1350.webp",
+      "placement": "Contact page or closing call to action",
+      "alt": "A quiet fog horizon where the Atlantic meets a dark Skeleton Coast beach",
+      "focal_position": "center"
+    },
+    {
+      "id": "carousel_fog_vessel",
+      "file": "webp/12-carousel-fog-vessel.webp",
+      "placement": "Horizontal editorial carousel",
+      "alt": "A distant vessel silhouette fading into Skeleton Coast fog",
+      "focal_position": "left center"
+    },
+    {
+      "id": "carousel_continuity",
+      "file": "webp/13-carousel-dune-continuity.webp",
+      "placement": "Horizontal editorial carousel",
+      "alt": "A clean Namib dune ridge marked by one restrained teal line",
+      "focal_position": "center"
+    },
+    {
+      "id": "carousel_threshold",
+      "file": "webp/14-carousel-rust-threshold.webp",
+      "placement": "Horizontal editorial carousel",
+      "alt": "A plain rusted steel plate standing in still dark water and fog",
+      "focal_position": "right center"
+    }
+  ]
+}
+

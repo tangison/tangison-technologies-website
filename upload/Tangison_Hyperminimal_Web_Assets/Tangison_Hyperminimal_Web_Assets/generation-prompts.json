@@ -1,0 +1,49 @@
+{
+  "mode": "Built-in image generation",
+  "shared_direction": {
+    "use_case": "photorealistic-natural and restrained stylized-concept",
+    "style": "Hyper-realistic premium editorial photography with natural material texture",
+    "maximum_elements": 2,
+    "signature_location": "Skeleton Coast, Namibia",
+    "palette": [
+      "ocean-black",
+      "fog white",
+      "mineral sand",
+      "controlled rust",
+      "restrained Tangison teal"
+    ],
+    "avoid": [
+      "faces",
+      "hands",
+      "crowds",
+      "animals",
+      "complex machinery",
+      "AI brains",
+      "robots",
+      "fake interfaces",
+      "text",
+      "generated logos",
+      "watermarks",
+      "cyberpunk",
+      "heavy black overlays",
+      "orange cinematic grading",
+      "surreal geometry"
+    ]
+  },
+  "asset_concepts": [
+    "Skeleton Coast dune meeting the Atlantic",
+    "Coastal signal monolith",
+    "Minimal AI operations node",
+    "Intersecting data planes",
+    "Resilient stone threshold",
+    "Strategy ring and line",
+    "Studio teal pigment signal",
+    "Agent graphite signal stone",
+    "Labs aluminium field experiment",
+    "Namibian horizon signal mast",
+    "Skeleton Coast contact horizon",
+    "Fog vessel field note",
+    "Dune continuity line",
+    "Rust threshold in still water"
+  ]
+}
