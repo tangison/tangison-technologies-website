@@ -1,0 +1,50 @@
+[
+  {
+    "viewport": "mobile-375",
+    "width": 375,
+    "title": "An AI workforce that runs inside your infrastructure",
+    "nav_height": 64,
+    "footer_height": 775,
+    "hero_opacity": "1",
+    "theme": "light",
+    "chat_widget_visible": true,
+    "console_errors_count": 0,
+    "screenshot_path": "/home/z/my-project/download/ss-mobile-375.png"
+  },
+  {
+    "viewport": "tablet-768",
+    "width": 768,
+    "title": "An AI workforce that runs inside your infrastructure",
+    "nav_height": 64,
+    "footer_height": 402,
+    "hero_opacity": "1",
+    "theme": "light",
+    "chat_widget_visible": true,
+    "console_errors_count": 0,
+    "screenshot_path": "/home/z/my-project/download/ss-tablet-768.png"
+  },
+  {
+    "viewport": "desktop-1280",
+    "width": 1280,
+    "title": "An AI workforce that runs inside your infrastructure",
+    "nav_height": 64,
+    "footer_height": 402,
+    "hero_opacity": "1",
+    "theme": "light",
+    "chat_widget_visible": true,
+    "console_errors_count": 0,
+    "screenshot_path": "/home/z/my-project/download/ss-desktop-1280.png"
+  },
+  {
+    "viewport": "desktop-1440",
+    "width": 1440,
+    "title": "An AI workforce that runs inside your infrastructure",
+    "nav_height": 64,
+    "footer_height": 402,
+    "hero_opacity": "1",
+    "theme": "light",
+    "chat_widget_visible": true,
+    "console_errors_count": 0,
+    "screenshot_path": "/home/z/my-project/download/ss-desktop-1440.png"
+  }
+]
