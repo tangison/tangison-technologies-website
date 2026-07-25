@@ -1,6 +1,5 @@
 'use client';
 
-import Image from "next/image";
 import Link from "next/link";
 import { SITE } from "@/lib/site";
 
@@ -14,25 +13,21 @@ interface LogoProps {
 }
 
 const sizeMap = {
-  sm: { width: 96, height: 24 },
-  md: { width: 140, height: 35 },
-  lg: { width: 180, height: 45 },
+  sm: "h-6",
+  md: "h-9",
+  lg: "h-12",
 };
 
 export function Logo({ linked = true, size = "md", className = "" }: LogoProps) {
-  const dims = sizeMap[size];
+  const heightClass = sizeMap[size];
   const alt = `${SITE.name} logo`;
 
   const img = (
-    <Image
-      src="/tangison-logo.png"
+    <img
+      src="/tangison-logo.svg"
       alt={alt}
-      width={dims.width}
-      height={dims.height}
-      priority={size === "lg"}
-      sizes={`${dims.width}px`}
-      className={`h-auto w-auto ${className}`}
-      style={{ maxWidth: dims.width, maxHeight: dims.height }}
+      className={`${heightClass} w-auto ${className}`}
+      style={{ maxHeight: size === "sm" ? 24 : size === "md" ? 36 : 48 }}
     />
   );
 

@@ -37,7 +37,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE.siteUrl),
   alternates: { canonical: SITE.siteUrl },
   icons: {
-    icon: "/favicon.png",
+    icon: [
+      { url: "/favicon.ico", sizes: "48x48" },
+      { url: "/favicon.png", sizes: "32x32", type: "image/png" },
+      { url: "/tangison-shipwreck-icon.svg", type: "image/svg+xml" },
+    ],
   },
   openGraph: {
     title: SITE.name,

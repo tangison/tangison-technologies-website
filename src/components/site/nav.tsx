@@ -24,6 +24,37 @@ const DROPDOWN_COMPANY = [
   { label: "Contact", href: "/contact" },
 ];
 
+/* ─── Focus trap utility ─── */
+function getFocusableElements(container: HTMLElement): HTMLElement[] {
+  return Array.from(
+    container.querySelectorAll(
+      'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    )
+  ).filter((el) => el.offsetParent !== null); // visible only
+}
+
+function trapFocus(container: HTMLElement, event: KeyboardEvent) {
+  const focusable = getFocusableElements(container);
+  if (focusable.length === 0) return;
+
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+
+  if (event.key === "Tab") {
+    if (event.shiftKey) {
+      if (document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      }
+    } else {
+      if (document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+  }
+}
+
 export function Nav() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -31,10 +62,10 @@ export function Nav() {
   const [dropdown, setDropdown] = useState<string | null>(null);
   const dropdownTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const menuRef = useRef<HTMLDivElement>(null);
+  const menuTriggerRef = useRef<HTMLButtonElement>(null);
 
-  // Close menu on route change — legitimate side effect of navigation
+  // Close menu on route change
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- closing UI on external route change
     setMenuOpen(false);
     setDropdown(null);
   }, [pathname]);
@@ -51,17 +82,30 @@ export function Nav() {
     };
   }, [menuOpen]);
 
-  // Focus trap & Escape for off-canvas
+  // Real focus trap + Escape for off-canvas
   useEffect(() => {
     if (!menuOpen) return;
 
-    const handler = (e: KeyboardEvent) => {
+    const menu = menuRef.current;
+    if (!menu) return;
+
+    // Focus the first focusable element on open
+    const focusable = getFocusableElements(menu);
+    if (focusable.length > 0) {
+      focusable[0].focus();
+    }
+
+    const keyHandler = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         setMenuOpen(false);
+        menuTriggerRef.current?.focus(); // restore focus to trigger
+        return;
       }
+      trapFocus(menu, e);
     };
-    document.addEventListener("keydown", handler);
-    return () => document.removeEventListener("keydown", handler);
+
+    document.addEventListener("keydown", keyHandler);
+    return () => document.removeEventListener("keydown", keyHandler);
   }, [menuOpen]);
 
   // CMD+K global trigger for search
@@ -167,7 +211,6 @@ export function Nav() {
 
           {/* Right actions */}
           <div className="flex items-center gap-3">
-            {/* Search trigger */}
             <button
               onClick={() => setSearchOpen(true)}
               className="flex h-9 w-9 items-center justify-center rounded-md text-[var(--muted-ink)] hover:text-[var(--ink)] hover:bg-[var(--surface-2)] transition-colors"
@@ -179,7 +222,6 @@ export function Nav() {
               </svg>
             </button>
 
-            {/* Contact action (small, quiet) */}
             <Link
               href="/contact"
               className="hidden md:inline-flex btn-outline text-xs py-1.5 px-3"
@@ -187,8 +229,8 @@ export function Nav() {
               Contact
             </Link>
 
-            {/* Menu trigger */}
             <button
+              ref={menuTriggerRef}
               onClick={() => setMenuOpen(true)}
               className="flex h-9 w-9 items-center justify-center rounded-md text-[var(--muted-ink)] hover:text-[var(--ink)] hover:bg-[var(--surface-2)] transition-colors"
               aria-label="Open menu"
@@ -204,179 +246,187 @@ export function Nav() {
         </div>
       </header>
 
+      {/* ─── OFF-CANVAS OVERLAY ─── */}
+      {menuOpen && (
+        <div
+          className="fixed inset-0 z-50 bg-[rgba(26,26,24,0.3)]"
+          onClick={() => {
+            setMenuOpen(false);
+            menuTriggerRef.current?.focus();
+          }}
+        />
+      )}
+
       {/* ─── OFF-CANVAS MENU ─── */}
-      <div
-        className={`fixed inset-0 z-50 transition-colors ${menuOpen ? "bg-[rgba(26,26,24,0.3)]" : "bg-transparent pointer-events-none"}`}
-        aria-hidden={!menuOpen}
-        onClick={() => setMenuOpen(false)}
-      />
-
-      <div
-        ref={menuRef}
-        className={`nav-surface-enter ${menuOpen ? "open" : ""} fixed top-0 right-0 bottom-0 z-50 w-full md:w-[520px] bg-[var(--surface)] border-l border-[var(--hairline)] overflow-y-auto`}
-        role="dialog"
-        aria-label="Navigation menu"
-        aria-modal={menuOpen}
-      >
-        {/* Close button */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-[var(--hairline)]">
-          <Logo linked={false} size="sm" />
-          <button
-            onClick={() => setMenuOpen(false)}
-            className="flex h-10 w-10 items-center justify-center rounded-md text-[var(--ink)] hover:bg-[var(--surface-2)] transition-colors"
-            aria-label="Close menu"
-          >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="18" y1="6" x2="6" y2="18" />
-              <line x1="6" y1="6" x2="18" y2="18" />
-            </svg>
-          </button>
-        </div>
-
-        {/* Primary nav links with imagery */}
-        <div className="flex flex-col md:flex-row">
-          {/* Image side (desktop only) */}
-          <div className="hidden md:block w-[240px] bg-[var(--surface-2)] relative overflow-hidden">
-
-            <img
-              src={navImageMap[activeOffCanvas] ?? navImageMap["Technology"]}
-              alt=""
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-          </div>
-
-          {/* Links side */}
-          <div className="flex-1 px-6 py-8">
-            <p className="eyebrow mb-6">Navigation</p>
-
-            <nav aria-label="Off-canvas primary navigation">
-              <ul className="space-y-4">
-                {NAV_PRIMARY.map((item, i) => (
-                  <li
-                    key={item.href}
-                    className={`reveal ${menuOpen ? "visible" : ""} reveal-delay-${i + 1}`}
-                    onMouseEnter={() => setActiveOffCanvas(item.label)}
-                  >
-                    <Link
-                      href={item.href}
-                      onClick={() => setMenuOpen(false)}
-                      className="display-md text-[var(--ink)] hover:text-[var(--teal)] transition-colors block py-1"
-                    >
-                      {item.label}
-                    </Link>
-
-                    {/* Sub-links for Technology */}
-                    {item.label === "Technology" && (
-                      <ul className="mt-2 space-y-2 pl-4">
-                        {DROPDOWN_TECHNOLOGY.map((sub) => (
-                          <li key={sub.href}>
-                            <Link
-                              href={sub.href}
-                              onClick={() => setMenuOpen(false)}
-                              className="text-sm text-[var(--muted-ink)] hover:text-[var(--ink)] transition-colors"
-                            >
-                              {sub.label}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-
-                    {/* Sub-links for Company */}
-                    {item.label === "Company" && (
-                      <ul className="mt-2 space-y-2 pl-4">
-                        {DROPDOWN_COMPANY.map((sub) => (
-                          <li key={sub.href}>
-                            <Link
-                              href={sub.href}
-                              onClick={() => setMenuOpen(false)}
-                              className="text-sm text-[var(--muted-ink)] hover:text-[var(--ink)] transition-colors"
-                            >
-                              {sub.label}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </nav>
-
-            {/* Ecosystem section */}
-            <hr className="hairline my-8" />
-            <p className="eyebrow mb-4">Ecosystem</p>
-            <ul className="space-y-3">
-              {EcosystemEntities.map((entity) => (
-                <li key={entity.name}>
-                  <Link
-                    href={entity.href}
-                    onClick={() => setMenuOpen(false)}
-                    target={entity.href.startsWith("http") ? "_blank" : undefined}
-                    rel={entity.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                    className="text-sm text-[var(--muted-ink)] hover:text-[var(--ink)] transition-colors"
-                  >
-                    {entity.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-
-            {/* Secondary nav */}
-            <hr className="hairline my-8" />
-            <ul className="flex flex-wrap gap-4">
-              {NAV_SECONDARY.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    onClick={() => setMenuOpen(false)}
-                    className="text-sm text-[var(--muted-ink)] hover:text-[var(--ink)] transition-colors"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-
-            {/* Search trigger */}
+      {menuOpen && (
+        <div
+          ref={menuRef}
+          className="nav-surface-enter open fixed top-0 right-0 bottom-0 z-50 w-full md:w-[520px] bg-[var(--surface)] border-l border-[var(--hairline)] overflow-y-auto"
+          role="dialog"
+          aria-label="Navigation menu"
+          aria-modal="true"
+        >
+          {/* Close button */}
+          <div className="flex items-center justify-between px-6 py-4 border-b border-[var(--hairline)]">
+            <Logo linked={false} size="sm" />
             <button
               onClick={() => {
                 setMenuOpen(false);
-                setSearchOpen(true);
+                menuTriggerRef.current?.focus();
               }}
-              className="mt-6 flex items-center gap-2 text-sm text-[var(--muted-ink)] hover:text-[var(--ink)] transition-colors"
+              className="flex h-10 w-10 items-center justify-center rounded-md text-[var(--ink)] hover:bg-[var(--surface-2)] transition-colors"
+              aria-label="Close menu"
             >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="11" cy="11" r="8" />
-                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
               </svg>
-              Search
             </button>
+          </div>
 
-            {/* Location + positioning */}
-            <hr className="hairline my-8" />
-            <p className="text-sm text-[var(--muted-ink)]">
-              {SITE.location}
-            </p>
-            <p className="text-xs text-[var(--muted-ink)] mt-1">
-              {SITE.tagline}
-            </p>
+          {/* Primary nav links with imagery */}
+          <div className="flex flex-col md:flex-row">
+            {/* Image side (desktop only) */}
+            <div className="hidden md:block w-[240px] bg-[var(--surface-2)] relative overflow-hidden">
+              <img
+                src={navImageMap[activeOffCanvas] ?? navImageMap["Technology"]}
+                alt=""
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+            </div>
 
-            {/* Credit */}
-            <p className="mt-6 text-xs text-[var(--muted-ink)]">
-              Made by{" "}
-              <a
-                href={SITE.studioUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-[var(--teal)] transition-colors"
+            {/* Links side */}
+            <div className="flex-1 px-6 py-8">
+              <p className="eyebrow mb-6">Navigation</p>
+
+              <nav aria-label="Off-canvas primary navigation">
+                <ul className="space-y-4">
+                  {NAV_PRIMARY.map((item) => (
+                    <li
+                      key={item.href}
+                      onMouseEnter={() => setActiveOffCanvas(item.label)}
+                    >
+                      <Link
+                        href={item.href}
+                        onClick={() => setMenuOpen(false)}
+                        className="display-md text-[var(--ink)] hover:text-[var(--teal)] transition-colors block py-1"
+                      >
+                        {item.label}
+                      </Link>
+
+                      {/* Sub-links for Technology */}
+                      {item.label === "Technology" && (
+                        <ul className="mt-2 space-y-2 pl-4">
+                          {DROPDOWN_TECHNOLOGY.map((sub) => (
+                            <li key={sub.href}>
+                              <Link
+                                href={sub.href}
+                                onClick={() => setMenuOpen(false)}
+                                className="text-sm text-[var(--muted-ink)] hover:text-[var(--ink)] transition-colors"
+                              >
+                                {sub.label}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+
+                      {/* Sub-links for Company */}
+                      {item.label === "Company" && (
+                        <ul className="mt-2 space-y-2 pl-4">
+                          {DROPDOWN_COMPANY.map((sub) => (
+                            <li key={sub.href}>
+                              <Link
+                                href={sub.href}
+                                onClick={() => setMenuOpen(false)}
+                                className="text-sm text-[var(--muted-ink)] hover:text-[var(--ink)] transition-colors"
+                              >
+                                {sub.label}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+
+              {/* Ecosystem section */}
+              <hr className="hairline my-8" />
+              <p className="eyebrow mb-4">Ecosystem</p>
+              <ul className="space-y-3">
+                {EcosystemEntities.map((entity) => (
+                  <li key={entity.name}>
+                    <Link
+                      href={entity.href}
+                      onClick={() => setMenuOpen(false)}
+                      target={entity.href.startsWith("http") ? "_blank" : undefined}
+                      rel={entity.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                      className="text-sm text-[var(--muted-ink)] hover:text-[var(--ink)] transition-colors"
+                    >
+                      {entity.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+
+              {/* Secondary nav */}
+              <hr className="hairline my-8" />
+              <ul className="flex flex-wrap gap-4">
+                {NAV_SECONDARY.map((item) => (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      onClick={() => setMenuOpen(false)}
+                      className="text-sm text-[var(--muted-ink)] hover:text-[var(--ink)] transition-colors"
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+
+              {/* Search trigger */}
+              <button
+                onClick={() => {
+                  setMenuOpen(false);
+                  setSearchOpen(true);
+                }}
+                className="mt-6 flex items-center gap-2 text-sm text-[var(--muted-ink)] hover:text-[var(--ink)] transition-colors"
               >
-                Tangison Studio
-              </a>
-            </p>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="11" cy="11" r="8" />
+                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                </svg>
+                Search
+              </button>
+
+              {/* Location */}
+              <hr className="hairline my-8" />
+              <p className="text-sm text-[var(--muted-ink)]">
+                {SITE.location}
+              </p>
+              <p className="text-xs text-[var(--muted-ink)] mt-1">
+                {SITE.tagline}
+              </p>
+
+              {/* Credit */}
+              <p className="mt-6 text-xs text-[var(--muted-ink)]">
+                Made by{" "}
+                <a
+                  href={SITE.studioUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[var(--teal)] transition-colors"
+                >
+                  Tangison Studio
+                </a>
+              </p>
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       {/* ─── SEARCH DIALOG ─── */}
       <SearchDialog open={searchOpen} onClose={() => setSearchOpen(false)} />
