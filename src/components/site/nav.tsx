@@ -30,7 +30,7 @@ function getFocusableElements(container: HTMLElement): HTMLElement[] {
     container.querySelectorAll(
       'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
     )
-  ).filter((el) => el.offsetParent !== null); // visible only
+  ).filter((el) => el.offsetParent !== null);
 }
 
 function trapFocus(container: HTMLElement, event: KeyboardEvent) {
@@ -53,6 +53,74 @@ function trapFocus(container: HTMLElement, event: KeyboardEvent) {
       }
     }
   }
+}
+
+/* ─── Smart scroll-to-top ─── */
+function ScrollToTop() {
+  const [visible, setVisible] = useState(false);
+  const [shouldHide, setShouldHide] = useState(false);
+  const lastScrollY = useRef(0);
+  const ticking = useRef(false);
+
+  useEffect(() => {
+    const onScroll = () => {
+      if (ticking.current) return;
+      ticking.current = true;
+
+      requestAnimationFrame(() => {
+        const y = window.scrollY;
+        const goingDown = y > lastScrollY.current;
+        lastScrollY.current = y;
+
+        // Show after 600px of scroll depth
+        // Hide if near top (< 200px) or scrolling down fast
+        const pastThreshold = y > 600;
+        const nearTop = y < 200;
+
+        if (nearTop) {
+          setVisible(false);
+          setShouldHide(false);
+        } else if (pastThreshold && !goingDown) {
+          setVisible(true);
+          setShouldHide(false);
+        } else if (goingDown && pastThreshold) {
+          setShouldHide(true);
+        } else {
+          setVisible(false);
+          setShouldHide(false);
+        }
+
+        ticking.current = false;
+      });
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    // Briefly hide after click to avoid annoyance
+    setShouldHide(true);
+    setTimeout(() => setShouldHide(false), 800);
+  };
+
+  if (!visible) return null;
+
+  return (
+    <button
+      onClick={scrollToTop}
+      className={`fixed bottom-6 right-6 z-30 flex h-10 w-10 items-center justify-center rounded-full border border-[var(--hairline)] bg-[var(--surface)] text-[var(--ink)] shadow-[var(--shadow-warm-md)] transition-all duration-300 hover:bg-[var(--surface-2)] hover:border-[var(--ink)] focus-visible:outline-2 focus-visible:outline-[var(--teal)] focus-visible:outline-offset-2 ${
+        shouldHide ? "opacity-0 translate-y-2 pointer-events-none" : "opacity-100 translate-y-0"
+      }`}
+      aria-label="Scroll to top"
+    >
+      <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <line x1="10" y1="15" x2="10" y2="5" />
+        <polyline points="5,10 10,5 15,10" />
+      </svg>
+    </button>
+  );
 }
 
 export function Nav() {
@@ -89,7 +157,6 @@ export function Nav() {
     const menu = menuRef.current;
     if (!menu) return;
 
-    // Focus the first focusable element on open
     const focusable = getFocusableElements(menu);
     if (focusable.length > 0) {
       focusable[0].focus();
@@ -98,7 +165,7 @@ export function Nav() {
     const keyHandler = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         setMenuOpen(false);
-        menuTriggerRef.current?.focus(); // restore focus to trigger
+        menuTriggerRef.current?.focus();
         return;
       }
       trapFocus(menu, e);
@@ -150,12 +217,12 @@ export function Nav() {
 
   return (
     <>
-      {/* ─── RESTING HEADER ─── */}
+      {/* ─── FLOATING HEADER ─── */}
       <header
-        className="fixed top-0 left-0 right-0 z-40 bg-[var(--bg)]/95 backdrop-blur-sm"
-        style={{ height: "var(--nav-height)" }}
+        className="fixed z-40 mx-auto left-4 right-4 md:left-6 md:right-6 top-3 md:top-4 rounded-md border border-[var(--hairline)] bg-[var(--bg)]/95 backdrop-blur-sm shadow-[var(--shadow-warm)] transition-shadow duration-200 hover:shadow-[var(--shadow-warm-md)]"
+        style={{ maxWidth: "var(--container-wide)" }}
       >
-        <div className="container-tangison flex items-center justify-between h-full">
+        <div className="container-tangison flex items-center justify-between h-[var(--nav-height-mobile)] md:h-[var(--nav-height)]">
           <Logo linked size="sm" />
 
           {/* Desktop primary nav */}
@@ -229,6 +296,7 @@ export function Nav() {
               Contact
             </Link>
 
+            {/* 2-line menu icon (not 3) */}
             <button
               ref={menuTriggerRef}
               onClick={() => setMenuOpen(true)}
@@ -236,15 +304,17 @@ export function Nav() {
               aria-label="Open menu"
               aria-expanded={menuOpen}
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="3" y1="6" x2="21" y2="6" />
-                <line x1="3" y1="12" x2="21" y2="12" />
-                <line x1="3" y1="18" x2="21" y2="18" />
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <line x1="3" y1="7" x2="17" y2="7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                <line x1="3" y1="13" x2="17" y2="13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
               </svg>
             </button>
           </div>
         </div>
       </header>
+
+      {/* ─── SMART SCROLL-TO-TOP ─── */}
+      <ScrollToTop />
 
       {/* ─── OFF-CANVAS OVERLAY ─── */}
       {menuOpen && (
