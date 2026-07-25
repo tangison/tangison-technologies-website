@@ -130,7 +130,7 @@ export default function Home() {
               <h3 className="display-sm text-[var(--ink)] mt-2">{METHODOLOGY[0].phase}</h3>
               <p className="mt-3 text-[var(--muted-ink)] body-constrained">{METHODOLOGY[0].description}</p>
               <Link href={METHODOLOGY[0].href} className="mt-4 inline-flex text-sm text-[var(--teal)] hover:text-[var(--ink)] transition-colors font-medium">
-                Learn more
+                Learn more about Observe
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </Link>
             </div>
@@ -165,7 +165,7 @@ export default function Home() {
               <h3 className="display-sm text-[var(--ink)] mt-2">{METHODOLOGY[1].phase}</h3>
               <p className="mt-3 text-[var(--muted-ink)] body-constrained">{METHODOLOGY[1].description}</p>
               <Link href={METHODOLOGY[1].href} className="mt-4 inline-flex text-sm text-[var(--teal)] hover:text-[var(--ink)] transition-colors font-medium">
-                Learn more
+                Learn more about Decide
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </Link>
             </div>
@@ -187,7 +187,7 @@ export default function Home() {
               <h3 className="display-sm text-[var(--teal-text)] mt-2 reveal-delay-2">{METHODOLOGY[2].phase}</h3>
               <p className="mt-2 text-[var(--teal-text)]/80 body-constrained text-sm reveal-delay-3">{METHODOLOGY[2].description}</p>
               <Link href={METHODOLOGY[2].href} className="mt-4 inline-flex text-sm text-[var(--teal)] hover:text-[var(--teal-text)] transition-colors font-medium reveal-delay-4">
-                Learn more
+                Learn more about Operate
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </Link>
             </div>

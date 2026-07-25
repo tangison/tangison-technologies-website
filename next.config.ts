@@ -6,6 +6,11 @@ const nextConfig: NextConfig = {
     ignoreBuildErrors: true,
   },
   reactStrictMode: false,
+  images: {
+    formats: ["image/webp"],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+  },
   async redirects() {
     return [
       // Obsolete Agent product routes → corporate equivalents
@@ -17,8 +22,6 @@ const nextConfig: NextConfig = {
       { source: "/blog", destination: "/company", permanent: true },
       { source: "/about", destination: "/company", permanent: true },
       { source: "/cookies", destination: "/privacy", permanent: true },
-      // Redirect bare tangison.com → www
-      // This is handled at Vercel/domain level, not here
     ];
   },
 };
