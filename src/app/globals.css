@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -56,6 +55,7 @@
 
   /* Accent — muted teal (desaturated, below 70% sat) */
   --teal: #2B6B5E;
+  --teal-hover: #35806F;
   --teal-text: #F0EDE8;
 
   /* Destructive */
@@ -99,7 +99,7 @@
   --nav-height-mobile: 56px;
 }
 
-/* ─── DARK THEME (optional, not default) ─── */
+/* ─── DARK THEME ─── */
 .dark {
   --bg: #121210;
   --surface: #1C1C1A;
@@ -112,6 +112,7 @@
   --hairline: rgba(240, 237, 232, 0.1);
 
   --teal: #3A8B7A;
+  --teal-hover: #4BA38F;
   --teal-text: #121210;
 
   --destructive: #E85545;
@@ -261,7 +262,7 @@
     cursor: pointer;
   }
   .btn-accent:hover {
-    background: #35806F;
+    background: var(--teal-hover);
   }
   .btn-accent:active {
     transform: scale(0.98);

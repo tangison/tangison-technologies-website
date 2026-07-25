@@ -18,8 +18,6 @@ export const SITE = {
   description:
     "Tangison Technologies designs operational intelligence systems for environments where connectivity, data and infrastructure cannot be assumed.",
   email: "contact@tangison.com",
-  github: "https://github.com/tangison",
-  repo: "https://github.com/tangison/tangison-technologies-website",
 } as const;
 
 export const NAV_PRIMARY = [

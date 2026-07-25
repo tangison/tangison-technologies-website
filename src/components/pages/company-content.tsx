@@ -17,12 +17,12 @@ export default function CompanyPage() {
       <section ref={heroRef} className="hero-section noise-overlay reveal" aria-label="Company hero">
         <div className="absolute inset-0">
           <Image
-            src="/images/tangison/webp/10-about-namibia-signal.webp"
-            alt="A single distant signal mast on a vast Namibian gravel horizon"
+            src="/images/tangison/webp/01-skeleton-coast-hero-1920x1080.webp"
+            alt="The Namib Desert meeting the Atlantic Ocean through coastal fog on the Skeleton Coast"
             fill
             sizes="100vw"
             className="object-cover"
-            style={{ objectPosition: "right center" }}
+            style={{ objectPosition: "center" }}
           />
           <div className="absolute inset-0 bg-gradient-to-r from-[rgba(26,26,24,0.45)] via-[rgba(26,26,24,0.2)] to-transparent" />
         </div>

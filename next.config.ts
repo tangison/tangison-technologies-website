@@ -2,10 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: "standalone",
-  typescript: {
-    ignoreBuildErrors: true,
-  },
-  reactStrictMode: false,
+  reactStrictMode: true,
   images: {
     formats: ["image/webp"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
@@ -22,6 +19,8 @@ const nextConfig: NextConfig = {
       { source: "/blog", destination: "/company", permanent: true },
       { source: "/about", destination: "/company", permanent: true },
       { source: "/cookies", destination: "/privacy", permanent: true },
+      // Old sitemap-overview route → canonical /sitemap
+      { source: "/sitemap-overview", destination: "/sitemap", permanent: true },
     ];
   },
 };

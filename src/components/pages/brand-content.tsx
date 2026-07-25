@@ -73,15 +73,12 @@ export default function BrandPage() {
                 <p className="mt-2 text-[var(--muted-ink)] text-sm body-constrained">
                   Use the Tangison logo as provided. Do not redraw,
                   approximate, convert, alter proportions, or recreate
-                  the logo from scratch. Preserve the aspect ratio,
+                  the logo from scratch. The logo is available as an
+                  SVG file (tangison-logo.svg). Always use the SVG
+                  at all required sizes. Preserve the aspect ratio,
                   transparency and clear space around the mark. The
                   logo must remain legible and identifiable at all
                   sizes.
-                </p>
-                <p className="mt-2 text-[var(--muted-ink)] text-sm body-constrained">
-                  The current logo is a PNG file. An SVG version will
-                  be provided when available. Until then, use the PNG
-                  at all required sizes without modification.
                 </p>
               </div>
             </div>
