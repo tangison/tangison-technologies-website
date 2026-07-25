@@ -62,7 +62,7 @@ function ContactForm() {
           </p>
           <button
             onClick={() => setSubmitted(false)}
-            className="mt-4 btn-outline text-xs py-1.5 px-3"
+            className="mt-4 btn-outline py-2.5 px-4"
           >
             Send another message
           </button>

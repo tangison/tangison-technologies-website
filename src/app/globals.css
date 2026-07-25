@@ -1,7 +1,5 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:is(.dark *));
-
 /* ─── TANGISON TECHNOLOGIES EDITORIAL DESIGN SYSTEM ───
    Ideology: "Intelligence for imperfect conditions."
    Visual: "Vast conditions. Precise intelligence."
@@ -97,29 +95,6 @@
   /* Nav */
   --nav-height: 64px;
   --nav-height-mobile: 56px;
-}
-
-/* ─── DARK THEME ─── */
-.dark {
-  --bg: #121210;
-  --surface: #1C1C1A;
-  --surface-2: #242420;
-  --muted-surface: #2A2A26;
-
-  --ink: #F0EDE8;
-  --muted-ink: #9A968F;
-
-  --hairline: rgba(240, 237, 232, 0.1);
-
-  --teal: #3A8B7A;
-  --teal-hover: #4BA38F;
-  --teal-text: #121210;
-
-  --destructive: #E85545;
-
-  --shadow-warm: 0 1px 3px rgba(240, 237, 232, 0.04);
-  --shadow-warm-md: 0 4px 12px rgba(240, 237, 232, 0.06);
-  --shadow-warm-lg: 0 8px 24px rgba(240, 237, 232, 0.08);
 }
 
 /* ─── BASE ─── */

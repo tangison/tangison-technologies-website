@@ -113,7 +113,7 @@ export default function Home() {
       <section ref={methodRef} className="section-spacing bg-[var(--bg)]" aria-label="Methodology">
         <div className="container-tangison">
           <div className="reveal">
-            <p className="eyebrow mb-2">Methodology</p>
+            <p className="eyebrow mb-2">How we work</p>
             <h2 className="display display-md text-[var(--ink)]">
               Observe. Decide. Operate.
             </h2>
@@ -130,7 +130,7 @@ export default function Home() {
               <h3 className="display-sm text-[var(--ink)] mt-2">{METHODOLOGY[0].phase}</h3>
               <p className="mt-3 text-[var(--muted-ink)] body-constrained">{METHODOLOGY[0].description}</p>
               <Link href={METHODOLOGY[0].href} className="mt-4 inline-flex text-sm text-[var(--teal)] hover:text-[var(--ink)] transition-colors font-medium">
-                Learn more about Observe
+                How Observe works
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </Link>
             </div>
@@ -165,7 +165,7 @@ export default function Home() {
               <h3 className="display-sm text-[var(--ink)] mt-2">{METHODOLOGY[1].phase}</h3>
               <p className="mt-3 text-[var(--muted-ink)] body-constrained">{METHODOLOGY[1].description}</p>
               <Link href={METHODOLOGY[1].href} className="mt-4 inline-flex text-sm text-[var(--teal)] hover:text-[var(--ink)] transition-colors font-medium">
-                Learn more about Decide
+                Decide under constraints
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </Link>
             </div>
@@ -187,7 +187,7 @@ export default function Home() {
               <h3 className="display-sm text-[var(--teal-text)] mt-2 reveal-delay-2">{METHODOLOGY[2].phase}</h3>
               <p className="mt-2 text-[var(--teal-text)]/80 body-constrained text-sm reveal-delay-3">{METHODOLOGY[2].description}</p>
               <Link href={METHODOLOGY[2].href} className="mt-4 inline-flex text-sm text-[var(--teal)] hover:text-[var(--teal-text)] transition-colors font-medium reveal-delay-4">
-                Learn more about Operate
+                Operate in the field
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </Link>
             </div>
@@ -199,7 +199,6 @@ export default function Home() {
       <section ref={carouselRef} className="section-spacing bg-[var(--surface-2)]" aria-label="Visual sequence">
         <div className="container-tangison-wide">
           <div className="reveal mb-6">
-            <p className="eyebrow mb-2">Conditions</p>
             <h2 className="display-sm text-[var(--ink)]">
               The landscape that shapes the method
             </h2>
@@ -267,7 +266,6 @@ export default function Home() {
       <section ref={ecosystemRef} className="section-spacing bg-[var(--surface)]" aria-label="Ecosystem">
         <div className="container-tangison">
           <div className="reveal">
-            <p className="eyebrow mb-2">Ecosystem</p>
             <h2 className="display-md text-[var(--ink)]">
               Three capabilities, one intention
             </h2>
@@ -285,7 +283,7 @@ export default function Home() {
                 href={entity.href}
                 target={entity.href.startsWith("http") ? "_blank" : undefined}
                 rel={entity.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                className={`group reveal reveal-delay-${i + 1} block rounded-md overflow-hidden bg-[var(--surface-2)] hover:bg-[var(--surface)] transition-colors border border-[var(--hairline)]`}
+                className={`group reveal reveal-delay-${i + 1} block rounded-md overflow-hidden bg-[var(--surface-2)] hover:bg-[var(--surface)] transition-colors border border-[var(--hairline)] min-w-0`}
               >
                 <div className="aspect-[4/3] overflow-hidden">
                   <Image

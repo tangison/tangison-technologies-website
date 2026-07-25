@@ -110,7 +110,7 @@ function ScrollToTop() {
   return (
     <button
       onClick={scrollToTop}
-      className={`fixed bottom-6 right-6 z-30 flex h-10 w-10 items-center justify-center rounded-full border border-[var(--hairline)] bg-[var(--surface)] text-[var(--ink)] shadow-[var(--shadow-warm-md)] transition-all duration-300 hover:bg-[var(--surface-2)] hover:border-[var(--ink)] focus-visible:outline-2 focus-visible:outline-[var(--teal)] focus-visible:outline-offset-2 ${
+      className={`fixed bottom-6 right-6 z-30 flex h-11 w-11 items-center justify-center rounded-full border border-[var(--hairline)] bg-[var(--surface)] text-[var(--ink)] shadow-[var(--shadow-warm-md)] transition-all duration-300 hover:bg-[var(--surface-2)] hover:border-[var(--ink)] focus-visible:outline-2 focus-visible:outline-[var(--teal)] focus-visible:outline-offset-2 ${
         shouldHide ? "opacity-0 translate-y-2 pointer-events-none" : "opacity-100 translate-y-0"
       }`}
       aria-label="Scroll to top"
@@ -240,6 +240,19 @@ export function Nav() {
                 <Link
                   href={item.href}
                   className={`nav-link ${isActive(item.href) ? "active" : ""}`}
+                  aria-current={isActive(item.href) ? "page" : undefined}
+                  aria-haspopup={(item.label === "Technology" || item.label === "Company") ? "true" : undefined}
+                  aria-expanded={(item.label === "Technology" && dropdown === "technology") || (item.label === "Company" && dropdown === "company") ? "true" : undefined}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " " || e.key === "ArrowDown") {
+                      e.preventDefault();
+                      if (item.label === "Technology") dropdownEnter("technology");
+                      if (item.label === "Company") dropdownEnter("company");
+                    }
+                    if (e.key === "Escape") {
+                      setDropdown(null);
+                    }
+                  }}
                 >
                   {item.label}
                 </Link>
@@ -251,7 +264,7 @@ export function Nav() {
                       <Link
                         key={sub.href}
                         href={sub.href}
-                        className="block px-4 py-2 text-sm text-[var(--muted-ink)] hover:text-[var(--ink)] hover:bg-[var(--surface-2)] transition-colors"
+                        className="block px-4 py-3 text-sm text-[var(--muted-ink)] hover:text-[var(--ink)] hover:bg-[var(--surface-2)] transition-colors"
                       >
                         {sub.label}
                       </Link>
@@ -265,7 +278,7 @@ export function Nav() {
                       <Link
                         key={sub.href}
                         href={sub.href}
-                        className="block px-4 py-2 text-sm text-[var(--muted-ink)] hover:text-[var(--ink)] hover:bg-[var(--surface-2)] transition-colors"
+                        className="block px-4 py-3 text-sm text-[var(--muted-ink)] hover:text-[var(--ink)] hover:bg-[var(--surface-2)] transition-colors"
                       >
                         {sub.label}
                       </Link>
@@ -280,7 +293,7 @@ export function Nav() {
           <div className="flex items-center gap-3">
             <button
               onClick={() => setSearchOpen(true)}
-              className="flex h-9 w-9 items-center justify-center rounded-md text-[var(--muted-ink)] hover:text-[var(--ink)] hover:bg-[var(--surface-2)] transition-colors"
+              className="flex h-11 w-11 items-center justify-center rounded-md text-[var(--muted-ink)] hover:text-[var(--ink)] hover:bg-[var(--surface-2)] transition-colors"
               aria-label="Search"
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -291,7 +304,7 @@ export function Nav() {
 
             <Link
               href="/contact"
-              className="hidden md:inline-flex btn-outline text-xs py-1.5 px-3"
+              className="hidden md:inline-flex btn-outline text-xs py-2.5 px-4"
             >
               Contact
             </Link>
@@ -300,7 +313,7 @@ export function Nav() {
             <button
               ref={menuTriggerRef}
               onClick={() => setMenuOpen(true)}
-              className="flex h-9 w-9 items-center justify-center rounded-md text-[var(--muted-ink)] hover:text-[var(--ink)] hover:bg-[var(--surface-2)] transition-colors"
+              className="flex h-11 w-11 items-center justify-center rounded-md text-[var(--muted-ink)] hover:text-[var(--ink)] hover:bg-[var(--surface-2)] transition-colors"
               aria-label="Open menu"
               aria-expanded={menuOpen}
             >
@@ -344,7 +357,7 @@ export function Nav() {
                 setMenuOpen(false);
                 menuTriggerRef.current?.focus();
               }}
-              className="flex h-10 w-10 items-center justify-center rounded-md text-[var(--ink)] hover:bg-[var(--surface-2)] transition-colors"
+              className="flex h-11 w-11 items-center justify-center rounded-md text-[var(--ink)] hover:bg-[var(--surface-2)] transition-colors"
               aria-label="Close menu"
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

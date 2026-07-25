@@ -97,7 +97,6 @@ export default function TechnologyPage() {
       <section className="section-spacing bg-[var(--bg)]">
         <div className="container-tangison">
           <div className="reveal">
-            <p className="eyebrow mb-2">Overview</p>
             <h2 className="display-md text-[var(--ink)]">
               Intelligence as a discipline, not a feature
             </h2>
@@ -237,7 +236,6 @@ export default function TechnologyPage() {
       <section className="section-spacing bg-[var(--surface)]">
         <div className="container-tangison text-center">
           <div className="reveal">
-            <p className="eyebrow mb-2">Next step</p>
             <h2 className="display-md text-[var(--ink)]">
               See the company behind the methodology
             </h2>

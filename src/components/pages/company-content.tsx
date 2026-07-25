@@ -46,7 +46,6 @@ export default function CompanyPage() {
       <section className="section-spacing bg-[var(--bg)]">
         <div className="container-tangison">
           <div className="reveal">
-            <p className="eyebrow mb-2">Overview</p>
             <h2 className="display-md text-[var(--ink)]">
               Intelligence for imperfect conditions
             </h2>
@@ -68,18 +67,15 @@ export default function CompanyPage() {
 
           <div className="mt-8 grid md:grid-cols-3 gap-6">
             <div className="reveal reveal-delay-1 p-6 bg-[var(--surface)] border border-[var(--hairline)] rounded-md">
-              <span className="text-[var(--teal)] font-mono text-xs">01</span>
-              <h3 className="text-sm font-semibold text-[var(--ink)] mt-2">Location</h3>
+              <h3 className="text-sm font-semibold text-[var(--ink)]">Location</h3>
               <p className="text-[var(--muted-ink)] mt-1 text-xs">{SITE.location}</p>
             </div>
             <div className="reveal reveal-delay-2 p-6 bg-[var(--surface)] border border-[var(--hairline)] rounded-md">
-              <span className="text-[var(--teal)] font-mono text-xs">02</span>
-              <h3 className="text-sm font-semibold text-[var(--ink)] mt-2">Owner</h3>
+              <h3 className="text-sm font-semibold text-[var(--ink)]">Owner</h3>
               <p className="text-[var(--muted-ink)] mt-1 text-xs">{SITE.owner}</p>
             </div>
             <div className="reveal reveal-delay-3 p-6 bg-[var(--surface)] border border-[var(--hairline)] rounded-md">
-              <span className="text-[var(--teal)] font-mono text-xs">03</span>
-              <h3 className="text-sm font-semibold text-[var(--ink)] mt-2">Intent</h3>
+              <h3 className="text-sm font-semibold text-[var(--ink)]">Intent</h3>
               <p className="text-[var(--muted-ink)] mt-1 text-xs">{SITE.tagline}</p>
             </div>
           </div>
@@ -91,7 +87,6 @@ export default function CompanyPage() {
         <div className="container-tangison">
           <div className="grid md:grid-cols-2 gap-6 md:gap-12 items-start">
             <div className="reveal">
-              <p className="eyebrow mb-2">Philosophy</p>
               <h2 className="display-md text-[var(--ink)]">
                 Conditions shape the method.
               </h2>
@@ -175,7 +170,6 @@ export default function CompanyPage() {
               />
             </div>
             <div className="reveal reveal-delay-2">
-              <p className="eyebrow mb-2">Context</p>
               <h2 className="display-md text-[var(--ink)]">
                 Namibia is not an edge case.
               </h2>
@@ -207,7 +201,6 @@ export default function CompanyPage() {
       <section className="section-spacing bg-[var(--surface)]">
         <div className="container-tangison text-center">
           <div className="reveal">
-            <p className="eyebrow mb-2">Next step</p>
             <h2 className="display-md text-[var(--ink)]">
               See how the methodology works
             </h2>
