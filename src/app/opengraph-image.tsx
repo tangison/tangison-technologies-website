@@ -19,20 +19,9 @@ export default async function Image() {
           padding: "60px 80px",
           backgroundColor: "#F0EDE8",
           position: "relative",
+          backgroundImage: "linear-gradient(135deg, rgba(26,26,24,0.08) 0%, rgba(240,237,232,1) 50%, rgba(240,237,232,1) 100%)",
         }}
       >
-        {/* Gradient overlay */}
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            background: "linear-gradient(135deg, rgba(26,26,24,0.08) 0%, rgba(240,237,232,1) 50%, rgba(240,237,232,1) 100%)",
-          }}
-        />
-
         {/* Accent line */}
         <div
           style={{
@@ -45,45 +34,52 @@ export default async function Image() {
           }}
         />
 
-        {/* Tagline */}
+        {/* Content wrapper — single flex child */}
         <div
           style={{
-            fontSize: 14,
-            fontWeight: 600,
-            letterSpacing: "0.08em",
-            color: "#2B6B5E",
-            textTransform: "uppercase",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-start",
             position: "relative",
           }}
         >
-          Tangison Technologies
-        </div>
+          {/* Tagline */}
+          <div
+            style={{
+              fontSize: 14,
+              fontWeight: 600,
+              letterSpacing: "0.08em",
+              color: "#2B6B5E",
+              textTransform: "uppercase",
+            }}
+          >
+            Tangison Technologies
+          </div>
 
-        {/* Main headline */}
-        <div
-          style={{
-            fontSize: 56,
-            fontWeight: 800,
-            lineHeight: 1.08,
-            letterSpacing: "-0.02em",
-            color: "#1A1A18",
-            position: "relative",
-            marginTop: 16,
-          }}
-        >
-          Intelligence for<br />imperfect conditions.
-        </div>
+          {/* Main headline */}
+          <div
+            style={{
+              fontSize: 56,
+              fontWeight: 800,
+              lineHeight: 1.08,
+              letterSpacing: "-0.02em",
+              color: "#1A1A18",
+              marginTop: 16,
+            }}
+          >
+            Intelligence for imperfect conditions.
+          </div>
 
-        {/* Location */}
-        <div
-          style={{
-            fontSize: 14,
-            color: "#6B6760",
-            position: "relative",
-            marginTop: 24,
-          }}
-        >
-          Windhoek, Namibia
+          {/* Location */}
+          <div
+            style={{
+              fontSize: 14,
+              color: "#6B6760",
+              marginTop: 24,
+            }}
+          >
+            Windhoek, Namibia
+          </div>
         </div>
       </div>
     ),
