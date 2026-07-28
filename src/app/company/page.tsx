@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     "About Tangison Technologies, its philosophy, and its Namibian context.",
   openGraph: {
     title: "Company — Tangison Technologies",
-    description: "About Tangison Technologies, built in Namibia for imperfect conditions.",
+    description: "About Tangison Technologies, built in Namibia for conditions where connectivity drops and infrastructure is uneven.",
   },
 };
 

@@ -12,7 +12,7 @@ const METHODOLOGY = [
     phase: "Observe",
     number: "01",
     description:
-      "Gather signals from environments where connectivity, data and infrastructure cannot be assumed. Observation is the first discipline: listening before speaking, sensing before acting.",
+      "Gather signals from environments where connectivity drops, data arrives late, and infrastructure is uneven. Observation is the first discipline: listening before speaking, sensing before acting.",
     href: "/technology#observe",
     image: "/images/tangison/webp/03-ai-operations-node.webp",
     imageAlt: "A minimal graphite control node with a single teal status light",
@@ -22,7 +22,7 @@ const METHODOLOGY = [
     phase: "Decide",
     number: "02",
     description:
-      "Turn observations into operational decisions. Not abstract analysis, but concrete choices made under real constraints: limited time, partial information, incomplete infrastructure.",
+      "Turn observations into operational decisions. Not abstract analysis, but concrete choices made under real constraints: limited time, partial information, uneven infrastructure.",
     href: "/technology#decide",
     image: "/images/tangison/webp/04-data-decision-planes.webp",
     imageAlt: "Intersecting smoke-glass planes joined by a precise teal seam",
@@ -32,7 +32,7 @@ const METHODOLOGY = [
     phase: "Operate",
     number: "03",
     description:
-      "Execute decisions in the field. Systems that run where connectivity drops, where hardware ages, where conditions change without warning. Operation is the proof of the method.",
+      "Execute decisions in the field. Systems that run where connectivity drops, where hardware ages, where conditions shift without warning. Operation is the proof that the method works.",
     href: "/technology#operate",
     image: "/images/tangison/webp/05-resilient-platform-monolith.webp",
     imageAlt: "A dark stone monolith with a narrow light seam emerging through coastal fog",
@@ -90,12 +90,12 @@ export default function Home() {
           <div className="container-tangison pb-12 md:pb-16">
             <p className="eyebrow reveal-delay-1 mb-4">{SITE.visualIdea}</p>
             <h1 className="display display-lg text-[var(--teal-text)] reveal-delay-2">
-              Intelligence<br />for imperfect<br />conditions.
+              Operational<br />intelligence<br />without assumptions.
             </h1>
             <p className="mt-4 text-sm text-[var(--teal-text)]/80 body-constrained reveal-delay-3">
-              Tangison Technologies designs operational intelligence systems
-              for environments where connectivity, data and infrastructure
-              cannot be assumed.
+              Tangison Technologies builds operational intelligence systems
+              that work where connectivity drops, data arrives late,
+              and infrastructure is uneven.
             </p>
             <div className="mt-6 flex gap-3 reveal-delay-4">
               <Link href="/technology" className="btn-accent">
@@ -113,13 +113,13 @@ export default function Home() {
       <section ref={methodRef} className="section-spacing bg-[var(--bg)]" aria-label="Methodology">
         <div className="container-tangison">
           <div className="reveal">
-            <p className="eyebrow mb-2">How we work</p>
+            <p className="eyebrow mb-2">Methodology</p>
             <h2 className="display display-md text-[var(--ink)]">
               Observe. Decide. Operate.
             </h2>
             <p className="mt-4 text-[var(--muted-ink)] body-constrained">
-              Three phases, not three products. A methodology built for
-              conditions that do not wait for ideal infrastructure.
+              A single methodology with three connected phases. Each phase
+              handles the gaps the next one will encounter.
             </p>
           </div>
 
@@ -238,20 +238,23 @@ export default function Home() {
               />
             </div>
             <div className="reveal reveal-delay-2">
-              <p className="eyebrow mb-2">Context</p>
+              <p className="eyebrow mb-2">Namibia</p>
               <h2 className="display-md text-[var(--ink)]">
-                Built in Namibia.<br />Built for conditions like these.
+                Where the conditions<br/>that teach the method<br/>are everyday reality.
               </h2>
               <p className="mt-4 text-[var(--muted-ink)] body-constrained">
                 Namibia is a country where vast distances, sparse connectivity
                 and extreme conditions are everyday reality, not edge cases.
-                That context is not a limitation. It is the design brief.
+                The Skeleton Coast, the Namib Desert, the gravel plains:
+                these are the environments that shaped the Observe, Decide,
+                Operate methodology.
               </p>
               <p className="mt-3 text-[var(--muted-ink)] body-constrained">
                 Tangison Technologies operates from Windhoek, building systems
-                that work where others assume they cannot. The Skeleton Coast,
-                the Namib Desert, the gravel plains: these are the environments
-                that teach the methodology.
+                that run where others assume they cannot. When connectivity
+                drops on the gravel plains, when data arrives late from
+                remote stations, when hardware ages under coastal fog:
+                these are the conditions that prove the method works.
               </p>
               <Link href="/company" className="mt-5 inline-flex text-sm text-[var(--teal)] hover:text-[var(--ink)] transition-colors font-medium">
                 About the company
@@ -267,12 +270,13 @@ export default function Home() {
         <div className="container-tangison">
           <div className="reveal">
             <h2 className="display-md text-[var(--ink)]">
-              Three capabilities, one intention
+              One purpose across three capabilities
             </h2>
             <p className="mt-3 text-[var(--muted-ink)] body-constrained">
               Tangison operates as a connected ecosystem: an AI agent platform,
-              a design and engineering studio, and a research lab. Each serves
-              the same purpose: intelligence for imperfect conditions.
+              a design and engineering studio, and a research lab. Each
+              capability builds systems that work without assuming perfect
+              conditions.
             </p>
           </div>
 
@@ -328,11 +332,13 @@ export default function Home() {
           <div className="container-tangison relative z-10 py-16 md:py-24">
             <p className="eyebrow mb-4">Contact</p>
             <h2 className="display display-md text-[var(--teal-text)]">
-              Start a conversation.
+              Tell us what conditions you face.
             </h2>
             <p className="mt-4 text-[var(--teal-text)]/80 body-constrained max-w-md">
               If your operations run where connectivity drops and
-              conditions shift without warning, we should talk.
+              conditions shift without warning, Tangison can help.
+              Describe your environment and we will tell you what
+              is possible.
             </p>
             <div className="mt-6 flex gap-3">
               <Link href="/contact" className="btn-accent">

@@ -133,9 +133,13 @@ export function Nav() {
   const menuTriggerRef = useRef<HTMLButtonElement>(null);
 
   // Close menu on route change
+  const prevPathname = useRef(pathname);
   useEffect(() => {
-    setMenuOpen(false);
-    setDropdown(null);
+    if (prevPathname.current !== pathname) {
+      prevPathname.current = pathname;
+      setMenuOpen(false);
+      setDropdown(null);
+    }
   }, [pathname]);
 
   // Scroll lock when menu is open

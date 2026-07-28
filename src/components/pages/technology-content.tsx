@@ -11,9 +11,9 @@ const PHASES = [
     id: "observe",
     phase: "Observe",
     number: "01",
-    headline: "Gather signals from conditions that resist measurement.",
+    headline: "Get clear readings from conditions that resist measurement.",
     description:
-      "The first discipline is observation: listening before speaking, sensing before acting. In environments where connectivity drops, data arrives late, and infrastructure is uneven, observation must work without assuming a steady stream of clean inputs. Tangison builds sensing systems that tolerate gaps, delays and noise.",
+      "The first discipline is observation: listening before speaking, sensing before acting. In environments where connectivity drops, data arrives late, and infrastructure is uneven, observation must work without assuming a steady stream of clean inputs. Tangison builds sensing systems that tolerate gaps, delays and noise, so you get usable signals instead of silence.",
     details: [
       "Works with intermittent connectivity and delayed data",
       "Handles noisy, incomplete and unstructured signals",
@@ -27,9 +27,9 @@ const PHASES = [
     id: "decide",
     phase: "Decide",
     number: "02",
-    headline: "Turn observations into operational choices under real constraints.",
+    headline: "Make operational choices with the data you have, not the data you wish you had.",
     description:
-      "Decisions in imperfect conditions are not abstract analyses. They are concrete choices made under limited time, partial information and incomplete infrastructure. Tangison decision systems do not wait for perfect data. They work with what is available, weigh what is uncertain, and commit to what is actionable.",
+      "Decisions in imperfect conditions are not abstract analyses. They are concrete choices made under limited time, partial information and uneven infrastructure. Tangison decision systems do not wait for perfect data. They work with what is available, weigh what is uncertain, and commit to what is actionable, so you can move forward instead of waiting for conditions that may never arrive.",
     details: [
       "Operates with partial information and bounded confidence",
       "Balances speed and accuracy under time pressure",
@@ -43,9 +43,9 @@ const PHASES = [
     id: "operate",
     phase: "Operate",
     number: "03",
-    headline: "Execute decisions where connectivity drops and conditions shift.",
+    headline: "Run operations where connectivity drops and conditions shift without warning.",
     description:
-      "Operation is the proof of the method. Systems that run where hardware ages, networks fragment and conditions change without warning. Tangison operational platforms are designed for the field, not the lab. They run locally when they must, connect when they can, and degrade gracefully when they cannot.",
+      "Operation is the proof that the method works. Systems that run where hardware ages, networks fragment and conditions shift without warning. Tangison operational platforms are designed for the field, not the lab. They run locally when they must, connect when they can, and degrade gracefully when they cannot, so your operations continue instead of crashing when conditions worsen.",
     details: [
       "Designed for disconnected and intermittently connected environments",
       "Degrades gracefully rather than failing catastrophically",
@@ -86,8 +86,8 @@ export default function TechnologyPage() {
             </h1>
             <p className="mt-4 text-sm text-[var(--teal-text)]/80 body-constrained reveal-delay-3">
               A methodology built for conditions that do not wait for
-              ideal infrastructure. Three phases, one intention:
-              operational intelligence where it matters most.
+              ideal infrastructure. Three connected phases that turn
+              raw, uncertain signals into operational action.
             </p>
           </div>
         </div>
@@ -98,14 +98,15 @@ export default function TechnologyPage() {
         <div className="container-tangison">
           <div className="reveal">
             <h2 className="display-md text-[var(--ink)]">
-              Intelligence as a discipline, not a feature
+              Intelligence that runs without assumptions
             </h2>
             <p className="mt-4 text-[var(--muted-ink)] body-constrained">
               Tangison does not offer three separate products labelled Observe,
               Decide and Operate. These are phases of a single methodology:
-              the sequence that turns raw, imperfect signals into operational
-              action. Each phase informs the next. The methodology works
-              because the phases are connected.
+              the sequence that turns uncertain signals into operational
+              action. Each phase handles the gaps the next one will encounter.
+              The methodology works because the phases are connected, not
+              because they are sold separately.
             </p>
           </div>
         </div>
@@ -175,8 +176,10 @@ export default function TechnologyPage() {
               </p>
               <p className="mt-3 text-[var(--muted-ink)] body-constrained">
                 It does not require constant connectivity to external
-                services. It does not assume pristine data. It is designed
-                for the same imperfect conditions that shaped the methodology.
+                services. It does not assume pristine data. It keeps your
+                data on your hardware and your operations running when
+                connectivity drops, because it was designed for the same
+                conditions that shaped the methodology.
               </p>
               <Link
                 href={SITE.agentUrl}
@@ -215,6 +218,8 @@ export default function TechnologyPage() {
               as the research and prototyping arm of the methodology,
               testing new approaches to sensing, decision-making and
               operational execution before they become production systems.
+              When the market offers no solution for the conditions you face,
+              Labs builds one and tests it where those conditions actually exist.
             </p>
           </div>
 
@@ -237,10 +242,10 @@ export default function TechnologyPage() {
         <div className="container-tangison text-center">
           <div className="reveal">
             <h2 className="display-md text-[var(--ink)]">
-              See the company behind the methodology
+              Meet the company that built this methodology
             </h2>
             <Link href="/company" className="mt-5 btn-outline inline-flex">
-              About Tangison
+              About Tangison Technologies
             </Link>
           </div>
         </div>

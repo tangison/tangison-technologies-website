@@ -67,7 +67,7 @@ export default async function Image() {
               marginTop: 16,
             }}
           >
-            Intelligence for imperfect conditions.
+            Operational intelligence without assumptions.
           </div>
 
           {/* Location */}

@@ -9,7 +9,7 @@ const SITEMAP_STRUCTURE = [
   {
     group: "Primary pages",
     items: [
-      { label: "Homepage", href: "/", description: "Tangison Technologies. Intelligence for imperfect conditions." },
+      { label: "Homepage", href: "/", description: "Tangison Technologies. Operational intelligence without assumptions." },
       ...NAV_PRIMARY.map((n) => ({
         label: n.label,
         href: n.href,
@@ -20,7 +20,7 @@ const SITEMAP_STRUCTURE = [
   {
     group: "Technology detail",
     items: [
-      { label: "Observe", href: "/technology#observe", description: "Gather signals from imperfect conditions." },
+      { label: "Observe", href: "/technology#observe", description: "Gather signals from environments where connectivity drops and data arrives late." },
       { label: "Decide", href: "/technology#decide", description: "Turn observations into operational decisions." },
       { label: "Operate", href: "/technology#operate", description: "Execute decisions under real constraints." },
       { label: "Tangison Agent", href: "/technology#agent", description: "Self-hosted AI agent platform." },

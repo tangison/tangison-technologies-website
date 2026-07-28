@@ -31,12 +31,12 @@ export default function CompanyPage() {
           <div className="container-tangison pb-12 md:pb-16">
             <p className="eyebrow mb-4 reveal-delay-1">Company</p>
             <h1 className="display display-lg text-[var(--teal-text)] reveal-delay-2">
-              Built in Namibia.<br />Built for conditions<br />like these.
+              Operational intelligence<br/>built where conditions<br/>are the harshest.
             </h1>
             <p className="mt-4 text-sm text-[var(--teal-text)]/80 body-constrained reveal-delay-3">
-              Tangison Technologies operates from Windhoek, designing systems
-              for environments where connectivity, data and infrastructure
-              cannot be assumed.
+              Tangison Technologies operates from Windhoek, building systems
+              that work where connectivity drops, data arrives late,
+              and infrastructure is uneven.
             </p>
           </div>
         </div>
@@ -47,36 +47,36 @@ export default function CompanyPage() {
         <div className="container-tangison">
           <div className="reveal">
             <h2 className="display-md text-[var(--ink)]">
-              Intelligence for imperfect conditions
+              Operational intelligence without assumptions
             </h2>
             <p className="mt-4 text-[var(--muted-ink)] body-constrained">
               Tangison Technologies is a technology company based in Windhoek,
-              Namibia. It designs operational intelligence systems for
-              environments where connectivity, data and infrastructure cannot
-              be assumed. The company does not build for ideal conditions. It
+              Namibia. It builds operational intelligence systems that work
+              where connectivity drops, data arrives late, and infrastructure
+              is uneven. The company does not build for ideal conditions. It
               builds for the conditions that actually exist.
             </p>
             <p className="mt-3 text-[var(--muted-ink)] body-constrained">
               Founded by Tangi Iigonda, Tangison operates as a connected
               ecosystem: an AI agent platform (Tangison Agent), a design and
               engineering studio (Tangison Studio), and a research lab
-              (Tangison Labs). Each capability serves the same purpose:
-              making intelligence work where it is needed most.
+              (Tangison Labs). Each capability builds systems that work
+              without assuming perfect conditions.
             </p>
           </div>
 
           <div className="mt-8 grid md:grid-cols-3 gap-6">
             <div className="reveal reveal-delay-1 p-6 bg-[var(--surface)] border border-[var(--hairline)] rounded-md">
               <h3 className="text-sm font-semibold text-[var(--ink)]">Location</h3>
-              <p className="text-[var(--muted-ink)] mt-1 text-xs">{SITE.location}</p>
+              <p className="text-[var(--muted-ink)] mt-1 text-xs">Based in {SITE.location}. Operations run from the conditions that teach the methodology.</p>
             </div>
             <div className="reveal reveal-delay-2 p-6 bg-[var(--surface)] border border-[var(--hairline)] rounded-md">
-              <h3 className="text-sm font-semibold text-[var(--ink)]">Owner</h3>
-              <p className="text-[var(--muted-ink)] mt-1 text-xs">{SITE.owner}</p>
+              <h3 className="text-sm font-semibold text-[var(--ink)]">Founded by</h3>
+              <p className="text-[var(--muted-ink)] mt-1 text-xs">{SITE.owner}. A solo founder building systems for conditions others ignore.</p>
             </div>
             <div className="reveal reveal-delay-3 p-6 bg-[var(--surface)] border border-[var(--hairline)] rounded-md">
               <h3 className="text-sm font-semibold text-[var(--ink)]">Intent</h3>
-              <p className="text-[var(--muted-ink)] mt-1 text-xs">{SITE.tagline}</p>
+              <p className="text-[var(--muted-ink)] mt-1 text-xs">Operational intelligence without assumptions. Systems that work where others assume they cannot.</p>
             </div>
           </div>
         </div>
@@ -127,27 +127,29 @@ export default function CompanyPage() {
 
           <div className="grid md:grid-cols-3 gap-6">
             <div className="reveal reveal-delay-1">
-              <h3 className="text-sm font-semibold text-[var(--ink)]">Principle one</h3>
+              <h3 className="text-sm font-semibold text-[var(--ink)]">Design for what exists</h3>
               <p className="mt-2 text-[var(--muted-ink)] text-sm">
                 Work with what exists, not what should exist. Design for
                 the conditions on the ground, not the conditions in the
-                specification.
+                specification. When connectivity drops, systems must
+                still work.
               </p>
             </div>
             <div className="reveal reveal-delay-2">
-              <h3 className="text-sm font-semibold text-[var(--ink)]">Principle two</h3>
+              <h3 className="text-sm font-semibold text-[var(--ink)]">Degrade, not crash</h3>
               <p className="mt-2 text-[var(--muted-ink)] text-sm">
                 Degrade gracefully, do not fail catastrophically. When
                 conditions worsen, systems should still function, even
-                if at reduced capability.
+                if at reduced capability. Operations continue, not halt.
               </p>
             </div>
             <div className="reveal reveal-delay-3">
-              <h3 className="text-sm font-semibold text-[var(--ink)]">Principle three</h3>
+              <h3 className="text-sm font-semibold text-[var(--ink)]">Traceable, not opaque</h3>
               <p className="mt-2 text-[var(--muted-ink)] text-sm">
                 Traceability over opacity. Every observation and every
                 decision should be traceable to its source. Intelligence
-                that cannot be examined cannot be trusted.
+                that cannot be examined cannot be trusted. Audit logs
+                are a feature, not an afterthought.
               </p>
             </div>
           </div>
@@ -178,19 +180,21 @@ export default function CompanyPage() {
                 and extreme environmental conditions. The Skeleton Coast,
                 the Namib Desert, the Kalahari: these are not exotic
                 exceptions. They are everyday reality for millions of people
-                and thousands of operations.
+                and thousands of operations that need technology to work
+                under exactly these conditions.
               </p>
               <p className="mt-3 text-[var(--muted-ink)] body-constrained">
                 That context is the design brief. Technology that works in
                 Windhoek, that works on the gravel plains, that works where
                 the fog rolls in from the Atlantic, is technology that works
-                anywhere conditions are imperfect. And imperfect conditions
-                are far more common than ideal ones.
+                anywhere conditions are less than ideal. And conditions that
+                are less than ideal are far more common than perfect ones.
               </p>
               <p className="mt-3 text-[var(--muted-ink)] body-constrained">
                 Tangison Technologies does not treat Namibia as a limitation
                 to overcome. It treats Namibia as the environment that
-                teaches the methodology.
+                proves the methodology. Every system is tested where the
+                conditions are the harshest, not where they are the easiest.
               </p>
             </div>
           </div>
@@ -202,10 +206,10 @@ export default function CompanyPage() {
         <div className="container-tangison text-center">
           <div className="reveal">
             <h2 className="display-md text-[var(--ink)]">
-              See how the methodology works
+              Understand how the methodology delivers results
             </h2>
             <Link href="/technology" className="mt-5 btn-accent inline-flex">
-              Technology
+              See the technology
             </Link>
           </div>
         </div>

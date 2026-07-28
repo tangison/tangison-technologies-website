@@ -44,7 +44,7 @@ function ContactForm() {
 
   return (
     <div className="p-6 bg-[var(--surface)] border border-[var(--hairline)] rounded-md">
-      <p className="eyebrow mb-4">Send a message</p>
+      <p className="eyebrow mb-4">Compose your message</p>
 
       {submitted ? (
         <div className="text-center py-4">
@@ -79,7 +79,7 @@ function ContactForm() {
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="How should we address you?"
+              placeholder="Your full name"
               className="w-full px-3 py-2 bg-[var(--surface-2)] border border-[var(--hairline)] rounded-md text-sm text-[var(--ink)] placeholder:text-[var(--muted-ink)] focus:outline-none focus:border-[var(--teal)] focus:ring-1 focus:ring-[var(--teal)] transition-colors"
               required
             />
@@ -113,7 +113,7 @@ function ContactForm() {
               id="contact-body"
               value={body}
               onChange={(e) => setBody(e.target.value)}
-              placeholder="Be specific about the conditions you face and what you need."
+              placeholder="Describe the conditions you face: connectivity, data quality, infrastructure. What needs to keep running?"
               rows={5}
               className="w-full px-3 py-2 bg-[var(--surface-2)] border border-[var(--hairline)] rounded-md text-sm text-[var(--ink)] placeholder:text-[var(--muted-ink)] focus:outline-none focus:border-[var(--teal)] focus:ring-1 focus:ring-[var(--teal)] transition-colors resize-y"
               required
@@ -159,11 +159,12 @@ export default function ContactPage() {
           <div className="container-tangison pb-12 md:pb-16">
             <p className="eyebrow mb-4 reveal-delay-1">Contact</p>
             <h1 className="display display-lg text-[var(--teal-text)] reveal-delay-2">
-              Start a<br />conversation.
+              Tell us what<br />conditions you face.
             </h1>
             <p className="mt-4 text-sm text-[var(--teal-text)]/80 body-constrained reveal-delay-3">
               If your operations run where connectivity drops and conditions
-              shift without warning, we should talk.
+              shift without warning, Tangison can help. Describe your
+              environment and we will tell you what is possible.
             </p>
           </div>
         </div>
@@ -176,17 +177,19 @@ export default function ContactPage() {
             {/* Left: statement */}
             <div className="reveal space-y-6">
               <h2 className="display-md text-[var(--ink)]">
-                Tangison Technologies
+                What happens when you contact us
               </h2>
               <p className="text-[var(--muted-ink)] body-constrained">
                 We respond to genuine enquiries about operational intelligence
                 systems, partnerships and applied research. If your work
-                involves imperfect conditions, we are interested.
+                involves environments where connectivity drops, data arrives
+                late, or infrastructure is uneven, we are interested.
               </p>
               <p className="text-[var(--muted-ink)] body-constrained">
                 We do not respond to generic vendor pitches, unsolicited
                 marketing or automated outreach. Write to us directly.
-                Be specific about the conditions you face.
+                Be specific about the conditions you face, and we will
+                tell you whether Tangison can help.
               </p>
 
               {/* Direct email link */}
@@ -229,7 +232,7 @@ export default function ContactPage() {
                       Tangison Agent
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 inline"><path d="M7 17L17 7M7 7h10v10"/></svg>
                     </a>
-                    <p className="text-xs text-[var(--muted-ink)]">AI agent platform</p>
+                    <p className="text-xs text-[var(--muted-ink)]">Self-hosted AI agents that keep your operations running</p>
                   </li>
                   <li>
                     <a
@@ -241,7 +244,7 @@ export default function ContactPage() {
                       Tangison Studio
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 inline"><path d="M7 17L17 7M7 7h10v10"/></svg>
                     </a>
-                    <p className="text-xs text-[var(--muted-ink)]">Design and engineering</p>
+                    <p className="text-xs text-[var(--muted-ink)]">Digital products built to work where conditions are unforgiving</p>
                   </li>
                   <li>
                     <a
@@ -250,7 +253,7 @@ export default function ContactPage() {
                     >
                       Tangison Labs
                     </a>
-                    <p className="text-xs text-[var(--muted-ink)]">Research and experimental systems</p>
+                    <p className="text-xs text-[var(--muted-ink)]">Experimental systems tested where existing technology fails</p>
                   </li>
                 </ul>
               </div>

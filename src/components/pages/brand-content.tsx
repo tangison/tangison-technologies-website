@@ -205,15 +205,18 @@ export default function BrandPage() {
             <p className="eyebrow mb-4">Tone</p>
             <p className="text-[var(--muted-ink)] body-constrained">
               Tangison writes in Namibian business English. The tone
-              is direct, specific and restrained. No AI cliches
-              (revolutionise, unlock, cutting-edge, seamless,
-              transformative, leverage, empower). No invented metrics,
-              testimonials or claims that cannot be verified.
+              is direct, specific and restrained. No em dashes. No
+              exclamation points. No AI cliches (revolutionise, unlock,
+              cutting-edge, seamless, transformative, leverage, empower).
+              No patterns like "X as Y, not Z" or "X things, one Y."
+              No invented metrics, testimonials or claims that cannot
+              be verified. These are editorial rules, not preferences.
             </p>
             <p className="mt-3 text-[var(--muted-ink)] body-constrained">
               Paragraphs are concise. Evidence and systems take priority
-              over hype. The writing serves the same principle as the
-              visual system: vast conditions, precise intelligence.
+              over hype. Every claim must be verifiable or marked for
+              client verification. The writing serves the same principle
+              as the visual system: vast conditions, precise intelligence.
             </p>
           </div>
 
@@ -234,7 +237,9 @@ export default function BrandPage() {
               Reduced-motion users receive instant visibility with no
               animation. No scroll-jacking, no excessive parallax, no
               JavaScript animation libraries. Motion is a communication
-              tool, not a decoration.
+              tool, not a decoration. Every animation must answer the
+              question: what relationship does this motion describe?
+              If the answer is "it looks cool," the animation is removed.
             </p>
           </div>
 
