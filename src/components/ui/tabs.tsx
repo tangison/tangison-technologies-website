@@ -8,6 +8,7 @@ import { useState } from "react";
    Uses Radix primitives for accessibility.
    Animation: content crossfades in place (per motion-master rule for state changes in place).
    Active indicator: slides between positions as a single element (per motion-master nav rule).
+   Mobile: tab list scrolls horizontally when tabs overflow, with scroll-snap.
    Reduced-motion: instant swap, no crossfade.
 */
 
@@ -27,31 +28,34 @@ export function Tabs({ items, defaultValue, className = "" }: TabsProps) {
   const defaultTab = defaultValue ?? items[0]?.id ?? "";
   const [activeTab, setActiveTab] = useState(defaultTab);
 
+  // Calculate indicator position based on active tab index
+  const activeIndex = items.findIndex((i) => i.id === activeTab);
+
   return (
     <TabsPrimitive.Root
       defaultValue={defaultTab}
       onValueChange={setActiveTab}
       className={`${className}`}
     >
-      {/* Tab list with sliding active indicator */}
-      <TabsPrimitive.List className="relative flex border-b border-[var(--hairline)] mb-6">
+      {/* Tab list: scrollable on mobile, equal-width on desktop */}
+      <TabsPrimitive.List className="relative flex overflow-x-auto scroll-snap-x mandatory -mx-4 px-4 md:mx-0 md:px-0 md:overflow-x-visible border-b border-[var(--hairline)] mb-6 scrollbar-width-thin scrollbar-color-hairline-transparent">
         {items.map((item) => (
           <TabsPrimitive.Trigger
             key={item.id}
             value={item.id}
-            className="flex-1 py-3 text-sm font-medium text-[var(--muted-ink)] hover:text-[var(--ink)] transition-colors data-[state=active]:text-[var(--ink)] data-[state=active]:font-semibold cursor-pointer text-center"
+            className="flex-shrink-0 md:flex-1 py-3 px-4 text-sm font-medium text-[var(--muted-ink)] hover:text-[var(--ink)] transition-colors data-[state=active]:text-[var(--ink)] data-[state=active]:font-semibold cursor-pointer text-center whitespace-nowrap scroll-snap-align-start"
           >
             {item.label}
           </TabsPrimitive.Trigger>
         ))}
-        {/* Sliding underline indicator */}
+        {/* Sliding underline indicator — only on desktop where flex-1 gives equal widths */}
         <motion.div
-          className="absolute bottom-0 h-[2px] bg-[var(--teal)]"
+          className="hidden md:block absolute bottom-0 h-[2px] bg-[var(--teal)]"
           layoutId="tab-indicator"
           transition={{ type: "spring", stiffness: 500, damping: 35 }}
           style={{
             width: `${100 / items.length}%`,
-            left: `${(items.findIndex((i) => i.id === activeTab) / items.length) * 100}%`,
+            left: `${(activeIndex / items.length) * 100}%`,
           }}
         />
       </TabsPrimitive.List>

@@ -233,7 +233,7 @@ export default function TechnologyPage() {
                 alt="A brushed aluminium disc emerging from dark wet coastal sand"
                 width={1200}
                 height={500}
-                sizes="(max-width: 768px) 100vw, 100vw"
+                sizes="100vw"
                 className="rounded-md w-full h-auto object-cover"
                 style={{ objectPosition: "right top" }}
               />

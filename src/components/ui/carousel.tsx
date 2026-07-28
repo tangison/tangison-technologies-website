@@ -118,7 +118,7 @@ export function Carousel({ items, className = "", autoplay = false, interval = 5
       <div className="flex items-center justify-center gap-4 mt-4">
         <button
           onClick={scrollPrev}
-          className="flex h-10 w-10 items-center justify-center rounded-md border border-[var(--hairline)] text-[var(--ink)] hover:bg-[var(--surface-2)] hover:border-[var(--ink)] transition-colors"
+          className="flex h-11 w-11 items-center justify-center rounded-md border border-[var(--hairline)] text-[var(--ink)] hover:bg-[var(--surface-2)] hover:border-[var(--ink)] transition-colors"
           aria-label="Previous slide"
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -132,10 +132,10 @@ export function Carousel({ items, className = "", autoplay = false, interval = 5
             <button
               key={i}
               onClick={() => scrollTo(i)}
-              className={`h-2 rounded-full transition-all duration-200 ${
+              className={`p-1 rounded-full transition-all duration-200 ${
                 i === selectedIndex
-                  ? "w-6 bg-[var(--teal)]"
-                  : "w-2 bg-[var(--hairline)] hover:bg-[var(--muted-ink)]"
+                  ? "h-3 w-6 bg-[var(--teal)]"
+                  : "h-3 w-3 bg-[var(--hairline)] hover:bg-[var(--muted-ink)]"
               }`}
               aria-label={`Go to slide ${i + 1}`}
               aria-current={i === selectedIndex ? "true" : undefined}
@@ -145,7 +145,7 @@ export function Carousel({ items, className = "", autoplay = false, interval = 5
 
         <button
           onClick={scrollNext}
-          className="flex h-10 w-10 items-center justify-center rounded-md border border-[var(--hairline)] text-[var(--ink)] hover:bg-[var(--surface-2)] hover:border-[var(--ink)] transition-colors"
+          className="flex h-11 w-11 items-center justify-center rounded-md border border-[var(--hairline)] text-[var(--ink)] hover:bg-[var(--surface-2)] hover:border-[var(--ink)] transition-colors"
           aria-label="Next slide"
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

@@ -333,6 +333,31 @@
     flex-shrink: 0;
   }
 
+  /* Tab list scroll on mobile */
+  .scrollbar-width-thin {
+    scrollbar-width: thin;
+    scrollbar-color: var(--hairline) transparent;
+  }
+  .scrollbar-width-thin::-webkit-scrollbar {
+    height: 4px;
+  }
+  .scrollbar-width-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scrollbar-width-thin::-webkit-scrollbar-thumb {
+    background: var(--hairline);
+    border-radius: 2px;
+  }
+  .scrollbar-color-hairline-transparent {
+    scrollbar-color: var(--hairline) transparent;
+  }
+  .scroll-snap-x-mandatory {
+    scroll-snap-type: x mandatory;
+  }
+  .scroll-snap-align-start {
+    scroll-snap-align: start;
+  }
+
   /* Subtle noise texture overlay */
   .noise-overlay::before {
     content: "";
