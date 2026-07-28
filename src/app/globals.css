@@ -386,6 +386,28 @@
     opacity: 1;
   }
 
+  /* Zoom-in reveal — scale from a trigger point */
+  .reveal-zoom {
+    opacity: 0;
+    transform: scale(0.85);
+    transition: opacity 400ms ease-out, transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal-zoom.visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* Scale-up reveal — slight scale for hero image on scroll */
+  .reveal-scale {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 500ms ease-out, transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal-scale.visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+
   /* Nav surface slide */
   .nav-surface-enter {
     transform: translateX(100%);
@@ -405,6 +427,39 @@
     opacity: 1;
     transform: translateY(0);
   }
+
+  /* Hero parallax zoom — gradual scale increase on scroll */
+  .hero-zoom {
+    transition: transform 0.1s linear;
+  }
+
+  /* Hover lift for cards */
+  .card-hover-lift {
+    transition: transform 200ms ease-out, box-shadow 200ms ease-out;
+  }
+  .card-hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-warm-md);
+  }
+
+  /* Ecosystem card zoom on hover */
+  .ecosystem-card {
+    transition: transform 250ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 250ms ease-out;
+  }
+  .ecosystem-card:hover {
+    transform: scale(1.02);
+    box-shadow: var(--shadow-warm-lg);
+  }
+}
+
+/* ─── ACCORDION KEYFRAMES ─── */
+@keyframes accordion-down {
+  from { height: 0; opacity: 0; }
+  to { height: auto; opacity: 1; }
+}
+@keyframes accordion-up {
+  from { height: auto; opacity: 1; }
+  to { height: 0; opacity: 0; }
 }
 
 /* ─── REDUCED MOTION ─── */
@@ -412,6 +467,8 @@
   .reveal,
   .reveal-left,
   .reveal-image,
+  .reveal-zoom,
+  .reveal-scale,
   .reveal-delay-1,
   .reveal-delay-2,
   .reveal-delay-3,
@@ -422,11 +479,17 @@
     transform: none !important;
     transition: none !important;
   }
-  .nav-surface-enter {
+  .nav-surface-enter,
+  .dropdown-enter,
+  .hero-zoom,
+  .card-hover-lift,
+  .ecosystem-card {
     transition: none !important;
   }
-  .dropdown-enter {
-    transition: none !important;
+  .card-hover-lift:hover,
+  .ecosystem-card:hover {
+    transform: none !important;
+    box-shadow: none !important;
   }
   *,
   *::before,

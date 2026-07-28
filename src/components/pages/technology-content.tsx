@@ -5,6 +5,10 @@ import Link from "next/link";
 import { PageShell } from "@/components/site/page-shell";
 import { useReveal, useRevealChildren } from "@/hooks/use-reveal";
 import { SITE } from "@/lib/site";
+import { Tabs } from "@/components/ui/tabs";
+import { Accordion } from "@/components/ui/accordion";
+import { ZoomReveal } from "@/components/ui/zoom-reveal";
+import { ClipReveal } from "@/components/ui/clip-reveal";
 
 const PHASES = [
   {
@@ -15,9 +19,9 @@ const PHASES = [
     description:
       "The first discipline is observation: listening before speaking, sensing before acting. In environments where connectivity drops, data arrives late, and infrastructure is uneven, observation must work without assuming a steady stream of clean inputs. Tangison builds sensing systems that tolerate gaps, delays and noise, so you get usable signals instead of silence.",
     details: [
-      "Works with intermittent connectivity and delayed data",
-      "Handles noisy, incomplete and unstructured signals",
-      "Designed for environments where sensor networks are sparse",
+      { id: "observe-detail-1", title: "How does Tangison handle intermittent connectivity?", body: "Observation systems are designed to buffer and store data locally when connectivity drops, then transmit when a connection becomes available. They do not require a constant network link. Sensors and data collectors continue to record signals during offline periods, so no observations are lost because the network was unavailable." },
+      { id: "observe-detail-2", title: "What happens when data arrives late or incomplete?", body: "The Observe phase is built for delayed and partial data. It does not discard late arrivals or refuse incomplete signals. Instead, it timestamps what it receives, flags what is uncertain, and passes it to the Decide phase with its confidence level attached. The downstream phases work with what is available, not what is ideal." },
+      { id: "observe-detail-3", title: "What environments does Observe target?", body: "Any environment where sensor networks are sparse, connectivity is intermittent, and signals arrive with noise or gaps. This includes remote monitoring stations, field operations on gravel plains, coastal infrastructure under fog, and agricultural sensors across vast distances. These are environments that standard monitoring systems cannot reliably serve." },
     ],
     image: "/images/tangison/webp/03-ai-operations-node.webp",
     imageAlt: "A minimal graphite control node with a single teal status light",
@@ -31,9 +35,9 @@ const PHASES = [
     description:
       "Decisions in imperfect conditions are not abstract analyses. They are concrete choices made under limited time, partial information and uneven infrastructure. Tangison decision systems do not wait for perfect data. They work with what is available, weigh what is uncertain, and commit to what is actionable, so you can move forward instead of waiting for conditions that may never arrive.",
     details: [
-      "Operates with partial information and bounded confidence",
-      "Balances speed and accuracy under time pressure",
-      "Produces decisions that are traceable, not opaque",
+      { id: "decide-detail-1", title: "How does Decide handle partial information?", body: "Decision systems operate with bounded confidence. They assign confidence levels to each input, propagate uncertainty through the decision chain, and produce outputs that are annotated with their reliability. This means every decision is traceable to its source data and its certainty level. Decisions are never presented as absolute when the inputs are not." },
+      { id: "decide-detail-2", title: "Can Decide balance speed and accuracy?", body: "Yes. The Decide phase includes configurable time constraints. When decisions must be made quickly, the system reduces its evidence threshold and flags the decision as time-constrained. When more time is available, it waits for additional data to increase confidence. The tradeoff between speed and accuracy is explicit, not hidden." },
+      { id: "decide-detail-3", title: "Why does traceability matter?", body: "Every observation and every decision in the Tangison system is logged with its provenance. This means the reasoning chain can be inspected, audited and reproduced. Intelligence that cannot be examined cannot be trusted. In operational environments, traceability is the difference between a decision that works and a decision that nobody can explain or verify." },
     ],
     image: "/images/tangison/webp/04-data-decision-planes.webp",
     imageAlt: "Intersecting smoke-glass planes joined by a precise teal seam",
@@ -47,9 +51,9 @@ const PHASES = [
     description:
       "Operation is the proof that the method works. Systems that run where hardware ages, networks fragment and conditions shift without warning. Tangison operational platforms are designed for the field, not the lab. They run locally when they must, connect when they can, and degrade gracefully when they cannot, so your operations continue instead of crashing when conditions worsen.",
     details: [
-      "Designed for disconnected and intermittently connected environments",
-      "Degrades gracefully rather than failing catastrophically",
-      "Runs locally when connectivity is unavailable",
+      { id: "operate-detail-1", title: "How does Operate handle disconnected environments?", body: "Operational platforms run locally when connectivity is unavailable. They do not require a constant connection to a central server. Local execution ensures that operations continue even when the network drops. When connectivity returns, the platform synchronises with upstream systems. The default mode is local-first, cloud-optional." },
+      { id: "operate-detail-2", title: "What does graceful degradation mean?", body: "When conditions worsen, Tangison systems reduce capability rather than fail entirely. If bandwidth drops, the system compresses transmissions. If sensor data becomes unreliable, the system falls back to simpler heuristics. If compute resources shrink, the system prioritises critical tasks. The principle is: operations continue, even if at reduced capability. They never halt silently." },
+      { id: "operate-detail-3", title: "What is the difference between lab and field design?", body: "Lab-designed systems assume stable infrastructure, clean data and constant connectivity. Field-designed systems assume none of these. Tangison Operate platforms are tested in Namibian conditions where connectivity drops, hardware ages under coastal fog, and data arrives late from remote stations. This is where the methodology is proven, not in simulated environments." },
     ],
     image: "/images/tangison/webp/05-resilient-platform-monolith.webp",
     imageAlt: "A dark stone monolith with a narrow light seam emerging through coastal fog",
@@ -59,7 +63,6 @@ const PHASES = [
 
 export default function TechnologyPage() {
   const heroRef = useReveal<HTMLElement>();
-  const phasesRef = useRevealChildren<HTMLElement>();
   const agentRef = useRevealChildren<HTMLElement>();
 
   return (
@@ -112,49 +115,49 @@ export default function TechnologyPage() {
         </div>
       </section>
 
-      {/* ─── PHASES ─── */}
-      <section ref={phasesRef} className="bg-[var(--surface)]" aria-label="Methodology phases">
-        {PHASES.map((phase, i) => {
-          const isEven = i % 2 === 0;
-          return (
-            <div
-              key={phase.id}
-              id={phase.id}
-              className="section-spacing border-t border-[var(--hairline)]"
-            >
-              <div className="container-tangison grid md:grid-cols-2 gap-6 md:gap-12 items-center">
-                {/* Text side */}
-                <div className={`reveal ${isEven ? "" : "reveal-left"} reveal-delay-1 ${isEven ? "" : "order-2 md:order-2"}`}>
-                  <span className="text-[var(--teal)] font-mono text-xs tracking-widest">{phase.number}</span>
-                  <p className="eyebrow mt-3 mb-1">{phase.phase}</p>
-                  <h2 className="display-sm text-[var(--ink)]">{phase.headline}</h2>
-                  <p className="mt-3 text-[var(--muted-ink)] body-constrained">{phase.description}</p>
-                  <ul className="mt-4 space-y-2">
-                    {phase.details.map((detail) => (
-                      <li key={detail} className="flex items-start gap-2 text-sm text-[var(--muted-ink)]">
-                        <span className="inline-block w-1 h-1 rounded-full bg-[var(--teal)] mt-2 flex-shrink-0" />
-                        {detail}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+      {/* ─── PHASES: Tabs + Accordion ─── */}
+      <section className="bg-[var(--surface)]" aria-label="Methodology phases">
+        <div className="container-tangison section-spacing-tight">
+          <Tabs
+            items={PHASES.map((phase) => ({
+              id: phase.id,
+              label: phase.phase,
+              content: (
+                <div key={phase.id} id={phase.id} className="grid md:grid-cols-2 gap-6 md:gap-12 items-start">
+                  {/* Text side */}
+                  <div>
+                    <span className="text-[var(--teal)] font-mono text-xs tracking-widest">{phase.number}</span>
+                    <p className="eyebrow mt-3 mb-1">{phase.phase}</p>
+                    <h2 className="display-sm text-[var(--ink)]">{phase.headline}</h2>
+                    <p className="mt-3 text-[var(--muted-ink)] body-constrained">{phase.description}</p>
 
-                {/* Image side */}
-                <div className={`reveal-image reveal-delay-2 ${isEven ? "order-1 md:order-2" : "order-1 md:order-1"}`}>
-                  <Image
-                    src={phase.image}
-                    alt={phase.imageAlt}
-                    width={600}
-                    height={400}
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    className="rounded-md w-full h-auto object-cover"
-                    style={{ objectPosition: phase.focal }}
-                  />
+                    {/* Accordion for detailed questions */}
+                    <div className="mt-6">
+                      <p className="eyebrow mb-3">Details</p>
+                      <Accordion items={phase.details} />
+                    </div>
+                  </div>
+
+                  {/* Image side */}
+                  <div>
+                    <ZoomReveal origin={phase.focal === "left center" ? "left" : "right"} delay={0.1}>
+                      <Image
+                        src={phase.image}
+                        alt={phase.imageAlt}
+                        width={600}
+                        height={400}
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        className="rounded-md w-full h-auto object-cover"
+                        style={{ objectPosition: phase.focal }}
+                      />
+                    </ZoomReveal>
+                  </div>
                 </div>
-              </div>
-            </div>
-          );
-        })}
+              ),
+            }))}
+            defaultValue="observe"
+          />
+        </div>
       </section>
 
       {/* ─── TANGISON AGENT ─── */}
@@ -191,7 +194,7 @@ export default function TechnologyPage() {
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1"><path d="M7 17L17 7M7 7h10v10"/></svg>
               </Link>
             </div>
-            <div className="reveal-image reveal-delay-2">
+            <ClipReveal direction="right" delay={0.1} className="reveal-delay-2">
               <Image
                 src="/images/tangison/webp/08-ecosystem-agent.webp"
                 alt="A smooth graphite stone with one small teal signal on pale sand"
@@ -201,7 +204,7 @@ export default function TechnologyPage() {
                 className="rounded-md w-full h-auto object-cover"
                 style={{ objectPosition: "left bottom" }}
               />
-            </div>
+            </ClipReveal>
           </div>
         </div>
       </section>
@@ -223,16 +226,18 @@ export default function TechnologyPage() {
             </p>
           </div>
 
-          <div className="mt-8 reveal-image reveal-delay-1">
-            <Image
-              src="/images/tangison/webp/09-ecosystem-labs.webp"
-              alt="A brushed aluminium disc emerging from dark wet coastal sand"
-              width={1200}
-              height={500}
-              sizes="(max-width: 768px) 100vw, 100vw"
-              className="rounded-md w-full h-auto object-cover"
-              style={{ objectPosition: "right top" }}
-            />
+          <div className="mt-8">
+            <ZoomReveal origin="center" delay={0.1}>
+              <Image
+                src="/images/tangison/webp/09-ecosystem-labs.webp"
+                alt="A brushed aluminium disc emerging from dark wet coastal sand"
+                width={1200}
+                height={500}
+                sizes="(max-width: 768px) 100vw, 100vw"
+                className="rounded-md w-full h-auto object-cover"
+                style={{ objectPosition: "right top" }}
+              />
+            </ZoomReveal>
           </div>
         </div>
       </section>

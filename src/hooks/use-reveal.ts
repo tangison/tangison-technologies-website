@@ -51,7 +51,7 @@ export function useRevealChildren<T extends HTMLElement = HTMLElement>(
     if (!container) return;
 
     const targets = container.querySelectorAll(
-      ".reveal, .reveal-left, .reveal-image"
+      ".reveal, .reveal-left, .reveal-image, .reveal-zoom, .reveal-scale"
     );
 
     const observer = new IntersectionObserver(
