@@ -2,9 +2,36 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { PageShell } from "@/components/site/page-shell";
 import { useReveal, useRevealChildren } from "@/hooks/use-reveal";
 import { SITE } from "@/lib/site";
+import { ZoomReveal } from "@/components/ui/zoom-reveal";
+import { StaggerReveal, StaggerItem } from "@/components/ui/stagger-reveal";
+import { useEffect, useRef } from "react";
+
+/* ─── Hero zoom on scroll for contact page ─── */
+function useHeroZoom() {
+  const heroImageRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const heroImage = heroImageRef.current;
+    if (!heroImage) return;
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced) return;
+
+    const onScroll = () => {
+      const y = window.scrollY;
+      const scale = 1 + Math.min(y / 5000, 0.08);
+      heroImage.style.transform = `scale(${scale})`;
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  return heroImageRef;
+}
 
 /* ─── Contact form that generates mailto: links ─── */
 const SUBJECT_OPTIONS = [
@@ -37,13 +64,12 @@ function ContactForm() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Open the mail client with prefilled content
     window.location.href = mailtoLink;
     setSubmitted(true);
   };
 
   return (
-    <div className="p-6 bg-[var(--surface)] border border-[var(--hairline)] rounded-md">
+    <div className="p-6 bg-[var(--surface)] border border-[var(--hairline)] rounded-md card-hover-lift">
       <p className="eyebrow mb-4">Compose your message</p>
 
       {submitted ? (
@@ -137,13 +163,13 @@ function ContactForm() {
 
 export default function ContactPage() {
   const heroRef = useReveal<HTMLElement>();
-  const detailsRef = useRevealChildren<HTMLElement>();
+  const heroImageRef = useHeroZoom();
 
   return (
     <PageShell>
-      {/* ─── HERO ─── */}
+      {/* ─── HERO with parallax zoom ─── */}
       <section ref={heroRef} className="hero-section noise-overlay reveal" aria-label="Contact hero">
-        <div className="absolute inset-0">
+        <div ref={heroImageRef} className="absolute inset-0 hero-zoom">
           <Image
             src="/images/tangison/webp/11-contact-coast-horizon.webp"
             alt="A quiet fog horizon where the Atlantic meets a dark Skeleton Coast beach"
@@ -171,92 +197,105 @@ export default function ContactPage() {
       </section>
 
       {/* ─── CONTACT FORM + DETAILS ─── */}
-      <section ref={detailsRef} className="section-spacing bg-[var(--bg)]" aria-label="Contact details">
+      <section className="section-spacing bg-[var(--bg)]" aria-label="Contact details">
         <div className="container-tangison">
           <div className="grid md:grid-cols-2 gap-6 md:gap-12">
-            {/* Left: statement */}
-            <div className="reveal space-y-6">
-              <h2 className="display-md text-[var(--ink)]">
-                What happens when you contact us
-              </h2>
-              <p className="text-[var(--muted-ink)] body-constrained">
-                We respond to genuine enquiries about operational intelligence
-                systems, partnerships and applied research. If your work
-                involves environments where connectivity drops, data arrives
-                late, or infrastructure is uneven, we are interested.
-              </p>
-              <p className="text-[var(--muted-ink)] body-constrained">
-                We do not respond to generic vendor pitches, unsolicited
-                marketing or automated outreach. Write to us directly.
-                Be specific about the conditions you face, and we will
-                tell you whether Tangison can help.
-              </p>
-
-              {/* Direct email link */}
-              <div className="p-6 bg-[var(--surface)] border border-[var(--hairline)] rounded-md">
-                <p className="eyebrow mb-3">Direct email</p>
-                <a
-                  href={`mailto:${SITE.email}?subject=Enquiry%20for%20Tangison%20Technologies`}
-                  className="display-sm text-[var(--teal)] hover:text-[var(--ink)] transition-colors"
-                >
-                  {SITE.email}
-                </a>
-                <p className="text-xs text-[var(--muted-ink)] mt-2">
-                  Opens your mail client with a prefilled subject line.
+            {/* Left: statement + info cards */}
+            <div className="space-y-6">
+              <ZoomReveal origin="left">
+                <h2 className="display-md text-[var(--ink)]">
+                  What happens when you contact us
+                </h2>
+              </ZoomReveal>
+              <div className="reveal text-[var(--muted-ink)] body-constrained">
+                <p>
+                  We respond to genuine enquiries about operational intelligence
+                  systems, partnerships and applied research. If your work
+                  involves environments where connectivity drops, data arrives
+                  late, or infrastructure is uneven, we are interested.
+                </p>
+                <p className="mt-3">
+                  We do not respond to generic vendor pitches, unsolicited
+                  marketing or automated outreach. Write to us directly.
+                  Be specific about the conditions you face, and we will
+                  tell you whether Tangison can help.
                 </p>
               </div>
 
-              <div className="p-6 bg-[var(--surface)] border border-[var(--hairline)] rounded-md">
-                <p className="eyebrow mb-3">Location</p>
-                <p className="text-[var(--ink)] text-sm font-semibold">{SITE.location}</p>
-                <p className="text-[var(--muted-ink)] text-xs mt-1">
-                  Tangison Technologies operates from Windhoek, Namibia.
-                </p>
-              </div>
+              {/* Info cards with stagger reveal */}
+              <StaggerReveal staggerDelay={0.1} className="space-y-4">
+                <StaggerItem>
+                  <div className="p-6 bg-[var(--surface)] border border-[var(--hairline)] rounded-md card-hover-lift">
+                    <p className="eyebrow mb-3">Direct email</p>
+                    <a
+                      href={`mailto:${SITE.email}?subject=Enquiry%20for%20Tangison%20Technologies`}
+                      className="display-sm text-[var(--teal)] hover:text-[var(--ink)] transition-colors"
+                    >
+                      {SITE.email}
+                    </a>
+                    <p className="text-xs text-[var(--muted-ink)] mt-2">
+                      Opens your mail client with a prefilled subject line.
+                    </p>
+                  </div>
+                </StaggerItem>
+
+                <StaggerItem>
+                  <div className="p-6 bg-[var(--surface)] border border-[var(--hairline)] rounded-md card-hover-lift">
+                    <p className="eyebrow mb-3">Location</p>
+                    <p className="text-[var(--ink)] text-sm font-semibold">{SITE.location}</p>
+                    <p className="text-[var(--muted-ink)] text-xs mt-1">
+                      Tangison Technologies operates from Windhoek, Namibia.
+                      The location is the design brief, not a limitation.
+                    </p>
+                  </div>
+                </StaggerItem>
+
+                <StaggerItem>
+                  <div className="p-6 bg-[var(--surface)] border border-[var(--hairline)] rounded-md">
+                    <p className="eyebrow mb-3">Ecosystem</p>
+                    <ul className="space-y-2">
+                      <li>
+                        <a
+                          href={SITE.agentUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm text-[var(--ink)] hover:text-[var(--teal)] transition-colors font-medium"
+                        >
+                          Tangison Agent
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 inline"><path d="M7 17L17 7M7 7h10v10"/></svg>
+                        </a>
+                        <p className="text-xs text-[var(--muted-ink)]">Self-hosted AI agents that keep your operations running</p>
+                      </li>
+                      <li>
+                        <a
+                          href={SITE.studioUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm text-[var(--ink)] hover:text-[var(--teal)] transition-colors font-medium"
+                        >
+                          Tangison Studio
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 inline"><path d="M7 17L17 7M7 7h10v10"/></svg>
+                        </a>
+                        <p className="text-xs text-[var(--muted-ink)]">Digital products built to work where conditions are unforgiving</p>
+                      </li>
+                      <li>
+                        <Link
+                          href="/technology#labs"
+                          className="text-sm text-[var(--ink)] hover:text-[var(--teal)] transition-colors font-medium"
+                        >
+                          Tangison Labs
+                        </Link>
+                        <p className="text-xs text-[var(--muted-ink)]">Experimental systems tested where existing technology fails</p>
+                      </li>
+                    </ul>
+                  </div>
+                </StaggerItem>
+              </StaggerReveal>
             </div>
 
-            {/* Right: contact form + ecosystem */}
-            <div className="reveal reveal-delay-2 space-y-6">
+            {/* Right: contact form */}
+            <div className="reveal reveal-delay-2">
               <ContactForm />
-
-              <div className="p-6 bg-[var(--surface)] border border-[var(--hairline)] rounded-md">
-                <p className="eyebrow mb-3">Ecosystem</p>
-                <ul className="space-y-2">
-                  <li>
-                    <a
-                      href={SITE.agentUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm text-[var(--ink)] hover:text-[var(--teal)] transition-colors font-medium"
-                    >
-                      Tangison Agent
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 inline"><path d="M7 17L17 7M7 7h10v10"/></svg>
-                    </a>
-                    <p className="text-xs text-[var(--muted-ink)]">Self-hosted AI agents that keep your operations running</p>
-                  </li>
-                  <li>
-                    <a
-                      href={SITE.studioUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm text-[var(--ink)] hover:text-[var(--teal)] transition-colors font-medium"
-                    >
-                      Tangison Studio
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 inline"><path d="M7 17L17 7M7 7h10v10"/></svg>
-                    </a>
-                    <p className="text-xs text-[var(--muted-ink)]">Digital products built to work where conditions are unforgiving</p>
-                  </li>
-                  <li>
-                    <a
-                      href="/technology#labs"
-                      className="text-sm text-[var(--ink)] hover:text-[var(--teal)] transition-colors font-medium"
-                    >
-                      Tangison Labs
-                    </a>
-                    <p className="text-xs text-[var(--muted-ink)]">Experimental systems tested where existing technology fails</p>
-                  </li>
-                </ul>
-              </div>
             </div>
           </div>
 
@@ -265,19 +304,19 @@ export default function ContactPage() {
           <div className="reveal text-center">
             <p className="text-sm text-[var(--muted-ink)]">
               For brand guidelines and visual identity, visit the{" "}
-              <a href="/brand" className="text-[var(--teal)] hover:text-[var(--ink)] transition-colors font-medium">
+              <Link href="/brand" className="text-[var(--teal)] hover:text-[var(--ink)] transition-colors font-medium">
                 Brand page
-              </a>.
+              </Link>.
             </p>
             <p className="text-sm text-[var(--muted-ink)] mt-2">
               For legal matters, refer to{" "}
-              <a href="/privacy" className="text-[var(--teal)] hover:text-[var(--ink)] transition-colors font-medium">
+              <Link href="/privacy" className="text-[var(--teal)] hover:text-[var(--ink)] transition-colors font-medium">
                 Privacy
-              </a>{" "}
+              </Link>{" "}
               and{" "}
-              <a href="/terms" className="text-[var(--teal)] hover:text-[var(--ink)] transition-colors font-medium">
+              <Link href="/terms" className="text-[var(--teal)] hover:text-[var(--ink)] transition-colors font-medium">
                 Terms
-              </a>.
+              </Link>.
             </p>
           </div>
         </div>

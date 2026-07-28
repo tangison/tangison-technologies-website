@@ -46,8 +46,11 @@ export function Carousel({ items, className = "", autoplay = false, interval = 5
 
   const onSelect = useCallback(() => {
     if (!emblaApi) return;
-    setSelectedIndex(emblaApi.selectedScrollSnap());
-    setScrollSnaps(emblaApi.scrollSnapList());
+    // Use requestAnimationFrame to defer setState outside the sync effect body
+    requestAnimationFrame(() => {
+      setSelectedIndex(emblaApi.selectedScrollSnap());
+      setScrollSnaps(emblaApi.scrollSnapList());
+    });
   }, [emblaApi]);
 
   // Start autoplay
@@ -65,7 +68,11 @@ export function Carousel({ items, className = "", autoplay = false, interval = 5
 
   useEffect(() => {
     if (!emblaApi) return;
-    onSelect();
+    // Initialise snaps via rAF to avoid synchronous setState in effect
+    requestAnimationFrame(() => {
+      setSelectedIndex(emblaApi.selectedScrollSnap());
+      setScrollSnaps(emblaApi.scrollSnapList());
+    });
     emblaApi.on("select", onSelect);
     emblaApi.on("pointerDown", stopAutoplay);
     startAutoplay();
@@ -88,8 +95,7 @@ export function Carousel({ items, className = "", autoplay = false, interval = 5
               className="flex-[0_0_85%] md:flex-[0_0_60%] min-w-0 pl-2"
             >
               <div className="relative aspect-[4/3] overflow-hidden rounded-md">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                  <img
                   src={item.src}
                   alt={item.alt}
                   width={item.width}
