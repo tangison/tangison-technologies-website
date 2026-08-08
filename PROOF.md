@@ -171,3 +171,87 @@ Audit-and-fix the live tangison.com parent site (post-Wave-1 rebuild) against th
    - sitemap.xml home URL has no trailing slash
    - manifest.webmanifest has `id:"/"`
 5. Record live evidence in PROOF.md
+
+---
+
+# PROOF.md — Wave 3 Evidence Ledger (Polish)
+
+**Status**: Wave 3 complete
+**Branch**: main
+**Commit**: 5f59083
+**Date**: 2026-08-08
+**Deploy target**: https://www.tangison.com (Vercel auto-deploy from origin/main)
+
+---
+
+## Wave 3 Findings + Fixes
+
+After Wave 2 audit, ran additional live checks against the industry-standard website
+checklist (Sections 3 Brand/visual design, 17 Local business). Found two missing
+assets plus a thin PWA manifest:
+
+| # | Severity | Finding | Fix | File |
+|---|----------|---------|-----|------|
+| 1 | P2 | `/apple-touch-icon.png` returned 404 — iOS home-screen install had no icon | Generated 180x180 PNG with brand-teal background from shipwreck SVG; added to layout metadata.icons.apple | public/apple-touch-icon.png, src/app/layout.tsx |
+| 2 | P2 | PWA manifest had only 2 icons (SVG + 32x32 PNG) — Chrome/Android installability 'needs improvement' | Added icon-192.png + icon-512.png + maskable 512 variant | public/icon-192.png, public/icon-512.png, src/app/manifest.ts |
+| 3 | P3 | `/llms.txt` returned 404 — no AI-crawler documentation (GPTBot, ClaudeBot, PerplexityBot, etc.) | Wrote concise llms.txt summarising the company + listing all 8 public pages with one-line summaries | public/llms.txt |
+
+## Wave 3 Pre-deploy Verification
+
+| Check | Command | Result | Status |
+|-------|---------|--------|--------|
+| Lint | `npm run lint` | 0 errors | PASS |
+| Typecheck | `npx tsc --noEmit` | 0 errors | PASS |
+| Build | `npm run build` | 14 routes generated successfully | PASS |
+| apple-touch-icon link emitted | grep in `.next/server/app/index.html` | `<link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" type="image/png"/>` present | PASS |
+| Manifest icons count | `cat .next/server/app/manifest.webmanifest.body` | 5 icons: SVG any, 32 any, 192 any, 512 any, 512 maskable | PASS |
+
+## Wave 3 Live Verification (post-deploy)
+
+Waited 90s after push to origin/main for Vercel auto-deploy, then verified
+at https://www.tangison.com:
+
+| Check | Command | Result | Status |
+|-------|---------|--------|--------|
+| /apple-touch-icon.png | `curl -sI https://www.tangison.com/apple-touch-icon.png` | HTTP/2 200, image/png, 4130 bytes | PASS |
+| /icon-192.png | `curl -sI https://www.tangison.com/icon-192.png` | HTTP/2 200, image/png, 4573 bytes | PASS |
+| /icon-512.png | `curl -sI https://www.tangison.com/icon-512.png` | HTTP/2 200, image/png, 17043 bytes | PASS |
+| /llms.txt | `curl -sI https://www.tangison.com/llms.txt` | HTTP/2 200, text/plain, 2103 bytes | PASS |
+| apple-touch-icon link in HTML | `curl -s https://www.tangison.com \| grep apple-touch-icon` | `<link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" type="image/png"/>` | PASS |
+| Manifest icons (live) | `curl -s https://www.tangison.com/manifest.webmanifest` | 5 icons: SVG + 32 + 192 + 512 any + 512 maskable | PASS |
+
+## Wave 2 Live Verification (post-deploy, recapped)
+
+Wave 2 commit `1aa92ca` was also pushed earlier in this session. Live checks confirm:
+
+| Check | Live value | Status |
+|-------|-----------|--------|
+| HTTP status (home) | 200 (HTTP/2, Vercel, hkg1 edge) | PASS |
+| theme-color meta | `#2B6B5E` | PASS |
+| viewport meta count | 1 (no duplicate) | PASS |
+| apple-mobile-web-app-title | `Tangison Technologies` | PASS |
+| format-detection | `telephone=no, address=no, email=no` | PASS |
+| canonical | `https://www.tangison.com` (no trailing slash) | PASS |
+| Content-Security-Policy | present, frame-ancestors 'none', object-src 'none' | PASS |
+| X-Frame-Options | `DENY` | PASS |
+| X-Content-Type-Options | `nosniff` | PASS |
+| Strict-Transport-Security | `max-age=63072000; includeSubDomains; preload` | PASS |
+| Referrer-Policy | `strict-origin-when-cross-origin` | PASS |
+| Permissions-Policy | `camera=(), microphone=(), geolocation=(), interest-cohort=()` | PASS |
+| X-Powered-By | absent (poweredByHeader: false) | PASS |
+| JSON-LD count | 2 (Organization + WebSite) | PASS |
+| Twitter card | summary_large_image | PASS |
+| OG image:alt | present | PASS |
+| H1 count (home) | 1 | PASS |
+| img without alt | 0 | PASS |
+| lang attribute | `en` | PASS |
+| All 8 page routes | 200 (home, technology, company, brand, contact, privacy, terms, sitemap) | PASS |
+| 404 route | 404 (proper status, not 200) | PASS |
+
+## Cumulative state after Waves 1 + 2 + 3
+
+- **Commits pushed**: 1aa92ca (Wave 2), 5f59083 (Wave 3)
+- **GitHub**: https://github.com/tangison/tangison-technologies-website/commits/main
+- **Live site**: https://www.tangison.com — Vercel auto-deploy confirmed via x-vercel-cache: HIT
+- **Total findings addressed**: 10 (3 from Wave 1, 7 from Wave 2, 3 from Wave 3)
+- **All quality gates**: lint=0, typecheck=0, build=14 routes, live verification all PASS
