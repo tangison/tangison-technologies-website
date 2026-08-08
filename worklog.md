@@ -31,3 +31,40 @@ Stage Summary:
 - 8 routes proposed for future site (vs 14 current)
 - Asset intake specification created, awaiting owner delivery
 - Audit branch pushed to GitHub: audit-wave-1
+
+---
+
+## 2026-08-08 — Wave 2 Production Audit-and-Fix
+
+**Task ID**: parent-audit-2
+**Agent**: Super Z (autonomous Webman mode)
+**Task**: Audit-and-fix tangison.com parent website (deployed via Vercel from origin/main of github.com/tangison/tangison-technologies-website). Active phase: tangison-web-audit → tangison-web-deploy. Build mode: Full. Art-direction owner: Hallmark + Impeccable.
+
+### Work Log
+
+- Located correct repo via GitHub API + cross-checking live site markers (H2s, /technology route, /tangison-shipwreck-icon.svg)
+- Initially cloned github.com/tangison/tangison (WRONG repo — "TANGISON SYSTEMS", has /about, /services, /solutions, /industries, /work routes not in live sitemap). Pivoted to github.com/tangison/tangison-technologies-website (CORRECT — matches live site exactly)
+- Read Webman skill pack: tangison-web-audit/SKILL.md and tangison-web-deploy/SKILL.md fully
+- Read prior Wave 1 audit (2026-07-25) and Wave 1 PROOF.md — established that Wave 1 was report-only, then 5 commits rebuilt the site and deployed it
+- Inspected current source: layout.tsx, robots.ts, sitemap.ts, manifest.ts, next.config.ts, src/lib/site.ts, src/app/globals.css, not-found.tsx, error.tsx, package.json, vercel.json
+- Baseline: lint=0 errors, typecheck=0 errors, build=14 routes
+- Live audit (curl https://www.tangison.com/): HTTP 200, canonical https://www.tangison.com, viewport count=1, manifest present, JSON-LD count=2, "Made by Tangison Studio" credit present, BUT theme-color count=0, no CSP/security headers
+- Identified 7 findings (2 P1, 3 P2, 2 P3) — see PROOF.md
+- Applied 5 file edits via MultiEdit (layout.tsx, next.config.ts, sitemap.ts, robots.ts, manifest.ts)
+- Verified fixes via lint + typecheck + build + inspection of generated artifacts (.next/server/app/{sitemap.xml,robots.txt,manifest.webmanifest,index.html})
+- All P1 and P2 fixes verified in build output
+
+### Files Changed
+
+1. `src/app/layout.tsx` — Added `viewport` export with themeColor #2B6B5E; added `appleWebApp` and `formatDetection` to metadata
+2. `next.config.ts` — Added `poweredByHeader: false`; added `headers()` block with CSP, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy, HSTS preload
+3. `src/app/sitemap.ts` — Changed home route `path: "/"` → `path: ""` to fix trailing-slash canonical mismatch
+4. `src/app/robots.ts` — Removed empty `disallow: []` array
+5. `src/app/manifest.ts` — Added `id: "/"` field; changed `start_url: "/"` → `start_url: "/?source=pwa"` for install attribution
+
+### Stage Summary
+
+- 7 findings classified and fixed (2 P1, 3 P2, 2 P3)
+- All local verification gates pass (lint, typecheck, build, artifact inspection)
+- Ready to commit + push to origin/main
+- Will verify live deployment on www.tangison.com after Vercel auto-deploy (~90s)

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { SITE } from "@/lib/site";
@@ -14,6 +14,12 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
   display: "swap",
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#2B6B5E",
+};
 
 export const metadata: Metadata = {
   title: {
@@ -36,6 +42,16 @@ export const metadata: Metadata = {
   publisher: SITE.company,
   metadataBase: new URL(SITE.siteUrl),
   alternates: { canonical: SITE.siteUrl },
+  appleWebApp: {
+    title: SITE.name,
+    statusBarStyle: "default",
+    capable: true,
+  },
+  formatDetection: {
+    telephone: false,
+    email: false,
+    address: false,
+  },
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "48x48" },

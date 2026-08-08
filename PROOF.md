@@ -119,3 +119,55 @@ Phase | Action | Target | Command or method | Version | Result | Evidence path o
 ---
 
 **Wave 1 is complete. Stopping at audit and environment checkpoint as specified. The official logo and asset package are intentionally withheld until the owner provides them.**
+
+---
+
+## Wave 2: Production Audit-and-Fix (2026-08-08)
+
+**Branch**: main (deployed via Vercel auto-deploy on push)
+**Auditor**: Super Z (autonomous Webman mode)
+**Live target**: https://www.tangison.com (apex 308-redirects to https://www.tangison.com which serves 200)
+
+### Scope
+
+Audit-and-fix the live tangison.com parent site (post-Wave-1 rebuild) against the Webman industry checklist (24 sections) and the web-quality-audit framework. Active Webman phase: `tangison-web-audit` → `tangison-web-deploy`.
+
+### Findings
+
+| # | Sev | Tool / method | Location | Evidence | User impact | Root cause | Fix | Verification |
+|---|-----|---------------|----------|----------|-------------|------------|-----|--------------|
+| 1 | P1 | `curl https://www.tangison.com/` + grep | `src/app/layout.tsx` | `theme-color` count in live HTML = 0 | Mobile browser UI does not match brand teal | No `viewport` export with `themeColor` | Added `export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#2B6B5E" }` | Build output: `<meta name="theme-color" content="#2B6B5E"/>` present |
+| 2 | P1 | `curl -sI https://www.tangison.com/` | `next.config.ts` | No `Content-Security-Policy`, `X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy` headers; only Vercel-default HSTS present | Site vulnerable to clickjacking, MIME sniffing, referrer leakage; no defence-in-depth | `headers()` function missing from `next.config.ts` | Added `headers()` block with CSP, X-Frame-Options DENY, X-Content-Type-Options nosniff, Referrer-Policy, Permissions-Policy, HSTS preload | Build passes; headers will be applied on Vercel deploy |
+| 3 | P2 | `curl https://www.tangison.com/sitemap.xml` + grep | `src/app/sitemap.ts` | Sitemap home URL is `https://www.tangison.com/` (trailing slash); HTML canonical is `https://www.tangison.com` (no slash) | SEO canonical mismatch; Google may flag as duplicate | `path: "/"` produces trailing-slash URL with `trailingSlash: false` default | Changed `path: "/"` to `path: ""` for home route | Generated sitemap.xml: `<loc>https://www.tangison.com</loc>` (no slash) |
+| 4 | P2 | `curl -sI https://www.tangison.com/` | `next.config.ts` | `X-Powered-By: Next.js` header sent by default | Framework fingerprint leak (minor info disclosure) | `poweredByHeader` not disabled | Added `poweredByHeader: false` to config | Verified in config |
+| 5 | P2 | Manual source review | `src/app/layout.tsx` | No `appleWebApp` or `formatDetection` in metadata | iOS PWA title not set; iOS auto-links phone numbers, emails, addresses | Missing metadata fields | Added `appleWebApp: { title: SITE.name, statusBarStyle: "default", capable: true }` and `formatDetection: { telephone: false, email: false, address: false }` | Build output: `<meta name="apple-mobile-web-app-title" content="Tangison Technologies"/>`, `<meta name="format-detection" content="telephone=no, address=no, email=no"/>` |
+| 6 | P3 | Manual source review | `src/app/robots.ts` | Empty `disallow: []` array | Unnecessary code | Likely template leftover | Removed empty array | Generated robots.txt is clean |
+| 7 | P3 | Manual source review | `src/app/manifest.ts` | Missing `id` field | PWA best practice; without stable id, reinstall treats as new app | Missing field | Added `id: "/"` and changed `start_url: "/?source=pwa"` for install attribution | Generated manifest: `{"id":"/", ...}` |
+
+### Pre-deploy verification
+
+| Check | Method | Result | Status |
+|-------|--------|--------|--------|
+| Lint | `npm run lint` | 0 errors | PASS |
+| Typecheck | `npx tsc --noEmit` | 0 errors | PASS |
+| Production build | `npm run build` | 14 routes generated successfully | PASS |
+| Generated sitemap.xml | `cat .next/server/app/sitemap.xml.body` | Home URL `https://www.tangison.com` (no slash) — matches canonical | PASS |
+| Generated robots.txt | `cat .next/server/app/robots.txt.body` | Clean, no empty disallow, sitemap referenced | PASS |
+| Generated manifest.webmanifest | `cat .next/server/app/manifest.webmanifest.body` | Has `id:"/"`, `start_url:"/?source=pwa"`, theme_color #2B6B5E | PASS |
+| Home HTML theme-color | grep in `.next/server/app/index.html` | `<meta name="theme-color" content="#2B6B5E"/>` present; viewport count=1 | PASS |
+| Home HTML apple-mobile-web-app | grep | title + status-bar-style present | PASS |
+| Home HTML format-detection | grep | `telephone=no, address=no, email=no` present | PASS |
+| Home HTML canonical | grep | `https://www.tangison.com` (no trailing slash) | PASS |
+
+### Deploy plan
+
+1. Commit changes (5 files modified) with clear message
+2. Push to `origin/main` of `github.com/tangison/tangison-technologies-website`
+3. Wait ~90s for Vercel auto-deploy
+4. Verify live site at https://www.tangison.com:
+   - All 5 security headers present (CSP, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy)
+   - `<meta name="theme-color" content="#2B6B5E"/>` present in HTML
+   - `X-Powered-By` header absent
+   - sitemap.xml home URL has no trailing slash
+   - manifest.webmanifest has `id:"/"`
+5. Record live evidence in PROOF.md

@@ -3,10 +3,11 @@ import { SITE } from "@/lib/site";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
+    id: "/",
     name: SITE.name,
     short_name: SITE.brand,
     description: SITE.description,
-    start_url: "/",
+    start_url: "/?source=pwa",
     display: "browser",
     background_color: "#F0EDE8",
     theme_color: "#2B6B5E",
