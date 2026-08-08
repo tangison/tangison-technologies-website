@@ -1,0 +1,24 @@
+# Tangison Technologies
+
+> Tangison Technologies builds operational intelligence systems that work where connectivity drops, data arrives late, and infrastructure is uneven.
+
+Tangison Technologies is an operational intelligence company headquartered in Windhoek, Namibia. We build systems for environments where conventional cloud-only stacks fail: low or intermittent connectivity, late-arriving data, uneven infrastructure, and harsh physical conditions. Our methodology is built around three phases — Observe, Decide, Operate — and our products are designed to run inside the customer's own infrastructure rather than depending on third-party clouds.
+
+This is the corporate website. It is not a product documentation site. For product documentation, see the Tangison Agent product at https://agent.tangison.com (self-hosted AI agents). For client work and digital product design, see Tangison Studio at https://studio.tangison.com.
+
+## Pages
+
+- [Home](https://www.tangison.com): Corporate positioning, ecosystem overview, and the Observe-Decide-Operate methodology.
+- [Technology](https://www.tangison.com/technology): The operational intelligence methodology in detail, including the Tangison Agent platform and Tangison Labs experimental systems.
+- [Company](https://www.tangison.com/company): About Tangison Technologies, its founding context in Namibia, and the team.
+- [Contact](https://www.tangison.com/contact): How to reach Tangison Technologies. Use this page for partnership, sales, and general enquiries.
+- [Brand](https://www.tangison.com/brand): Tangison brand guidelines, identity, and visual system.
+- [Privacy Policy](https://www.tangison.com/privacy): What this website collects and how it handles visitor data.
+- [Terms of Service](https://www.tangison.com/terms): Terms for using this website.
+- [Sitemap](https://www.tangison.com/sitemap): Human-readable site map.
+
+## Optional
+
+- Tangison Agent (product): https://agent.tangison.com
+- Tangison Studio (client work): https://studio.tangison.com
+- Tangison Labs (experimental systems): https://www.tangison.com/technology#labs
