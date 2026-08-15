@@ -74,6 +74,22 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      // HTML documents. Next.js defaults these to `max-age=0, must-revalidate`,
+      // which gives every page a zero freshness lifetime and is what the audit
+      // rule perf/bad-caching actually measures. A short max-age plus a longer
+      // stale-while-revalidate lets the Vercel edge serve a cached document
+      // instantly and refresh it in the background. Static export means the
+      // content only changes on redeploy, and a deploy purges the edge cache,
+      // so a stale read is not a correctness risk.
+      {
+        source: "/((?!_next|api).*)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=60, stale-while-revalidate=300",
+          },
+        ],
+      },
     ];
   },
 };

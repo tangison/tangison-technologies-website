@@ -61,8 +61,16 @@ export function Tabs({ items, defaultValue, className = "" }: TabsProps) {
       </TabsPrimitive.List>
 
       {/* Tab content with crossfade */}
+      {/* Content panels.
+          `asChild` is deliberately NOT used here. With `asChild`, Radix forwards
+          its generated `id` and other props to its single child, and that child
+          was AnimatePresence, which is not a DOM element and drops them. The
+          panel id therefore never reached the DOM while each Trigger still
+          rendered `aria-controls="radix-...-content-<id>"`, so every tab pointed
+          at a non-existent element (audit rule a11y/duplicate-id-aria).
+          Rendering a real element keeps the aria-controls target present. */}
       {items.map((item) => (
-        <TabsPrimitive.Content key={item.id} value={item.id} asChild forceMount>
+        <TabsPrimitive.Content key={item.id} value={item.id} forceMount>
           <AnimatePresence mode="wait">
             {activeTab === item.id && (
               <motion.div
