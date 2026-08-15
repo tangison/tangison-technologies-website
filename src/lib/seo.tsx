@@ -14,6 +14,25 @@ export function organizationJsonLd() {
     url: SITE.siteUrl,
     logo: `${SITE.siteUrl}/tangison-logo.png`,
     email: SITE.email,
+    telephone: SITE.phoneMainE164,
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        contactType: "customer service",
+        telephone: SITE.phoneMainE164,
+        email: SITE.email,
+        areaServed: "NA",
+        availableLanguage: ["en"],
+      },
+      {
+        "@type": "ContactPoint",
+        contactType: "sales",
+        name: "Tangison Studio",
+        telephone: SITE.phoneStudioE164,
+        areaServed: "NA",
+        availableLanguage: ["en"],
+      },
+    ],
     address: {
       "@type": "PostalAddress",
       addressLocality: "Windhoek",

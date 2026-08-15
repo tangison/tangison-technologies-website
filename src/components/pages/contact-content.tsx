@@ -241,6 +241,29 @@ export default function ContactPage() {
 
                 <StaggerItem>
                   <div className="p-6 bg-[var(--surface)] border border-[var(--hairline)] rounded-md card-hover-lift">
+                    <p className="eyebrow mb-3">Telephone</p>
+                    <a
+                      href={`tel:${SITE.phoneMainE164}`}
+                      className="display-sm text-[var(--teal)] hover:text-[var(--ink)] transition-colors"
+                    >
+                      {SITE.phoneMainDisplay}
+                    </a>
+                    <p className="text-xs text-[var(--muted-ink)] mt-2">
+                      Main business line, Windhoek. For Tangison Studio work,
+                      call{" "}
+                      <a
+                        href={`tel:${SITE.phoneStudioE164}`}
+                        className="text-[var(--teal)] hover:text-[var(--ink)] transition-colors font-medium"
+                      >
+                        {SITE.phoneStudioDisplay}
+                      </a>
+                      .
+                    </p>
+                  </div>
+                </StaggerItem>
+
+                <StaggerItem>
+                  <div className="p-6 bg-[var(--surface)] border border-[var(--hairline)] rounded-md card-hover-lift">
                     <p className="eyebrow mb-3">Location</p>
                     <p className="text-[var(--ink)] text-sm font-semibold">{SITE.location}</p>
                     <p className="text-[var(--muted-ink)] text-xs mt-1">

@@ -18,6 +18,14 @@ export const SITE = {
   description:
     "Tangison Technologies builds operational intelligence systems that work where connectivity drops, data arrives late, and infrastructure is uneven.",
   email: "contact@tangison.com",
+  /** Main business line. MTC mobile, national format 081 341 1522. */
+  phoneMain: "0813411522",
+  phoneMainDisplay: "081 341 1522",
+  phoneMainE164: "+264813411522",
+  /** Tangison Studio line. TN Mobile, national format 085 341 1522. */
+  phoneStudio: "0853411522",
+  phoneStudioDisplay: "085 341 1522",
+  phoneStudioE164: "+264853411522",
 } as const;
 
 export const NAV_PRIMARY = [

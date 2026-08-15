@@ -48,6 +48,32 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      // NOTE: /_next/static and /_next/image are already served by Next.js
+      // with `public, max-age=31536000, immutable`. Overriding them here is
+      // both unnecessary and unsupported (Next warns and the :path* repeat
+      // pattern fails to compile), so those routes are deliberately absent.
+      //
+      // Static media in /public is NOT content-hashed, so it gets a short
+      // freshness window plus a long stale-while-revalidate tail. This is the
+      // header the audit flagged as missing (perf/bad-caching).
+      {
+        source: "/images/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=86400, stale-while-revalidate=604800",
+          },
+        ],
+      },
+      {
+        source: "/fonts/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
     ];
   },
 };
