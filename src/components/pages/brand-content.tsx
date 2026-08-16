@@ -198,16 +198,16 @@ export default function BrandPage() {
                     <div className="space-y-6">
                       <div>
                         <p className="text-xs font-mono text-[var(--muted-ink)]">Display (headings)</p>
-                        <p className="display text-[var(--ink)] mt-2">Inter, 800 weight, tight tracking</p>
+                        <p className="display text-[var(--ink)] mt-2">Satoshi, 800 weight, tight tracking</p>
                         <p className="mt-2 text-sm text-[var(--muted-ink)] body-constrained">
-                          Display text uses Inter at 800 weight with -0.02em tracking and 1.08 line-height. The tight tracking and reduced line-height create decisive headlines. Display sizes use clamp for fluid scaling: display-lg (2.5rem to 3.5rem), display-md (2rem to 2.5rem), display-sm (1.5rem to 1.75rem).
+                          Display text uses Satoshi at 800 weight with -0.02em tracking and 1.08 line-height. The tight tracking and reduced line-height create decisive headlines. Display sizes use clamp for fluid scaling: display-lg (2.5rem to 3.5rem), display-md (2rem to 2.5rem), display-sm (1.5rem to 1.75rem).
                         </p>
                       </div>
                       <div>
                         <p className="text-xs font-mono text-[var(--muted-ink)]">Body (content)</p>
-                        <p className="text-[var(--ink)] mt-1" style={{ fontFamily: "var(--font-body)" }}>Inter, 400 weight, default tracking. Used for paragraphs and descriptions.</p>
+                        <p className="text-[var(--ink)] mt-1" style={{ fontFamily: "var(--font-body)" }}>Satoshi, 400 weight, default tracking. Used for paragraphs and descriptions.</p>
                         <p className="mt-2 text-sm text-[var(--muted-ink)] body-constrained">
-                          Body text uses Inter at 400 weight with default tracking and 1.6 line-height. Body-constrained paragraphs are limited to 65ch width for optimal reading measure. The font stack falls back to system-ui for compatibility.
+                          Body text uses Satoshi at 400 weight with default tracking and 1.6 line-height. Body-constrained paragraphs are limited to 65ch width for optimal reading measure. The font stack falls back to system-ui for compatibility.
                         </p>
                       </div>
                       <div>

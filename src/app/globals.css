@@ -65,8 +65,8 @@
   --shadow-warm-lg: 0 8px 24px rgba(26, 26, 24, 0.1);
 
   /* Typography — scale and tracking */
-  --font-head: "Inter", "Noto Serif SC", system-ui, sans-serif;
-  --font-body: "Inter", "Noto Sans SC", system-ui, sans-serif;
+  --font-head: var(--font-satoshi), system-ui, sans-serif;
+  --font-body: var(--font-satoshi), system-ui, sans-serif;
   --font-mono-family: "Geist Mono", ui-monospace, monospace;
 
   /* Type scale */

@@ -1,12 +1,23 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
+import { Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { SITE } from "@/lib/site";
+import { Analytics } from "@vercel/analytics/next";
 
-const inter = Inter({
-  variable: "--font-body",
-  subsets: ["latin"],
+/* Satoshi is one of the three elements shared with studio.tangison.com
+   (logomark, typeface family, footer structure). Self-hosted so both
+   domains resolve to the identical family. */
+const satoshi = localFont({
+  variable: "--font-satoshi",
   display: "swap",
+  src: [
+    { path: "../../public/fonts/Satoshi-300.ttf", weight: "300", style: "normal" },
+    { path: "../../public/fonts/Satoshi-400.ttf", weight: "400", style: "normal" },
+    { path: "../../public/fonts/Satoshi-500.ttf", weight: "500", style: "normal" },
+    { path: "../../public/fonts/Satoshi-700.ttf", weight: "700", style: "normal" },
+    { path: "../../public/fonts/Satoshi-900.ttf", weight: "900", style: "normal" },
+  ],
 });
 
 const geistMono = Geist_Mono({
@@ -99,13 +110,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${geistMono.variable} antialiased`}
+        className={`${satoshi.variable} ${geistMono.variable} antialiased`}
         style={{ fontFamily: "var(--font-body)" }}
       >
         <a href="#main" className="skip-link">
           Skip to main content
         </a>
         {children}
+        <Analytics />
       </body>
     </html>
   );
