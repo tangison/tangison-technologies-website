@@ -40,6 +40,7 @@ const CONTENT: Record<
     links: [
       { label: "Technology", href: "/technology" },
       { label: "Company", href: "/company" },
+      { label: "Careers", href: "/careers" },
       { label: "Contact", href: "/contact" },
     ],
   },
@@ -49,6 +50,7 @@ const CONTENT: Record<
     cta: { label: "Visit Tangison Studio", href: STUDIO_HREF, external: true },
     links: [
       { label: "Company", href: "/company" },
+      { label: "Careers", href: "/careers" },
       { label: "Brand", href: "/brand" },
       { label: "Contact", href: "/contact" },
     ],
@@ -69,6 +71,7 @@ const CONTENT: Record<
     links: [
       { label: "Technology", href: "/technology" },
       { label: "Company", href: "/company" },
+      { label: "Careers", href: "/careers" },
       { label: "Contact", href: "/contact" },
     ],
   },
