@@ -6,7 +6,8 @@ export const metadata: Metadata = {
   title: "Site Map",
   description: "A complete index of all pages on the Tangison Technologies website.",
   openGraph: {
-    title: "Site Map — Tangison Technologies",
+    images: [{ url: "/images/tangison/webp/02-skeleton-coast-signal-og-1200x630.webp", width: 1200, height: 630 }],
+    title: "Site Map: Tangison Technologies",
     description: "A complete index of all pages on the Tangison Technologies website.",
   },
 };

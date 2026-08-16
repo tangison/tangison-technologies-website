@@ -6,7 +6,8 @@ export const metadata: Metadata = {
   title: "Terms of Service",
   description: "Terms for using the Tangison Technologies website.",
   openGraph: {
-    title: "Terms of Service — Tangison Technologies",
+    images: [{ url: "/images/tangison/webp/02-skeleton-coast-signal-og-1200x630.webp", width: 1200, height: 630 }],
+    title: "Terms of Service: Tangison Technologies",
     description: "Terms for using the Tangison Technologies website.",
   },
 };

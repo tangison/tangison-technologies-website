@@ -7,7 +7,8 @@ export const metadata: Metadata = {
   title: "Contact",
   description: "Start a conversation with Tangison Technologies.",
   openGraph: {
-    title: "Contact — Tangison Technologies",
+    images: [{ url: "/images/tangison/webp/02-skeleton-coast-signal-og-1200x630.webp", width: 1200, height: 630 }],
+    title: "Contact: Tangison Technologies",
     description: "Start a conversation with Tangison Technologies.",
   },
 };
