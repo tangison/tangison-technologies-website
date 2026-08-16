@@ -24,7 +24,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: {
     default: SITE.name,
-    template: `%s — ${SITE.name}`,
+    template: `%s: ${SITE.name}`,
   },
   description: SITE.description,
   keywords: [
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
         url: "/images/tangison/webp/02-skeleton-coast-signal-og-1200x630.webp",
         width: 1200,
         height: 630,
-        alt: "Tangison Technologies — Operational intelligence without assumptions.",
+        alt: "Tangison Technologies: Operational intelligence without assumptions.",
       },
     ],
   },
