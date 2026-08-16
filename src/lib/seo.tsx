@@ -42,9 +42,27 @@ export function organizationJsonLd() {
       "@type": "Place",
       name: "Windhoek, Namibia",
     },
-    sameAs: [
-      SITE.agentUrl,
-      SITE.studioUrl,
+    /* @id lets studio.tangison.com's parentOrganization resolve to this exact
+       entity rather than to a second, unrelated Organization node. */
+    "@id": "https://tangison.com/#organization",
+    /* Studio is a distinct legal entity, so it belongs in subOrganization.
+       sameAs is for other profiles of THIS organization, not for children. */
+    subOrganization: [
+      {
+        "@type": "Organization",
+        "@id": "https://studio.tangison.com/#organization",
+        name: "Tangison Studio",
+        url: SITE.studioUrl,
+        description:
+          "The creative arm of Tangison Technologies. Brand systems, websites, and digital products.",
+      },
+      {
+        "@type": "Organization",
+        name: "Tangison Agent",
+        url: SITE.agentUrl,
+        description:
+          "Self-hosted AI agents that keep data on your own hardware.",
+      },
     ],
     member: TEAM_NAMES.map((name) => ({
       "@type": "Person",

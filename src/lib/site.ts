@@ -35,6 +35,7 @@ export const NAV_PRIMARY = [
 ] as const;
 
 export const NAV_SECONDARY = [
+  { label: "Careers", href: "/careers" },
   { label: "Brand", href: "/brand" },
   { label: "Privacy", href: "/privacy" },
   { label: "Terms", href: "/terms" },

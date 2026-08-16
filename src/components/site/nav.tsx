@@ -227,7 +227,19 @@ export function Nav() {
         style={{ maxWidth: "var(--container-wide)" }}
       >
         <div className="container-tangison flex items-center justify-between h-[var(--nav-height-mobile)] md:h-[var(--nav-height)]">
-          <Logo linked size="sm" />
+          <div className="flex items-center gap-3">
+            <Logo linked size="sm" />
+            {/* Cross-domain badge — the reciprocal of the one on
+                studio.tangison.com. Hidden below md so it never crowds the
+                mobile nav. */}
+            <a
+              href="https://studio.tangison.com/?utm_source=tangison.com&utm_medium=nav-badge&utm_campaign=cross-site"
+              className="hidden md:inline-flex items-center gap-1.5 rounded-full border border-[var(--hairline)] px-2.5 py-1 text-[10px] uppercase tracking-[0.14em] text-[var(--muted-ink)] hover:text-[var(--ink)] transition-colors"
+            >
+              Studio
+              <span aria-hidden="true">&#8599;</span>
+            </a>
+          </div>
 
           {/* Desktop primary nav */}
           <nav className="hidden md:flex items-center gap-6" aria-label="Primary navigation">

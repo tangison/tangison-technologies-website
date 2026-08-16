@@ -3,6 +3,7 @@
 import { Nav } from "./nav";
 import { Footer } from "./footer";
 import { LoadingScreen } from "./loading";
+import { ContactCluster } from "@/components/shared/contact-cluster";
 
 interface PageShellProps {
   children: React.ReactNode;
@@ -18,6 +19,7 @@ export function PageShell({ children }: PageShellProps) {
         {children}
       </main>
       <Footer />
+      <ContactCluster />
     </div>
   );
 }
