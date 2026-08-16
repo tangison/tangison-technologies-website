@@ -127,19 +127,27 @@ export function Carousel({ items, className = "", autoplay = false, interval = 5
         </button>
 
         {/* Dot indicators */}
-        <div className="flex gap-2">
+        <div className="flex">
           {scrollSnaps.map((_, i) => (
+            /* The dot stays visually small, but the touch target must be 44px
+               to meet the iOS Human Interface Guidelines minimum. The padding
+               carries the hit area; the inner span carries the appearance.
+               Negative margin keeps the original visual gap of 8px. */
             <button
               key={i}
               onClick={() => scrollTo(i)}
-              className={`p-1 rounded-full transition-all duration-200 ${
-                i === selectedIndex
-                  ? "h-3 w-6 bg-[var(--teal)]"
-                  : "h-3 w-3 bg-[var(--hairline)] hover:bg-[var(--muted-ink)]"
-              }`}
+              className="group flex h-11 w-11 items-center justify-center -mx-1.5"
               aria-label={`Go to slide ${i + 1}`}
               aria-current={i === selectedIndex ? "true" : undefined}
-            />
+            >
+              <span
+                className={`block rounded-full transition-all duration-200 ${
+                  i === selectedIndex
+                    ? "h-3 w-6 bg-[var(--teal)]"
+                    : "h-3 w-3 bg-[var(--hairline)] group-hover:bg-[var(--muted-ink)]"
+                }`}
+              />
+            </button>
           ))}
         </div>
 
