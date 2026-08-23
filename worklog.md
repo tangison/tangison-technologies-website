@@ -104,4 +104,6 @@ Stage Summary:
 
 - 6/6 deliverables complete; lint 0, tsc 0, build 15 routes, banner verified on 9/9 pages
 - 9 findings: 4 fixed, 5 flagged for the restructure and rebuild
-- Ready to push on owner approval; live re-verification steps recorded in PROOF.md
+- Owner approved push on 2026-08-23; da240cb pushed to origin/main, Vercel deploy READY
+- Live re-verification passed: banner on 9/9 routes, per-page canonical 9/9, security headers intact
+- Evidence recorded in PROOF.md (Wave 4 live evidence section)

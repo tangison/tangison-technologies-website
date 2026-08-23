@@ -311,5 +311,21 @@ Wave 2 commit `1aa92ca` was also pushed earlier in this session. Live checks con
 | Gate | Status | Note |
 |------|--------|------|
 | Local verification complete | DONE | All gates above PASS |
-| Push to origin/main | PENDING OWNER APPROVAL | Push triggers Vercel auto-deploy; announcement is a public business statement |
-| Live re-verification | BLOCKED ON PUSH | Re-run section 6 checks on https://www.tangison.com and record evidence here |
+| Push to origin/main | DONE (owner approved 2026-08-23) | 112eb04..da240cb pushed; Vercel deployment tangison-technologies-website-lesdcu7z2 reached READY |
+| Live re-verification | DONE (2026-08-23T08:15Z) | See live evidence below |
+
+## Wave 4 live evidence (post-deploy)
+
+| Check | Command | Result | Status |
+|-------|---------|--------|--------|
+| Deployment state | GET api.vercel.com/v6/deployments?projectId=prj_SQEebTIElefHUbgQ1kfMHH2PqWO8 | Latest production deployment READY | PASS |
+| All 9 routes | urllib GET per route on https://www.tangison.com | All HTTP 200 | PASS |
+| Banner on every live page | grep role="status" + exact text in live HTML | 9/9 pages render "agent.tangison.com is being discontinued. tangison.com is being restructured and rebuilt." | PASS |
+| Per-page canonical (live) | grep canonical in live HTML | 9/9 pages emit their own absolute canonical | PASS |
+| Security headers (live) | urllib header inspection on home | CSP, X-Frame-Options DENY, HSTS preload present; X-Powered-By absent | PASS |
+
+**Cumulative state after Waves 1 + 2 + 3 + 4**
+
+- Live site: https://www.tangison.com serving the announcement banner on all 9 routes
+- Findings addressed: 14 (3 Wave 1, 7 Wave 2, 3 Wave 3, 4 Wave 4 fixed) + 5 Wave 4 items flagged for the restructure and rebuild (W4-5 to W4-9)
+- Quality gates: lint=0, typecheck=0, build=15 routes, live verification all PASS
