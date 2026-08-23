@@ -4,7 +4,7 @@ import { pageJsonLd, JsonLdScript } from "@/lib/seo";
 import ProjectsContent from "@/components/pages/projects-content";
 
 const DESCRIPTION =
-  "Selected work from Tangison Technologies CC: in-house AI research, national media platforms, education and marketplace builds, and fifteen client projects delivered through Tangison Studio.";
+  "Selected work from Tangison Technologies CC: in-house AI research, a national newspaper platform, and fifteen client projects delivered through Tangison Studio.";
 
 export const metadata: Metadata = {
   title: "Projects and R&D",

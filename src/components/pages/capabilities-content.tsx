@@ -118,7 +118,7 @@ export default function CapabilitiesContent() {
       <section className="section-spacing bg-[var(--bg)]" aria-label="Page header">
         <div className="container-tangison">
           <p className="eyebrow mb-2">Capabilities</p>
-          <h1 className="display display-lg max-w-3xl">Five competencies. One standard.</h1>
+          <h1 className="display display-lg max-w-3xl">Five ways we keep institutions running.</h1>
           <p className="body-constrained mt-6">
             Every capability below is one we deliver today, in-house or through{" "}
             <a

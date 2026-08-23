@@ -4,7 +4,7 @@ import { pageJsonLd, JsonLdScript } from "@/lib/seo";
 import ProfileContent from "@/components/pages/profile-content";
 
 const DESCRIPTION =
-  "Tangison Technologies CC is a 100% Namibian owned technology company, registered in Namibia and founded and operated in Windhoek.";
+  "A registered Close Corporation in Namibia, 100% Namibian owned, founded and operated in Windhoek by Tangi Iigonda.";
 
 export const metadata: Metadata = {
   title: "Company Profile",

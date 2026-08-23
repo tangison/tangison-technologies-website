@@ -22,7 +22,7 @@ export default function ProfileContent() {
         <div className="container-tangison">
           <p className="eyebrow mb-2">Company Profile</p>
           <h1 className="display display-lg max-w-3xl">
-            A registered Namibian company, built to be verified.
+            Built to be verified.
           </h1>
         </div>
       </section>

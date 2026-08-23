@@ -22,7 +22,7 @@ export const SITE = {
   regNumber: "CC/2026/10147",
   registeredOn: "20 August 2026",
   description:
-    "Tangison Technologies CC is a 100% Namibian owned technology company in Windhoek. Information and communications technology, applied AI, digital transformation, consulting, and research and development.",
+    "Tangison Technologies CC is a 100% Namibian owned technology company in Windhoek. We build the systems institutions run on: ICT, applied AI, digital transformation, consulting, and R&D.",
   email: "info@tangison.com",
   phoneDisplay: "081 341 1522",
   phoneE164: "+264813411522",
@@ -58,31 +58,31 @@ export const CAPABILITIES = [
   {
     id: "ict",
     name: "Information and Communications Technology",
-    line: "Systems development, technical infrastructure, and IT support built for Namibian operating conditions.",
+    line: "Systems development, technical infrastructure, and IT support. Built for conditions that do not cooperate.",
     href: "/capabilities#ict",
   },
   {
     id: "ai",
     name: "Artificial Intelligence",
-    line: "Applied AI solutions, automation systems, and intelligent tooling that run where your data stays.",
+    line: "Applied AI, automation, and intelligent tooling. Your data stays on your systems.",
     href: "/capabilities#ai",
   },
   {
     id: "digital-transformation",
     name: "Digital Transformation Services",
-    line: "Advisory and implementation support that moves an institution from manual to measurable.",
+    line: "Advisory and implementation. From manual processes to measured operations.",
     href: "/capabilities#digital-transformation",
   },
   {
     id: "consulting",
     name: "Consulting",
-    line: "Strategic and technical consulting for decisions that have to hold up under scrutiny.",
+    line: "Strategic and technical advice. For decisions that have to hold up under scrutiny.",
     href: "/capabilities#consulting",
   },
   {
     id: "rnd",
     name: "Research and Development",
-    line: "Applied research, prototyping, and product development, done in-house.",
+    line: "Applied research, prototyping, and product development. Done in-house.",
     href: "/capabilities#rnd",
   },
 ] as const;

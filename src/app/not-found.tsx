@@ -9,9 +9,7 @@ export default function NotFound() {
         This page does not exist
       </h1>
       <p className="mt-4 text-[var(--muted-ink)] body-constrained text-center">
-        The page you were looking for does not exist on the {SITE.name}
-        website. It may have been moved, renamed or removed. Try one of
-        the links below to find what you need.
+        It may have moved or been renamed. Try one of the links below.
       </p>
       <div className="mt-6 flex flex-col sm:flex-row gap-3">
         <Link href="/" className="btn-accent">

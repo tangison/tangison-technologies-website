@@ -3,7 +3,7 @@ import { pageJsonLd, JsonLdScript } from "@/lib/seo";
 import CareersContent from "@/components/pages/careers-content";
 
 const DESCRIPTION =
-  "Work with Tangison Technologies CC in Windhoek. We build systems for conditions that do not cooperate.";
+  "Work with Tangison Technologies CC in Windhoek. A small, founder-led company building systems for imperfect conditions.";
 
 export const metadata: Metadata = {
   title: "Careers",

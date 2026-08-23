@@ -77,10 +77,10 @@ export default function Home() {
               Intelligence for imperfect conditions.
             </h1>
             <p className="mt-4 text-sm text-[var(--teal-text)]/80 body-constrained reveal-delay-3">
-              {SITE.name} builds the systems that keep Namibian businesses and
-              institutions running. Information and communications technology.
-              Applied artificial intelligence. Digital transformation.
-              Strategic consulting. Applied research and development.
+              We build the systems Namibian institutions run on. Five
+              capabilities, one standard: information and communications
+              technology, applied AI, digital transformation, consulting,
+              R&amp;D.
             </p>
             <div className="mt-6 flex flex-col sm:flex-row gap-3 reveal-delay-4">
               <Link href="/contact" className="btn-accent">
@@ -90,7 +90,7 @@ export default function Home() {
                 href="/capabilities"
                 className="btn-outline border-[rgba(240,237,232,0.3)] text-[var(--teal-text)] hover:bg-[rgba(240,237,232,0.1)]"
               >
-                View our capabilities
+                Explore our capabilities
               </Link>
             </div>
             <p className="mt-8 text-[11px] md:text-xs uppercase tracking-[0.16em] text-[var(--teal-text)]/70 reveal-delay-4">
@@ -275,12 +275,13 @@ export default function Home() {
         <div className="container-tangison relative z-10 py-16 md:py-24">
           <p className="eyebrow mb-2 text-[var(--bg)]/60">Tangison Technologies CC</p>
           <h2 className="display display-lg text-[var(--bg)] max-w-2xl">
-            Tell us what you need to run.
+            Built to be verified.
           </h2>
           <p className="body-constrained mt-5 text-[var(--bg)]/80">
             {SITE.legalName} is a registered Close Corporation in Namibia,
             registered 20 August 2026, 100% Namibian owned, and founded and
-            operated in Windhoek.
+            operated in Windhoek. Every detail on this site can be checked
+            against the Namibian business registry.
           </p>
           <div className="mt-8 flex flex-col sm:flex-row gap-3">
             <Link href="/contact" className="btn-accent">

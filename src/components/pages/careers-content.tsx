@@ -14,10 +14,9 @@ export default function CareersContent() {
           <p className="eyebrow mb-2">Careers</p>
           <h1 className="display display-lg">Work with Tangison</h1>
           <p className="mt-6 text-base leading-relaxed text-[var(--ink)]">
-            Tangison Technologies is a small, founder-led company in
-            Windhoek. We build systems for conditions that do not cooperate:
-            intermittent connectivity, late-arriving data, uneven
-            infrastructure. If you want to work where the work has to hold
+            A small, founder-led company in Windhoek. We build for conditions
+            that do not cooperate: intermittent connectivity, late-arriving
+            data, uneven infrastructure. If you want work that has to hold
             up, we want to hear from you.
           </p>
           <div className="mt-8">

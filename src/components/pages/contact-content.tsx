@@ -21,7 +21,7 @@ export default function ContactContent() {
       <section className="section-spacing bg-[var(--bg)]" aria-label="Page header">
         <div className="container-tangison">
           <p className="eyebrow mb-2">Contact and Compliance</p>
-          <h1 className="display display-lg max-w-3xl">Tell us what you need to run.</h1>
+          <h1 className="display display-lg max-w-3xl">Start a conversation.</h1>
           <p className="body-constrained mt-6">
             For tenders, RFIs, project enquiries, or a straight conversation.
           </p>

@@ -4,7 +4,7 @@ import { pageJsonLd, JsonLdScript } from "@/lib/seo";
 import CapabilitiesContent from "@/components/pages/capabilities-content";
 
 const DESCRIPTION =
-  "Information and communications technology, applied AI, digital transformation, consulting, and research and development from a registered Namibian technology company.";
+  "Information and communications technology, applied AI, digital transformation, consulting, and research and development. Delivered in-house or through Tangison Studio.";
 
 export const metadata: Metadata = {
   title: "Capabilities",
