@@ -454,3 +454,47 @@ Exit condition met: critic picks ours blind on every marketing route after one w
 - Live: https://www.tangison.com serving the Tangison Technologies CC capability statement with COLLINS-bar copy
 - Quality gates: lint=0, typecheck=0, build=16 routes, live verification all PASS
 - Open: founder portrait PNG pending owner file; legal review of Privacy/Terms; framer-motion cleanup wave (hidden /brand page); next 16.3.x Vercel revisit
+
+---
+
+# PROOF.md — Wave 7 Evidence Ledger (Minimalist Pass + New Imagery)
+
+**Status**: Wave 7 complete. Live on production.
+**Commit**: 9007e42
+**Date**: 2026-08-23
+**Owner instruction**: hero too heavy (one sentence only), site minimal, studio case-study tiles removed from Home (one button instead), images used properly with more same-style imagery generated, taste-skill presentation, remove bloat, copy on point.
+**Full delta record**: CONTENT_PLAN_V5.md in the planning folder
+
+## Changes shipped
+
+| Area | Change |
+|------|--------|
+| Home hero | One sentence ("Intelligence for imperfect conditions.") + one CTA. Eyebrow, subline, trust line removed (facts remain in compliance section, footer, schema) |
+| Home capabilities | Five rows now carry 96px image plates with hover physics (scale 700ms ease-out) |
+| Home client work | 15-tile grid removed; replaced by one line + one button to studio.tangison.com/work |
+| /capabilities | Each section opens with a 21:9 image plate (five images) |
+| /profile | Local presence section opens with a new 21:9 plate |
+| /projects | 21:9 cinematic plate under header; 15-tile studio grid remains here |
+| New imagery | 15-ict-coastal-backbone.jpg, 16-consulting-decision-horizon.jpg, 17-presence-dune-signal.jpg (generated in the hyper-minimal system, masters as style references, each visually inspected: max two dominant elements, graphite/sand/fog palette, single muted teal accent, no text, no people) |
+| Presentation | Section rhythm 7rem at desktop, overflow-x clip, single primary/secondary button styles, no meta-labels or hero stats, H1 within 3 lines at all widths |
+| Copy bloat | Home section leads removed where redundant; all verified facts and discontinued statuses preserved |
+
+## Verification
+
+| Check | Command or method | Result | Status |
+|-------|-------------------|--------|--------|
+| Lint | npm run lint | 0 errors | PASS |
+| Typecheck | npx tsc --noEmit | 0 errors | PASS |
+| Build | npm run build | 16 routes, all static | PASS |
+| Local crawl | Python, 23 checks on standalone server | 23/23 PASS | PASS |
+| Deployment | Vercel API | 9007e42 READY | PASS |
+| Live crawl | Python, 22 checks + 5-image recheck on https://www.tangison.com no-cache | 23/23 PASS (one initial FAIL was a malformed test string, re-verified with the correct literal) | PASS |
+| Studio references | Count across ten routes | 71 live | PASS |
+| New imagery | GET each file on production | All 200, >1KB | PASS |
+| Favicon/icons | Untouched this wave (no icon files in diff) | Verified by diff scope | PASS |
+
+**Cumulative state after Waves 1-7**
+
+- Live: https://www.tangison.com, minimalist capability statement, COLLINS-bar copy, five new-style images, studio portfolio surfaced as one button
+- Quality gates: lint=0, typecheck=0, build=16 routes, live verification all PASS
+- Open: founder portrait PNG pending owner file; legal review of Privacy/Terms; framer-motion cleanup (hidden /brand page); next 16.3.x Vercel revisit

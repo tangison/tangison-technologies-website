@@ -150,3 +150,24 @@ Stage Summary:
 - Wave 6 complete: production live with the rewritten copy
 - Favicon and icons re-verified byte-identical to pre-rebuild production during this wave's owner check
 - Open items unchanged: portrait PNG, legal review, framer-motion cleanup, 16.3.x revisit
+
+---
+
+## 2026-08-23 — Wave 7: Minimalist pass + generated imagery
+
+**Task**: Owner: hero too heavy (one sentence), site minimal, studio tiles out of Home (one button), use images properly + generate more in the same style, taste skill, remove bloat.
+
+### Work Log
+
+- Workspace recovery: .git and node_modules wiped again by snapshot; fresh clone on main filesystem (/home/user/tangison-min) at 4f4c545
+- Generated three images in the hyper-minimal system using existing masters as style references (generate_image): ict-coastal-backbone, consulting-decision-horizon, presence-dune-signal; each visually inspected against the style system before use
+- Home: hero cut to one sentence + one CTA; capability rows gained image plates with hover physics; 15-tile studio grid removed, replaced by one line + one button; leads cut
+- /capabilities: 21:9 plates per section; /profile: presence plate; /projects: intro plate
+- globals: section rhythm 7rem desktop, overflow-x clip
+- Gates: lint 0, tsc 0, build 16 routes; local 23/23 PASS; deployed 9007e42 READY; live 23/23 PASS (one false FAIL from a malformed test string, re-verified)
+- Studio references: 71 live across ten routes
+
+### Stage Summary
+
+- Wave 7 complete: production live with the minimalist design and new imagery
+- Open items unchanged: portrait PNG, legal review, framer-motion cleanup, 16.3.x revisit
