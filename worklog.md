@@ -128,3 +128,25 @@ Stage Summary:
 - Wave 5 complete: production live at tangison.com on the new architecture
 - Evidence in PROOF.md Wave 5 section
 - Open items: portrait PNG, legal review of Privacy/Terms, framer-motion cleanup, 16.3.x revisit
+
+---
+
+## 2026-08-23 — Wave 6: Copy rewrite to the COLLINS bar (gauntlet loop)
+
+**Task**: Owner: "the copy sounds weird, rewrite it, the bar is wearecollins.com." Ran the tangison-gauntlet-loop: fetched the bar (home, programs, case-study index), writer pass on all nine routes plus 404 and metadata, harsh critic pass blind A/B per route, one revision round, loop exited on critic verdicts.
+
+### Work Log
+
+- Fetched wearecollins.com copy; distilled the discipline (short declarative sentences, two-clause taglines, outcomes over features)
+- Hard constraints locked: approved core line, registration schema-only, verified facts, 69+ studio references, no exclamation points, no em dashes, formal Namibian government register
+- Writer pass: home hero subline + CTA + compliance section + five capability rows; capabilities/profile/contact H1s; careers body; 404; five metadata descriptions; llms.txt intro
+- Critic pass: 10 routes judged blind against fetched COLLINS sentences; 8 wins outright, 1 accepted constraint (approved core line compensated by subline), 2 not judged (legal register)
+- Implementation: 12 files; lint 0, tsc 0, build 16 routes
+- Sandbox incident: /tmp tmpfs filled (993MB, 89% used) corrupting node_modules; moved build to main filesystem, clean npm ci, green
+- Deployed 8220095; live crawl 27/27 PASS including reg schema-only, 89 studio refs, headers, 404
+
+### Stage Summary
+
+- Wave 6 complete: production live with the rewritten copy
+- Favicon and icons re-verified byte-identical to pre-rebuild production during this wave's owner check
+- Open items unchanged: portrait PNG, legal review, framer-motion cleanup, 16.3.x revisit

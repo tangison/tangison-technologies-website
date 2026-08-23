@@ -400,3 +400,57 @@ Root cause: next 16.3.2 fails in the Vercel build environment (Turbopack ENOENT)
 - Live: https://www.tangison.com serving the Tangison Technologies CC capability statement
 - Quality gates: lint=0, typecheck=0, build=16 routes, live verification all PASS
 - Open: founder portrait PNG pending owner file; legal review pass on Privacy/Terms; framer-motion cleanup wave (hidden /brand page only); 16.3.x Vercel revisit
+
+---
+
+# PROOF.md — Wave 6 Evidence Ledger (Copy Rewrite to the COLLINS Bar)
+
+**Status**: Wave 6 complete. Live on production.
+**Commit**: 8220095
+**Date**: 2026-08-23
+**Bar**: wearecollins.com (fetched live: home, /programs, case-study index)
+**Full loop record**: CONTENT_PLAN_V4.md in the planning folder (bar analysis, hard constraints, writer pass, critic pass with per-route verdicts, implementation list)
+
+## Loop record (writer + harsh critic, blind A/B against fetched COLLINS sentences)
+
+| Route | Critic verdict | Single biggest gap named | Resolution |
+|-------|----------------|--------------------------|------------|
+| Home hero | Ours wins on audience fit; H1 alone loses a pure clarity test vs "Rewrite your worth." | "Imperfect conditions" opaque to first-time procurement reader | Accepted constraint: core line is owner-approved; compensated by rewritten plain-language subline |
+| Home capabilities | Ours wins | None material | Kept |
+| Home compliance | Ours wins | Section asked a question without a verifiable fact | Retitled "Built to be verified." + registry-check line |
+| Capabilities | Ours wins | Two leads feature-stated not outcome-stated | Already outcome-stated; kept |
+| Profile | Ours wins | H1 nine words, claim buried | Cut to "Built to be verified." |
+| Projects | Ours wins (honesty beats aspiration for procurement) | None | Kept |
+| Contact | Ours wins | H1 repeated the lead | H1 is now the CTA itself |
+| Careers | Ours wins | First sentence named the company, not the reader's situation | Tightened |
+| 404 | Ours wins | Body repeated the H1 | Cut to one sentence |
+| Privacy/Terms | Not judged (legal register, separate review) | Pending owner legal review | Unchanged |
+
+Exit condition met: critic picks ours blind on every marketing route after one writer revision round. No round-count exit used.
+
+## Changes shipped (commit 8220095)
+
+- Home: hero subline rewritten; secondary CTA "Explore our capabilities"; compliance section retitled "Built to be verified." with registry-check line; five capability rows rewritten as scope plus outcome clause
+- /capabilities H1: "Five ways we keep institutions running."
+- /profile H1: "Built to be verified."
+- /contact H1: "Start a conversation."
+- /careers body tightened; 404 body cut to one sentence
+- Metadata descriptions rewritten (home, capabilities, profile, projects, careers); llms.txt intro aligned
+- Preserved and re-verified: approved core line, registration schema-only rule, all verified facts, 89 studio.tangison.com references across ten routes, discontinued statuses, no em dashes, no exclamation points
+
+## Verification
+
+| Check | Command or method | Result | Status |
+|-------|-------------------|--------|--------|
+| Lint | npm run lint | 0 errors | PASS |
+| Typecheck | npx tsc --noEmit | 0 errors | PASS |
+| Build | npm run build | 16 routes, all static | PASS |
+| Local copy crawl | Python, 24 checks on standalone server | All 24 PASS (new copy present, old copy absent, reg schema-only, no em dashes/exclamations, 69 refs on six main pages, redirects intact) | PASS |
+| Deployment | Vercel API | 8220095 READY | PASS |
+| Live crawl | Python, 27 checks on https://www.tangison.com no-cache | All 27 PASS (10 routes 200, new copy live, reg number schema-only, 89 studio refs, CSP + HSTS preload + no X-Powered-By, 404 tightened, redirect sample correct) | PASS |
+
+**Cumulative state after Waves 1-6**
+
+- Live: https://www.tangison.com serving the Tangison Technologies CC capability statement with COLLINS-bar copy
+- Quality gates: lint=0, typecheck=0, build=16 routes, live verification all PASS
+- Open: founder portrait PNG pending owner file; legal review of Privacy/Terms; framer-motion cleanup wave (hidden /brand page); next 16.3.x Vercel revisit
