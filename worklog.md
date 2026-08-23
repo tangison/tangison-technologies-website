@@ -107,3 +107,24 @@ Stage Summary:
 - Owner approved push on 2026-08-23; da240cb pushed to origin/main, Vercel deploy READY
 - Live re-verification passed: banner on 9/9 routes, per-page canonical 9/9, security headers intact
 - Evidence recorded in PROOF.md (Wave 4 live evidence section)
+
+---
+
+## 2026-08-23 — Wave 5: Tender-ready rebuild deployed
+
+**Task**: Rebuild tangison.com as the Tangison Technologies CC capability statement (tender-winning digital capability statement) and deploy.
+
+### Work Log
+
+- Implemented approved plan (CONTENT_PLAN_V3): 9 public routes + 404, /brand hidden, 301 map, footer compliance anchor, JSON-LD with legalName + schema-only BIPA number
+- Applied owner V3 revisions: Numeric refs removed, reg number hidden in schema only, Agent + Feorm discontinued statuses, 69 studio.tangison.com references, founder portrait slot (pending clean PNG)
+- Frontend audit fixed 5 bugs: tile image containing blocks, noise-overlay section, 13 display headings, stale WhatsApp message routes, domain overflow
+- Full local crawl audit: 10/10 pages, 17/17 images, 15/15 links, 11/11 redirects green
+- Deployment incident: next 16.3.2 failed on Vercel (Turbopack ENOENT, green locally on Node 20); bisected by pinning next 16.2.11 (minimum security-fixed version) -> READY; pinned exact to prevent caret drift
+- Live verification all PASS including byte-identical favicons (owner requirement: favicon untouched)
+
+### Stage Summary
+
+- Wave 5 complete: production live at tangison.com on the new architecture
+- Evidence in PROOF.md Wave 5 section
+- Open items: portrait PNG, legal review of Privacy/Terms, framer-motion cleanup, 16.3.x revisit

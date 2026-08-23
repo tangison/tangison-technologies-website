@@ -329,3 +329,74 @@ Wave 2 commit `1aa92ca` was also pushed earlier in this session. Live checks con
 - Live site: https://www.tangison.com serving the announcement banner on all 9 routes
 - Findings addressed: 14 (3 Wave 1, 7 Wave 2, 3 Wave 3, 4 Wave 4 fixed) + 5 Wave 4 items flagged for the restructure and rebuild (W4-5 to W4-9)
 - Quality gates: lint=0, typecheck=0, build=15 routes, live verification all PASS
+
+---
+
+# PROOF.md — Wave 5 Evidence Ledger (Tender-Ready Rebuild)
+
+**Status**: Wave 5 complete. Live on production.
+**Branch**: main (rebuild-tender merged via push)
+**Commits**: a6e59ad (rebuild + audit fixes), 8bcedbb (next pin bisect), 348eb17 (exact pin)
+**Date**: 2026-08-23
+**Full content spec**: CONTENT_PLAN_V3.md (owner revisions) in the planning folder
+
+## Scope delivered
+
+Tangison Technologies CC capability statement replacing the 9-route corporate site: /, /capabilities, /profile, /projects, /contact, /careers, /privacy, /terms, /sitemap, 404. /brand kept live and hidden from nav and sitemap. /technology and /company retired with 301s; all agent-era legacy URLs re-chained.
+
+## Owner instructions applied (V3)
+
+| Instruction | Result | Evidence |
+|-------------|--------|----------|
+| Remove Numeric Accounting Services references | Zero occurrences on all pages | Live crawl: "Numeric" absent from visible copy, 10/10 routes |
+| Registration number not visible, hidden in schema | CC/2026/10147 appears only in home Organization JSON-LD identifier; visible lines say "Registered Close Corporation in Namibia. BO compliant." | Live crawl: reg number absent from visible text 10/10 routes, present in schema |
+| Tangison Agent discontinued | /projects status "Discontinued", R&D section and profile group line updated | Live check PASS |
+| Feorm discontinued | "Status: Delivered and discontinued." + strip tile marked | Live check PASS |
+| studio.tangison.com referenced throughout | 69 references across six main pages (footer all pages, 30 case-study tiles, portfolio CTAs, group sections, nav badge, contact line, JSON-LD) | Live count on home alone: 28 |
+| Founder portrait | Leadership section wired for owner-supplied background-free PNG (public/images/tangi-portrait.png); magenta reference locked out; text layout ships until file arrives | Source + plan note |
+| Favicon untouched | public/favicon.ico, favicon.png, apple-touch-icon.png, icon-192/512, shipwreck SVG: zero diff vs last live commit; live bytes byte-identical to committed blobs | git diff 34c55a6..a6e59ad empty; live byte compare IDENTICAL 3/3 |
+
+## Deployment incident and resolution
+
+| Phase | Action | Target | Command or method | Result | Evidence | Timestamp | Status |
+|-------|--------|--------|-------------------|--------|----------|-----------|--------|
+| Deploy | Push rebuild-tender to main | tangison-technologies-website | git push origin rebuild-tender:main (a6e59ad) | Deployment dpl_HEXAwrLk9N9NJiAsv1QjZeRcxWAd ERROR: ENOENT, "npm run build exited 1" | Vercel deployment API errorCode/errorMessage | 2026-08-23T10:05 | FAIL |
+| Diagnose | Local reproduction | Fresh clone + npm ci + npm run build | git clone, npm ci, npm run build | Build green, 16 routes, standalone OK on Node v20.20.2 | Local build output | 2026-08-23T10:15 | ROOT CAUSE ISOLATED (environment) |
+| Bisect | Pin next 16.2.11 (keep sharp 0.35.3) | package.json | npm install next@16.2.11, push 8bcedbb | Deployment READY | Vercel deployment API state READY, sha 8bcedbb | 2026-08-23T10:25 | PASS |
+| Harden | Pin next to exact 16.2.11 | package.json | commit 348eb17 | Deployment READY | Vercel deployment API state READY, sha 348eb17 | 2026-08-23T10:35 | PASS |
+
+Root cause: next 16.3.2 fails in the Vercel build environment (Turbopack ENOENT) while building green locally on Node 20. 16.2.11 is the minimum version clearing the Wave 4 security advisories (GHSA-6gpp-xcg3-4w24, GHSA-m99w-x7hq-7vfj fixed in 16.2.11) and builds green on Vercel. Revisit 16.3.x later (candidate workaround: next build --webpack, the documented Next 16 compiler switch).
+
+## Live verification (post-deploy, https://www.tangison.com)
+
+| Check | Method | Result | Status |
+|-------|--------|--------|--------|
+| 10 public routes | Python crawl, no-cache | All HTTP 200, one h1 each, valid JSON-LD, per-page canonicals correct | PASS |
+| 11 redirects | Python crawl following redirects | /technology, /company, /features, /use-cases, /pricing, /docs, /faq, /blog, /about, /cookies, /sitemap-overview all 308 to correct new routes | PASS |
+| 404 | GET unknown path | 404, branded page with correct links | PASS |
+| Apex | GET https://tangison.com | 308 to https://www.tangison.com/ | PASS |
+| Security headers | Response header inspection | CSP, X-Frame-Options DENY, nosniff, HSTS preload, Referrer-Policy, Permissions-Policy present; X-Powered-By absent | PASS |
+| Favicon integrity | Live bytes vs committed git blobs | favicon.ico 361B, favicon.png 742B, apple-touch-icon.png 4130B, all byte-identical | PASS |
+| Project artwork | GET 4 of 15 webp | All 200 | PASS |
+| Hero + trust line + footer reg line | Visible-text grep | All present | PASS |
+| Reg number schema-only | Visible-text vs schema grep | Absent from visible copy, present in Organization JSON-LD | PASS |
+| studio.tangison.com references | Count on home | 28 on home alone (69 across six main pages in build audit) | PASS |
+| Agent + Feorm discontinued statuses | Visible-text grep on /projects | Both present | PASS |
+| Announcement banner gone | role="status" grep | Absent on all routes | PASS |
+| No em dashes / no Numeric | Visible-text grep | Zero occurrences on new pages | PASS |
+
+## Local verification (pre-deploy)
+
+| Check | Command | Result |
+|-------|---------|--------|
+| Lint | npm run lint | 0 errors |
+| Typecheck | npx tsc --noEmit | 0 errors |
+| Build | npm run build | 16 routes, all static |
+| Crawl audit | Python asset + link crawl | 17/17 optimized images 200, 15/15 internal links 200 |
+| Audit fixes | tile containing blocks, display base classes, WA message routes, overflow-wrap | Committed in a6e59ad |
+
+**Cumulative state after Waves 1-5**
+
+- Live: https://www.tangison.com serving the Tangison Technologies CC capability statement
+- Quality gates: lint=0, typecheck=0, build=16 routes, live verification all PASS
+- Open: founder portrait PNG pending owner file; legal review pass on Privacy/Terms; framer-motion cleanup wave (hidden /brand page only); 16.3.x Vercel revisit
