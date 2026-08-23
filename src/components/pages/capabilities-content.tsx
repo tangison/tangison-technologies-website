@@ -1,5 +1,6 @@
 'use client';
 
+import Image from "next/image";
 import Link from "next/link";
 import { PageShell } from "@/components/site/page-shell";
 import { useRevealChildren } from "@/hooks/use-reveal";
@@ -10,6 +11,8 @@ type Capability = {
   number: string;
   title: string;
   lead: string;
+  image: string;
+  imageAlt: string;
   scope: { label: string; text: string }[];
   practice?: string;
 };
@@ -20,6 +23,8 @@ const SECTIONS: Capability[] = [
     number: "01",
     title: "Information and Communications Technology",
     lead: "We design, build, and maintain the digital backbone institutions run on every day.",
+    image: "/images/tangison/webp/15-ict-coastal-backbone.jpg",
+    imageAlt: "A thin graphite lattice receding diagonally into dense coastal fog, one teal status light at the nearest joint",
     scope: [
       {
         label: "Systems development",
@@ -42,6 +47,8 @@ const SECTIONS: Capability[] = [
     number: "02",
     title: "Artificial Intelligence",
     lead: "Applied AI means models and agents deployed against your own systems and data, not rented from a third party.",
+    image: "/images/tangison/webp/03-ai-operations-node.webp",
+    imageAlt: "A minimal graphite control node with a single teal status light",
     scope: [
       {
         label: "Applied AI solutions",
@@ -63,6 +70,8 @@ const SECTIONS: Capability[] = [
     number: "03",
     title: "Digital Transformation Services",
     lead: "We move institutions from manual processes to measured, auditable digital operations.",
+    image: "/images/tangison/webp/04-data-decision-planes.webp",
+    imageAlt: "Intersecting smoke-glass planes joined by a precise teal seam",
     scope: [
       {
         label: "Advisory",
@@ -79,6 +88,8 @@ const SECTIONS: Capability[] = [
     number: "04",
     title: "Consulting",
     lead: "Strategic and technical consulting for decisions that have to hold up under scrutiny.",
+    image: "/images/tangison/webp/16-consulting-decision-horizon.jpg",
+    imageAlt: "A single dark plinth on a fog-covered plain at dawn, one thin teal line across the fog",
     scope: [
       {
         label: "Strategic consulting",
@@ -95,6 +106,8 @@ const SECTIONS: Capability[] = [
     number: "05",
     title: "Research and Development",
     lead: "We prototype in-house so our clients buy outcomes, not promises.",
+    image: "/images/tangison/webp/05-resilient-platform-monolith.webp",
+    imageAlt: "A dark stone monolith with a narrow light seam emerging through coastal fog",
     scope: [
       {
         label: "Applied research",
@@ -143,6 +156,9 @@ export default function CapabilitiesContent() {
           aria-label={s.title}
         >
           <div className="container-tangison">
+            <div className="relative mb-10 aspect-[21/9] overflow-hidden bg-[var(--surface)] md:mb-14">
+              <Image src={s.image} alt={s.imageAlt} fill sizes="100vw" className="object-cover reveal-image" />
+            </div>
             <div className="grid gap-8 md:grid-cols-12">
               <div className="md:col-span-4">
                 <p className="font-mono text-xs text-[var(--muted-ink)]">{s.number}</p>

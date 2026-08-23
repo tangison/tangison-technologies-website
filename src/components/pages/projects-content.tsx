@@ -66,6 +66,20 @@ export default function ProjectsContent() {
         </div>
       </section>
 
+      <section className="bg-[var(--bg)]" aria-label="Selected work plate">
+        <div className="container-tangison">
+          <div className="relative aspect-[21/9] overflow-hidden bg-[var(--surface-2)]">
+            <Image
+              src="/images/tangison/webp/12-carousel-fog-vessel.webp"
+              alt="A distant vessel silhouette fading into Skeleton Coast fog"
+              fill
+              sizes="100vw"
+              className="object-cover"
+            />
+          </div>
+        </div>
+      </section>
+
       {/* In-house R&D */}
       <section className="section-spacing bg-[var(--surface-2)]" aria-label="In-house R and D">
         <div className="container-tangison">

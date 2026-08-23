@@ -1,5 +1,6 @@
 'use client';
 
+import Image from "next/image";
 import { PageShell } from "@/components/site/page-shell";
 import { useRevealChildren } from "@/hooks/use-reveal";
 import { SITE } from "@/lib/site";
@@ -128,6 +129,15 @@ export default function ProfileContent() {
 
       <section className="section-spacing bg-[var(--surface-2)]" aria-label="Local presence">
         <div className="container-tangison">
+          <div className="relative mb-10 aspect-[21/9] overflow-hidden bg-[var(--surface)] md:mb-14">
+            <Image
+              src="/images/tangison/webp/17-presence-dune-signal.jpg"
+              alt="A slender dark monolith standing on a fog-covered Namib dune crest at dawn"
+              fill
+              sizes="100vw"
+              className="object-cover"
+            />
+          </div>
           <h2 className="display display-sm mb-4">Local presence</h2>
           <p className="text-base leading-relaxed text-[var(--ink)] max-w-2xl">
             Founded and operated from Windhoek. {SITE.address}. We work across

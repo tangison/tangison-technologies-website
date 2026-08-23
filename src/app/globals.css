@@ -109,6 +109,7 @@
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: clip;
   }
 
   /* Skip link */
@@ -206,6 +207,13 @@
   .section-spacing {
     padding-top: var(--space-4xl);
     padding-bottom: var(--space-3xl);
+  }
+
+  @media (min-width: 768px) {
+    .section-spacing {
+      padding-top: 7rem;
+      padding-bottom: 7rem;
+    }
   }
   .section-spacing-tight {
     padding-top: var(--space-2xl);
