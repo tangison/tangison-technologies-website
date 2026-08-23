@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "Technology",
   description:
     "Observe, Decide, Operate: Tangison's operational intelligence methodology and its technology ecosystem.",
+  alternates: { canonical: "/technology" },
   openGraph: {
     images: [{ url: "/images/tangison/webp/02-skeleton-coast-signal-og-1200x630.webp", width: 1200, height: 630 }],
     title: "Technology: Tangison Technologies",

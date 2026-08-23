@@ -95,6 +95,11 @@
   /* Nav */
   --nav-height: 64px;
   --nav-height-mobile: 56px;
+
+  /* Announcement bar (see AnnouncementBar). Mobile allows two 13px text
+     lines; desktop renders a single line. */
+  --announce-h-mobile: 44px;
+  --announce-h: 40px;
 }
 
 /* ─── BASE ─── */

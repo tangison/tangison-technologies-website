@@ -41,11 +41,12 @@ The dev server runs on http://localhost:3000.
 
 ## Routes
 
-8 page routes.
+9 page routes.
 
 ```
 /
 /brand
+/careers
 /company
 /contact
 /privacy

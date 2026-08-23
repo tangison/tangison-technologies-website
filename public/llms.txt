@@ -11,6 +11,7 @@ This is the corporate website. It is not a product documentation site. For produ
 - [Home](https://www.tangison.com): Corporate positioning, ecosystem overview, and the Observe-Decide-Operate methodology.
 - [Technology](https://www.tangison.com/technology): The operational intelligence methodology in detail, including the Tangison Agent platform and Tangison Labs experimental systems.
 - [Company](https://www.tangison.com/company): About Tangison Technologies, its founding context in Namibia, and the team.
+- [Careers](https://www.tangison.com/careers): Engineering, design and operations roles with Tangison Technologies in Windhoek.
 - [Contact](https://www.tangison.com/contact): How to reach Tangison Technologies. Use this page for partnership, sales, and general enquiries.
 - [Brand](https://www.tangison.com/brand): Tangison brand guidelines, identity, and visual system.
 - [Privacy Policy](https://www.tangison.com/privacy): What this website collects and how it handles visitor data.

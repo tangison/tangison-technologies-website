@@ -223,7 +223,7 @@ export function Nav() {
     <>
       {/* ─── FLOATING HEADER ─── */}
       <header
-        className="fixed z-40 mx-auto left-4 right-4 md:left-6 md:right-6 top-3 md:top-4 rounded-md border border-[var(--hairline)] bg-[var(--bg)]/95 backdrop-blur-sm shadow-[var(--shadow-warm)] transition-shadow duration-200 hover:shadow-[var(--shadow-warm-md)]"
+        className="fixed z-40 mx-auto left-4 right-4 md:left-6 md:right-6 top-[calc(var(--announce-h-mobile)+12px)] md:top-[calc(var(--announce-h)+16px)] rounded-md border border-[var(--hairline)] bg-[var(--bg)]/95 backdrop-blur-sm shadow-[var(--shadow-warm)] transition-shadow duration-200 hover:shadow-[var(--shadow-warm-md)]"
         style={{ maxWidth: "var(--container-wide)" }}
       >
         <div className="container-tangison flex items-center justify-between h-[var(--nav-height-mobile)] md:h-[var(--nav-height)]">

@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "Company",
   description:
     "About Tangison Technologies, its philosophy, and its Namibian context.",
+  alternates: { canonical: "/company" },
   openGraph: {
     images: [{ url: "/images/tangison/webp/02-skeleton-coast-signal-og-1200x630.webp", width: 1200, height: 630 }],
     title: "Company: Tangison Technologies",

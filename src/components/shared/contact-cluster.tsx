@@ -50,9 +50,13 @@ export function ContactCluster() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  React.useEffect(() => {
+  // Reset the cluster on route change during render (React-recommended
+  // "adjust state when a prop changes" pattern; avoids setState-in-effect).
+  const [prevPathname, setPrevPathname] = React.useState(pathname);
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname);
     setExpanded(false);
-  }, [pathname]);
+  }
 
   const waHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
     messageForPath(pathname)
