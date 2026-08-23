@@ -68,3 +68,40 @@ Stage Summary:
 - All local verification gates pass (lint, typecheck, build, artifact inspection)
 - Ready to commit + push to origin/main
 - Will verify live deployment on www.tangison.com after Vercel auto-deploy (~90s)
+
+---
+
+## 2026-08-23 — Wave 4: Production audit + agent.tangison.com discontinuation announcement
+
+**Task ID**: wave-4-audit-announce
+**Agent**: Arena.ai agent (Tangison skill stack: web-build preflight, web-audit scope, full-output enforcement)
+**Task**: Pull tangison.com from GitHub/Vercel, audit the whole site, and add the announcement that agent.tangison.com is being discontinued and tangison.com is being restructured and rebuilt.
+
+### Work Log
+
+- Verified both owner-provided tokens (GitHub + Vercel) while live
+- Mapped tangison.com + www.tangison.com to Vercel project tangison-technologies-website and to github.com/tangison/tangison-technologies-website; ruled out tangison/tangison (different site)
+- Cloned main (112eb04, clean tree); read PRODUCT.md, BUILD_PLAN.md, CONTENT_PLAN.md, AUDIT_WAVE_1.md, PROOF.md, worklog.md, README.md, source
+- Baseline: lint 1 error (pre-existing), tsc 0, build 15 routes static
+- Live audit: 9 routes 200, 8 legacy redirects 308, 404 branded, apex 308, all security + cache headers correct, SEO + a11y baseline healthy (1 h1 per page, 0 missing alt), 7 of 9 canonicals wrong, external links all resolve, npm audit 6 high + 1 moderate (transitive)
+- Built announcement bar (fixed strip above floating nav, role="status", existing tokens only), offset nav and main padding via --announce-h tokens; verified banner on 9/9 built pages
+- Fixed P1 lint error (contact-cluster.tsx render-time reset), P1 canonicals (7 pages), P3 README route count, P3 llms.txt careers line
+- Full report in AUDIT_WAVE_4.md; ledger in PROOF.md; flagged W4-5 (agent references for the rebuild), W4-6 (dependency bump), W4-7 (framer-motion plan deviation), W4-8/W4-9 (404 bar decision, year render)
+- Committed 7aebc51 locally; push to origin/main held for owner approval because the announcement is a public business statement
+
+### Files Changed
+
+1. `src/components/site/announcement-bar.tsx` (new)
+2. `src/components/site/page-shell.tsx` (mount bar, main padding)
+3. `src/components/site/nav.tsx` (floating header offset)
+4. `src/app/globals.css` (--announce-h tokens)
+5. `src/components/shared/contact-cluster.tsx` (lint fix)
+6. `src/app/{technology,company,brand,contact,privacy,terms,sitemap}/page.tsx` (canonical x7)
+7. `README.md`, `public/llms.txt` (docs)
+8. `AUDIT_WAVE_4.md` (new), `PROOF.md`, `worklog.md` (evidence)
+
+### Stage Summary
+
+- 6/6 deliverables complete; lint 0, tsc 0, build 15 routes, banner verified on 9/9 pages
+- 9 findings: 4 fixed, 5 flagged for the restructure and rebuild
+- Ready to push on owner approval; live re-verification steps recorded in PROOF.md

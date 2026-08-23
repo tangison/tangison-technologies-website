@@ -255,3 +255,61 @@ Wave 2 commit `1aa92ca` was also pushed earlier in this session. Live checks con
 - **Live site**: https://www.tangison.com — Vercel auto-deploy confirmed via x-vercel-cache: HIT
 - **Total findings addressed**: 10 (3 from Wave 1, 7 from Wave 2, 3 from Wave 3)
 - **All quality gates**: lint=0, typecheck=0, build=14 routes, live verification all PASS
+
+---
+
+# PROOF.md — Wave 4 Evidence Ledger (Agent Discontinuation Announcement + Audit)
+
+**Status**: Wave 4 complete (local verification). Push to origin/main pending owner approval.
+**Branch**: main
+**Commit**: 7aebc51 (code, docs, audit report) + this ledger commit
+**Date**: 2026-08-23
+**Deploy target**: https://www.tangison.com (Vercel auto-deploy from origin/main)
+**Full report**: AUDIT_WAVE_4.md
+
+## Scope locked
+
+6 deliverables: (1) announcement bar component, (2) nav + shell wiring with height tokens, (3) contact-cluster lint fix, (4) seven per-page canonical fixes, (5) documentation fixes (README routes, llms.txt), (6) evidence ledger (this entry + AUDIT_WAVE_4.md). All 6 delivered.
+
+## Findings fixed
+
+| Phase | Action | Target | Command or method | Result | Evidence path or URL | Timestamp | Status |
+|-------|--------|--------|-------------------|--------|----------------------|-----------|--------|
+| Audit | Identify GitHub/Vercel mapping | tangison.com | Vercel v2 projects + domains APIs, GitHub user/repos APIs | tangison.com + www.tangison.com -> project tangison-technologies-website -> github.com/tangison/tangison-technologies-website | AUDIT_WAVE_4.md section 2 | 2026-08-23T07:45 | PASS |
+| Audit | Clone and baseline | Repository | git clone, git status, git log | Clean tree at 112eb04, main | /home/user/tangison-website | 2026-08-23T07:47 | PASS |
+| Audit | Baseline lint | main before changes | npm run lint | 1 error (react-hooks/set-state-in-effect, contact-cluster.tsx:54) | npm output | 2026-08-23T07:52 | BASELINE FAIL (pre-existing) |
+| Audit | Baseline typecheck + build | main before changes | npx tsc --noEmit; npm run build | 0 errors; 15 routes static | npm output | 2026-08-23T07:52 | PASS |
+| Audit | Live crawl, 9 routes | https://www.tangison.com | curl -w http_code per route | All 200 | AUDIT_WAVE_4.md section 6 | 2026-08-23T07:52 | PASS |
+| Audit | Legacy redirects (8) | www.tangison.com | curl -w redirect_url | All 308 to correct targets | AUDIT_WAVE_4.md section 6 | 2026-08-23T07:52 | PASS |
+| Audit | 404 + apex | www.tangison.com | curl unknown path; curl tangison.com | 404 branded; apex 308 to www | AUDIT_WAVE_4.md section 6 | 2026-08-23T07:52 | PASS |
+| Audit | Security + cache headers | www.tangison.com/ | curl -sI | CSP, XFO DENY, nosniff, HSTS preload, Referrer-Policy, Permissions-Policy present; X-Powered-By absent; cache headers correct | AUDIT_WAVE_4.md section 6 | 2026-08-23T07:52 | PASS |
+| Audit | SEO per page (9 pages) | www.tangison.com | Python HTML parse: h1, canonical, og, img alt, jsonld | 1 h1 each; 0 imgs without alt; OG + JSON-LD present; 7 of 9 canonicals wrong (W4-2) | AUDIT_WAVE_4.md sections 3.1, 6 | 2026-08-23T07:54 | PASS with finding |
+| Audit | robots/sitemap/manifest/llms | www.tangison.com | curl | All 200; sitemap 9 URLs no trailing slash; robots clean | AUDIT_WAVE_4.md section 6 | 2026-08-23T07:54 | PASS |
+| Audit | External links (9 pages) | www.tangison.com | Python href crawl + status checks | studio (14), agent (4), wa.me (8) all resolve; agent refs flagged for discontinuation (W4-5) | AUDIT_WAVE_4.md section 6 | 2026-08-23T07:55 | PASS with finding |
+| Audit | Dependency audit | package.json | npm audit --json | 7 vulns (6 high, 1 moderate), all transitive; next <16.2.11, sharp <0.35.0 top items; flagged W4-6 | AUDIT_WAVE_4.md section 3.2 | 2026-08-23T07:59 | PASS with finding |
+| Audit | Plan vs code (motion) | src/components/ui | grep framer-motion | framer-motion retained in 5 components despite BUILD_PLAN removal; flagged W4-7 | AUDIT_WAVE_4.md section 3.2 | 2026-08-23T07:55 | PASS with finding |
+| Fix W4-1 | Lint error | src/components/shared/contact-cluster.tsx | Render-time prevPathname state reset replacing setState-in-effect | npm run lint 0 errors; tsc 0 errors | .next build output, AUDIT_WAVE_4.md | 2026-08-23T08:02 | PASS |
+| Fix W4-2 | Per-page canonical (7 pages) | src/app/{technology,company,brand,contact,privacy,terms,sitemap}/page.tsx | Added alternates.canonical per page | Build output: 9/9 pages emit own canonical | .next/server/app/*.html | 2026-08-23T08:02 | PASS |
+| Fix W4-3 | README route count | README.md | 8 -> 9 routes, added /careers | Diff | README.md | 2026-08-23T08:02 | PASS |
+| Fix W4-4 | llms.txt careers line | public/llms.txt | Added /careers entry from page's own description | Diff | public/llms.txt | 2026-08-23T08:02 | PASS |
+| Announce | Announcement bar | src/components/site/announcement-bar.tsx (new) | Fixed strip, role="status", tokens --announce-h-mobile 44px / --announce-h 40px, ink background, bg text, mono NOTICE label | Exact text "agent.tangison.com is being discontinued. tangison.com is being restructured and rebuilt." | AUDIT_WAVE_4.md section 4 | 2026-08-23T08:02 | PASS |
+| Announce | Nav + main offsets | src/components/site/nav.tsx, src/components/site/page-shell.tsx, src/app/globals.css | Header top calc(var(--announce-h...)+12px/16px); main pt adds bar height | Compiled CSS contains tokens and calc utilities; offsets preserve original 12px/16px float | Served CSS chunk, .next/server/app/index.html | 2026-08-23T08:02 | PASS |
+
+## Pre-deploy verification
+
+| Check | Command | Result | Status |
+|-------|---------|--------|--------|
+| Lint | npm run lint | 0 errors, 0 warnings | PASS |
+| Typecheck | npx tsc --noEmit | 0 errors | PASS |
+| Production build | npm run build | 15/15 routes, all static | PASS |
+| Banner on every page | grep role="status" + exact text in .next/server/app/*.html | 9/9 pages, one instance each | PASS |
+| Canonicals in build output | grep per page | 9/9 correct (was 2/9) | PASS |
+| Local production server | NODE_ENV=production node .next/standalone/server.js (0.0.0.0:3000) | Banner + corrected canonical + tokens served | PASS |
+
+## Deployment gate
+
+| Gate | Status | Note |
+|------|--------|------|
+| Local verification complete | DONE | All gates above PASS |
+| Push to origin/main | PENDING OWNER APPROVAL | Push triggers Vercel auto-deploy; announcement is a public business statement |
+| Live re-verification | BLOCKED ON PUSH | Re-run section 6 checks on https://www.tangison.com and record evidence here |
