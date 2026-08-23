@@ -15,10 +15,10 @@ import { SITE } from "@/lib/site";
  */
 
 function messageForPath(pathname: string): string {
-  if (pathname.startsWith("/technology")) {
-    return "Hello Tangison Technologies. I would like to discuss your technology.";
+  if (pathname.startsWith("/capabilities") || pathname.startsWith("/projects")) {
+    return "Hello Tangison Technologies. I would like to discuss your capabilities.";
   }
-  if (pathname.startsWith("/company")) {
+  if (pathname.startsWith("/profile")) {
     return "Hello Tangison Technologies. I would like to know more about the company.";
   }
   if (pathname.startsWith("/careers")) {
@@ -28,7 +28,7 @@ function messageForPath(pathname: string): string {
 }
 
 /** Main business line, MTC: 081 341 1522. wa.me wants digits only. */
-const WHATSAPP_NUMBER = SITE.phoneMainE164.replace("+", "");
+const WHATSAPP_NUMBER = SITE.phoneWa;
 
 export function ContactCluster() {
   const pathname = usePathname() || "/";

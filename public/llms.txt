@@ -1,25 +1,30 @@
-# Tangison Technologies
+# Tangison Technologies CC
 
-> Tangison Technologies builds operational intelligence systems that work where connectivity drops, data arrives late, and infrastructure is uneven.
+> Tangison Technologies CC is a 100% Namibian owned technology company in Windhoek. It builds the systems that keep Namibian businesses and institutions running under imperfect conditions.
 
-Tangison Technologies is an operational intelligence company headquartered in Windhoek, Namibia. We build systems for environments where conventional cloud-only stacks fail: low or intermittent connectivity, late-arriving data, uneven infrastructure, and harsh physical conditions. Our methodology is built around three phases — Observe, Decide, Operate — and our products are designed to run inside the customer's own infrastructure rather than depending on third-party clouds.
+Tangison Technologies CC is a registered Close Corporation in Namibia (BIPA registry), founded and operated in Windhoek by Tangi Iigonda. Core capabilities: information and communications technology, applied artificial intelligence, digital transformation services, strategic and technical consulting, and applied research and development.
 
-This is the corporate website. It is not a product documentation site. For product documentation, see the Tangison Agent product at https://agent.tangison.com (self-hosted AI agents). For client work and digital product design, see Tangison Studio at https://studio.tangison.com.
+This is the corporate capability statement of the company. For client work and design, see Tangison Studio at https://studio.tangison.com.
 
 ## Pages
 
-- [Home](https://www.tangison.com): Corporate positioning, ecosystem overview, and the Observe-Decide-Operate methodology.
-- [Technology](https://www.tangison.com/technology): The operational intelligence methodology in detail, including the Tangison Agent platform and Tangison Labs experimental systems.
-- [Company](https://www.tangison.com/company): About Tangison Technologies, its founding context in Namibia, and the team.
-- [Careers](https://www.tangison.com/careers): Engineering, design and operations roles with Tangison Technologies in Windhoek.
-- [Contact](https://www.tangison.com/contact): How to reach Tangison Technologies. Use this page for partnership, sales, and general enquiries.
-- [Brand](https://www.tangison.com/brand): Tangison brand guidelines, identity, and visual system.
+- [Home](https://www.tangison.com): Executive summary, capabilities index, selected work, and client strip.
+- [Capabilities](https://www.tangison.com/capabilities): The five competencies in detail, with scope per capability.
+- [Company Profile](https://www.tangison.com/profile): Ownership, registration status, mission, leadership, the Tangison group, and local presence.
+- [Projects and R&D](https://www.tangison.com/projects): Selected work with honest status, plus fifteen client projects delivered through Tangison Studio.
+- [Contact and Compliance](https://www.tangison.com/contact): Address, phone, email, and registration details.
+- [Careers](https://www.tangison.com/careers): Working with Tangison Technologies.
 - [Privacy Policy](https://www.tangison.com/privacy): What this website collects and how it handles visitor data.
 - [Terms of Service](https://www.tangison.com/terms): Terms for using this website.
-- [Sitemap](https://www.tangison.com/sitemap): Human-readable site map.
+- [Site Map](https://www.tangison.com/sitemap): Human-readable site map.
 
 ## Optional
 
-- Tangison Agent (product): https://agent.tangison.com
-- Tangison Studio (client work): https://studio.tangison.com
-- Tangison Labs (experimental systems): https://www.tangison.com/technology#labs
+- Tangison Studio (design and engineering arm): https://studio.tangison.com
+- Tangison Agent (in-house applied-AI platform, discontinued): https://agent.tangison.com
+
+## Contact
+
+- Email: info@tangison.com
+- Phone: +264 81 341 1522
+- Address: Corner Dr Frans Indongo St and John Meinert St, Windhoek West, Namibia 10005

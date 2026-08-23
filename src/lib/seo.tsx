@@ -1,52 +1,57 @@
-import { SITE, TEAM_NAMES } from "./site";
+import { SITE } from "./site";
 
 /**
- * Generate JSON-LD structured data for Tangison Technologies.
- * This data is embedded in pages for search engine understanding.
+ * JSON-LD structured data for Tangison Technologies CC.
+ *
+ * The BIPA registration number is published here (machine-readable
+ * structured data) only; it is deliberately not shown in visible copy.
  */
 
 export function organizationJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": "https://tangison.com/#organization",
     name: SITE.name,
+    legalName: SITE.legalName,
     description: SITE.description,
     url: SITE.siteUrl,
     logo: `${SITE.siteUrl}/tangison-logo.png`,
     email: SITE.email,
-    telephone: SITE.phoneMainE164,
-    contactPoint: [
-      {
-        "@type": "ContactPoint",
-        contactType: "customer service",
-        telephone: SITE.phoneMainE164,
-        email: SITE.email,
-        areaServed: "NA",
-        availableLanguage: ["en"],
-      },
-      {
-        "@type": "ContactPoint",
-        contactType: "sales",
-        name: "Tangison Studio",
-        telephone: SITE.phoneStudioE164,
-        areaServed: "NA",
-        availableLanguage: ["en"],
-      },
-    ],
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "Windhoek",
-      addressCountry: "NA",
+    telephone: SITE.phoneE164,
+    identifier: {
+      "@type": "PropertyValue",
+      name: "BIPA registration number",
+      value: SITE.regNumber,
     },
+    foundingDate: "2026-08-20",
     foundingLocation: {
       "@type": "Place",
       name: "Windhoek, Namibia",
     },
-    /* @id lets studio.tangison.com's parentOrganization resolve to this exact
-       entity rather than to a second, unrelated Organization node. */
-    "@id": "https://tangison.com/#organization",
-    /* Studio is a distinct legal entity, so it belongs in subOrganization.
-       sameAs is for other profiles of THIS organization, not for children. */
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Corner Dr Frans Indongo St and John Meinert St",
+      addressLocality: "Windhoek",
+      postalCode: "10005",
+      addressCountry: "NA",
+    },
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        contactType: "customer service",
+        telephone: SITE.phoneE164,
+        email: SITE.email,
+        areaServed: "NA",
+        availableLanguage: ["en"],
+      },
+    ],
+    member: [
+      {
+        "@type": "Person",
+        name: SITE.owner,
+      },
+    ],
     subOrganization: [
       {
         "@type": "Organization",
@@ -54,20 +59,9 @@ export function organizationJsonLd() {
         name: "Tangison Studio",
         url: SITE.studioUrl,
         description:
-          "The creative arm of Tangison Technologies. Brand systems, websites, and digital products.",
-      },
-      {
-        "@type": "Organization",
-        name: "Tangison Agent",
-        url: SITE.agentUrl,
-        description:
-          "Self-hosted AI agents that keep data on your own hardware.",
+          "The design and engineering arm of Tangison Technologies. Brand systems, websites, and digital products.",
       },
     ],
-    member: TEAM_NAMES.map((name) => ({
-      "@type": "Person",
-      name,
-    })),
   };
 }
 

@@ -4,25 +4,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Logo } from "./logo";
-import { SearchDialog } from "./search-dialog";
-import { SITE, NAV_PRIMARY, NAV_SECONDARY, EcosystemEntities } from "@/lib/site";
-
-/* ─── Dropdown data ─── */
-const DROPDOWN_TECHNOLOGY = [
-  { label: "Overview", href: "/technology" },
-  { label: "Observe", href: "/technology#observe" },
-  { label: "Decide", href: "/technology#decide" },
-  { label: "Operate", href: "/technology#operate" },
-  { label: "Tangison Agent", href: "/technology#agent" },
-];
-
-const DROPDOWN_COMPANY = [
-  { label: "Overview", href: "/company" },
-  { label: "Philosophy", href: "/company#philosophy" },
-  { label: "Namibia", href: "/company#namibia" },
-  { label: "Brand", href: "/brand" },
-  { label: "Contact", href: "/contact" },
-];
+import { SITE, NAV_PRIMARY, NAV_SECONDARY } from "@/lib/site";
 
 /* ─── Focus trap utility ─── */
 function getFocusableElements(container: HTMLElement): HTMLElement[] {
@@ -72,8 +54,6 @@ function ScrollToTop() {
         const goingDown = y > lastScrollY.current;
         lastScrollY.current = y;
 
-        // Show after 600px of scroll depth
-        // Hide if near top (< 200px) or scrolling down fast
         const pastThreshold = y > 600;
         const nearTop = y < 200;
 
@@ -100,7 +80,6 @@ function ScrollToTop() {
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
-    // Briefly hide after click to avoid annoyance
     setShouldHide(true);
     setTimeout(() => setShouldHide(false), 800);
   };
@@ -123,14 +102,21 @@ function ScrollToTop() {
   );
 }
 
+/* Off-canvas imagery mapping (kept from the editorial system). */
+const navImageMap: Record<string, string> = {
+  Capabilities: "/images/tangison/webp/03-ai-operations-node.webp",
+  Company: "/images/tangison/webp/10-about-namibia-signal.webp",
+  Contact: "/images/tangison/webp/11-contact-coast-horizon.webp",
+};
+
 export function Nav() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
-  const [dropdown, setDropdown] = useState<string | null>(null);
-  const dropdownTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const menuTriggerRef = useRef<HTMLButtonElement>(null);
+  const [activeOffCanvas, setActiveOffCanvas] = useState<string>(
+    NAV_PRIMARY[0].label
+  );
 
   // Close menu on route change
   const prevPathname = useRef(pathname);
@@ -138,7 +124,6 @@ export function Nav() {
     if (prevPathname.current !== pathname) {
       prevPathname.current = pathname;
       setMenuOpen(false);
-      setDropdown(null);
     }
   }, [pathname]);
 
@@ -179,59 +164,23 @@ export function Nav() {
     return () => document.removeEventListener("keydown", keyHandler);
   }, [menuOpen]);
 
-  // CMD+K global trigger for search
-  useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
-        e.preventDefault();
-        setSearchOpen(true);
-      }
-    };
-    document.addEventListener("keydown", handler);
-    return () => document.removeEventListener("keydown", handler);
-  }, []);
-
-  // Dropdown pointer tolerance
-  const dropdownEnter = useCallback((key: string) => {
-    if (dropdownTimeout.current) clearTimeout(dropdownTimeout.current);
-    setDropdown(key);
-  }, []);
-
-  const dropdownLeave = useCallback(() => {
-    dropdownTimeout.current = setTimeout(() => {
-      setDropdown(null);
-    }, 150);
-  }, []);
-
   const isActive = (href: string) => {
     if (href === "/") return pathname === "/";
     return pathname.startsWith(href.split("#")[0]);
   };
 
-  // Off-canvas imagery mapping
-  const navImageMap: Record<string, string> = {
-    Technology: "/images/tangison/webp/03-ai-operations-node.webp",
-    Company: "/images/tangison/webp/10-about-namibia-signal.webp",
-    Contact: "/images/tangison/webp/11-contact-coast-horizon.webp",
-  };
-
-  const [activeOffCanvas, setActiveOffCanvas] = useState<string>(
-    NAV_PRIMARY[0].label
-  );
-
   return (
     <>
       {/* ─── FLOATING HEADER ─── */}
       <header
-        className="fixed z-40 mx-auto left-4 right-4 md:left-6 md:right-6 top-[calc(var(--announce-h-mobile)+12px)] md:top-[calc(var(--announce-h)+16px)] rounded-md border border-[var(--hairline)] bg-[var(--bg)]/95 backdrop-blur-sm shadow-[var(--shadow-warm)] transition-shadow duration-200 hover:shadow-[var(--shadow-warm-md)]"
+        className="fixed z-40 mx-auto left-4 right-4 md:left-6 md:right-6 top-3 md:top-4 rounded-md border border-[var(--hairline)] bg-[var(--bg)]/95 backdrop-blur-sm shadow-[var(--shadow-warm)] transition-shadow duration-200 hover:shadow-[var(--shadow-warm-md)]"
         style={{ maxWidth: "var(--container-wide)" }}
       >
         <div className="container-tangison flex items-center justify-between h-[var(--nav-height-mobile)] md:h-[var(--nav-height)]">
           <div className="flex items-center gap-3">
             <Logo linked size="sm" />
-            {/* Cross-domain badge — the reciprocal of the one on
-                studio.tangison.com. Hidden below md so it never crowds the
-                mobile nav. */}
+            {/* Cross-domain badge: the reciprocal of the one on
+                studio.tangison.com. Hidden below md. */}
             <a
               href="https://studio.tangison.com/?utm_source=tangison.com&utm_medium=nav-badge&utm_campaign=cross-site"
               className="hidden md:inline-flex items-center gap-1.5 rounded-full border border-[var(--hairline)] px-2.5 py-1 text-[10px] uppercase tracking-[0.14em] text-[var(--muted-ink)] hover:text-[var(--ink)] transition-colors"
@@ -244,80 +193,19 @@ export function Nav() {
           {/* Desktop primary nav */}
           <nav className="hidden md:flex items-center gap-6" aria-label="Primary navigation">
             {NAV_PRIMARY.map((item) => (
-              <div
+              <Link
                 key={item.href}
-                className="relative"
-                onMouseEnter={() => {
-                  if (item.label === "Technology") dropdownEnter("technology");
-                  if (item.label === "Company") dropdownEnter("company");
-                }}
-                onMouseLeave={dropdownLeave}
+                href={item.href}
+                className={`nav-link ${isActive(item.href) ? "active" : ""}`}
+                aria-current={isActive(item.href) ? "page" : undefined}
               >
-                <Link
-                  href={item.href}
-                  className={`nav-link ${isActive(item.href) ? "active" : ""}`}
-                  aria-current={isActive(item.href) ? "page" : undefined}
-                  aria-haspopup={(item.label === "Technology" || item.label === "Company") ? "true" : undefined}
-                  aria-expanded={(item.label === "Technology" && dropdown === "technology") || (item.label === "Company" && dropdown === "company") ? "true" : undefined}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " " || e.key === "ArrowDown") {
-                      e.preventDefault();
-                      if (item.label === "Technology") dropdownEnter("technology");
-                      if (item.label === "Company") dropdownEnter("company");
-                    }
-                    if (e.key === "Escape") {
-                      setDropdown(null);
-                    }
-                  }}
-                >
-                  {item.label}
-                </Link>
-
-                {/* Dropdowns */}
-                {dropdown === "technology" && item.label === "Technology" && (
-                  <div className="dropdown-enter open absolute top-full left-0 mt-2 w-52 rounded-md border border-[var(--hairline)] bg-[var(--surface)] shadow-[var(--shadow-warm-md)] py-2">
-                    {DROPDOWN_TECHNOLOGY.map((sub) => (
-                      <Link
-                        key={sub.href}
-                        href={sub.href}
-                        className="block px-4 py-3 text-sm text-[var(--muted-ink)] hover:text-[var(--ink)] hover:bg-[var(--surface-2)] transition-colors"
-                      >
-                        {sub.label}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-
-                {dropdown === "company" && item.label === "Company" && (
-                  <div className="dropdown-enter open absolute top-full left-0 mt-2 w-52 rounded-md border border-[var(--hairline)] bg-[var(--surface)] shadow-[var(--shadow-warm-md)] py-2">
-                    {DROPDOWN_COMPANY.map((sub) => (
-                      <Link
-                        key={sub.href}
-                        href={sub.href}
-                        className="block px-4 py-3 text-sm text-[var(--muted-ink)] hover:text-[var(--ink)] hover:bg-[var(--surface-2)] transition-colors"
-                      >
-                        {sub.label}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
+                {item.label}
+              </Link>
             ))}
           </nav>
 
           {/* Right actions */}
           <div className="flex items-center gap-3">
-            <button
-              onClick={() => setSearchOpen(true)}
-              className="flex h-11 w-11 items-center justify-center rounded-md text-[var(--muted-ink)] hover:text-[var(--ink)] hover:bg-[var(--surface-2)] transition-colors"
-              aria-label="Search"
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="11" cy="11" r="8" />
-                <line x1="21" y1="21" x2="16.65" y2="16.65" />
-              </svg>
-            </button>
-
             <Link
               href="/contact"
               className="hidden md:inline-flex btn-outline text-xs py-2.5 px-4"
@@ -325,7 +213,7 @@ export function Nav() {
               Contact
             </Link>
 
-            {/* 2-line menu icon (not 3) */}
+            {/* 2-line menu icon */}
             <button
               ref={menuTriggerRef}
               onClick={() => setMenuOpen(true)}
@@ -383,12 +271,11 @@ export function Nav() {
             </button>
           </div>
 
-          {/* Primary nav links with imagery */}
           <div className="flex flex-col md:flex-row">
             {/* Image side (desktop only) */}
             <div className="hidden md:block w-[240px] bg-[var(--surface-2)] relative overflow-hidden">
               <img
-                src={navImageMap[activeOffCanvas] ?? navImageMap["Technology"]}
+                src={navImageMap[activeOffCanvas] ?? navImageMap["Capabilities"]}
                 alt=""
                 className="absolute inset-0 w-full h-full object-cover"
               />
@@ -412,62 +299,34 @@ export function Nav() {
                       >
                         {item.label}
                       </Link>
-
-                      {/* Sub-links for Technology */}
-                      {item.label === "Technology" && (
-                        <ul className="mt-2 space-y-2 pl-4">
-                          {DROPDOWN_TECHNOLOGY.map((sub) => (
-                            <li key={sub.href}>
-                              <Link
-                                href={sub.href}
-                                onClick={() => setMenuOpen(false)}
-                                className="text-sm text-[var(--muted-ink)] hover:text-[var(--ink)] transition-colors"
-                              >
-                                {sub.label}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-
-                      {/* Sub-links for Company */}
-                      {item.label === "Company" && (
-                        <ul className="mt-2 space-y-2 pl-4">
-                          {DROPDOWN_COMPANY.map((sub) => (
-                            <li key={sub.href}>
-                              <Link
-                                href={sub.href}
-                                onClick={() => setMenuOpen(false)}
-                                className="text-sm text-[var(--muted-ink)] hover:text-[var(--ink)] transition-colors"
-                              >
-                                {sub.label}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      )}
                     </li>
                   ))}
                 </ul>
               </nav>
 
-              {/* Ecosystem section */}
+              {/* Group */}
               <hr className="hairline my-8" />
-              <p className="eyebrow mb-4">Ecosystem</p>
+              <p className="eyebrow mb-4">The Tangison group</p>
               <ul className="space-y-3">
-                {EcosystemEntities.map((entity) => (
-                  <li key={entity.name}>
-                    <Link
-                      href={entity.href}
-                      onClick={() => setMenuOpen(false)}
-                      target={entity.href.startsWith("http") ? "_blank" : undefined}
-                      rel={entity.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                      className="text-sm text-[var(--muted-ink)] hover:text-[var(--ink)] transition-colors"
-                    >
-                      {entity.name}
-                    </Link>
-                  </li>
-                ))}
+                <li>
+                  <Link
+                    href="/projects"
+                    onClick={() => setMenuOpen(false)}
+                    className="text-sm text-[var(--muted-ink)] hover:text-[var(--ink)] transition-colors"
+                  >
+                    Projects and R&D
+                  </Link>
+                </li>
+                <li>
+                  <a
+                    href={SITE.studioUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-[var(--muted-ink)] hover:text-[var(--ink)] transition-colors"
+                  >
+                    Tangison Studio ↗
+                  </a>
+                </li>
               </ul>
 
               {/* Secondary nav */}
@@ -486,29 +345,10 @@ export function Nav() {
                 ))}
               </ul>
 
-              {/* Search trigger */}
-              <button
-                onClick={() => {
-                  setMenuOpen(false);
-                  setSearchOpen(true);
-                }}
-                className="mt-6 flex items-center gap-2 text-sm text-[var(--muted-ink)] hover:text-[var(--ink)] transition-colors"
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="11" cy="11" r="8" />
-                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                </svg>
-                Search
-              </button>
-
               {/* Location */}
               <hr className="hairline my-8" />
-              <p className="text-sm text-[var(--muted-ink)]">
-                {SITE.location}
-              </p>
-              <p className="text-xs text-[var(--muted-ink)] mt-1">
-                {SITE.tagline}
-              </p>
+              <p className="text-sm text-[var(--muted-ink)]">{SITE.address}</p>
+              <p className="text-xs text-[var(--muted-ink)] mt-1">{SITE.tagline}</p>
 
               {/* Credit */}
               <p className="mt-6 text-xs text-[var(--muted-ink)]">
@@ -526,9 +366,6 @@ export function Nav() {
           </div>
         </div>
       )}
-
-      {/* ─── SEARCH DIALOG ─── */}
-      <SearchDialog open={searchOpen} onClose={() => setSearchOpen(false)} />
     </>
   );
 }

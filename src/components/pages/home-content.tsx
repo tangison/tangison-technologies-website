@@ -1,75 +1,20 @@
 'use client';
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { PageShell } from "@/components/site/page-shell";
 import { useReveal, useRevealChildren } from "@/hooks/use-reveal";
-import { SITE, EcosystemEntities } from "@/lib/site";
-import { Carousel } from "@/components/ui/carousel";
-import { ZoomReveal } from "@/components/ui/zoom-reveal";
-import { ClipReveal } from "@/components/ui/clip-reveal";
-import { StaggerReveal, StaggerItem } from "@/components/ui/stagger-reveal";
+import {
+  SITE,
+  CAPABILITIES,
+  FEATURED_PROJECTS,
+  CLIENT_WORK,
+  STUDIO_CASE_HREF,
+  STUDIO_PORTFOLIO_HREF,
+} from "@/lib/site";
 
-/* ─── Methodology phases (editorial, NOT generic cards) ─── */
-const METHODOLOGY = [
-  {
-    phase: "Observe",
-    number: "01",
-    description:
-      "Gather signals from environments where connectivity drops, data arrives late, and infrastructure is uneven. Observation is the first discipline: listening before speaking, sensing before acting.",
-    href: "/technology#observe",
-    image: "/images/tangison/webp/03-ai-operations-node.webp",
-    imageAlt: "A minimal graphite control node with a single teal status light",
-    focal: "right center",
-  },
-  {
-    phase: "Decide",
-    number: "02",
-    description:
-      "Turn observations into operational decisions. Not abstract analysis, but concrete choices made under real constraints: limited time, partial information, uneven infrastructure.",
-    href: "/technology#decide",
-    image: "/images/tangison/webp/04-data-decision-planes.webp",
-    imageAlt: "Intersecting smoke-glass planes joined by a precise teal seam",
-    focal: "left center",
-  },
-  {
-    phase: "Operate",
-    number: "03",
-    description:
-      "Execute decisions in the field. Systems that run where connectivity drops, where hardware ages, where conditions shift without warning. Operation is the proof that the method works.",
-    href: "/technology#operate",
-    image: "/images/tangison/webp/05-resilient-platform-monolith.webp",
-    imageAlt: "A dark stone monolith with a narrow light seam emerging through coastal fog",
-    focal: "left center",
-  },
-];
-
-const CAROUSEL_ITEMS = [
-  {
-    src: "/images/tangison/webp/12-carousel-fog-vessel.webp",
-    alt: "A distant vessel silhouette fading into Skeleton Coast fog",
-    caption: "Fog vessel",
-    width: 440,
-    height: 300,
-  },
-  {
-    src: "/images/tangison/webp/13-carousel-dune-continuity.webp",
-    alt: "A clean Namib dune ridge marked by one restrained teal line",
-    caption: "Dune continuity",
-    width: 440,
-    height: 300,
-  },
-  {
-    src: "/images/tangison/webp/14-carousel-rust-threshold.webp",
-    alt: "A plain rusted steel plate standing in still dark water and fog",
-    caption: "Rust threshold",
-    width: 440,
-    height: 300,
-  },
-];
-
-/* ─── Hero zoom on scroll ─── */
+/* ─── Hero zoom on scroll (kept from the editorial system) ─── */
 function useHeroZoom() {
   const heroImageRef = useRef<HTMLDivElement>(null);
 
@@ -77,13 +22,13 @@ function useHeroZoom() {
     const heroImage = heroImageRef.current;
     if (!heroImage) return;
 
-    // Check reduced motion preference
-    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const prefersReduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
     if (prefersReduced) return;
 
     const onScroll = () => {
       const y = window.scrollY;
-      // Scale from 1 to 1.08 over the first 500px of scroll
       const scale = 1 + Math.min(y / 5000, 0.08);
       heroImage.style.transform = `scale(${scale})`;
     };
@@ -97,15 +42,16 @@ function useHeroZoom() {
 
 export default function Home() {
   const heroRef = useReveal<HTMLElement>();
-  const methodRef = useRevealChildren<HTMLElement>();
-  const namibiaRef = useRevealChildren<HTMLElement>();
-  const contactRef = useReveal<HTMLElement>();
+  const capsRef = useRevealChildren<HTMLElement>();
+  const workRef = useRevealChildren<HTMLElement>();
+  const clientsRef = useRevealChildren<HTMLElement>();
+  const complianceRef = useReveal<HTMLElement>();
   const heroImageRef = useHeroZoom();
 
   return (
     <PageShell>
       {/* ─── 1. HERO ─── */}
-      <section ref={heroRef} className="hero-section noise-overlay reveal" aria-label="Hero">
+      <section ref={heroRef} className="hero-section noise-overlay reveal" aria-label="Introduction">
         {/* Hero image with parallax zoom */}
         <div ref={heroImageRef} className="absolute inset-0 hero-zoom">
           <Image
@@ -124,260 +70,225 @@ export default function Home() {
         {/* Hero content */}
         <div className="absolute inset-0 flex items-end">
           <div className="container-tangison pb-12 md:pb-16">
-            <p className="eyebrow reveal-delay-1 mb-4">{SITE.visualIdea}</p>
+            <p className="eyebrow reveal-delay-1 mb-4 text-[var(--teal-text)]">
+              {SITE.legalName} · Windhoek, Namibia
+            </p>
             <h1 className="display display-lg text-[var(--teal-text)] reveal-delay-2">
-              Operational<br />intelligence<br />without assumptions.
+              Intelligence for imperfect conditions.
             </h1>
             <p className="mt-4 text-sm text-[var(--teal-text)]/80 body-constrained reveal-delay-3">
-              Tangison Technologies builds operational intelligence systems
-              that work where connectivity drops, data arrives late,
-              and infrastructure is uneven.
+              {SITE.name} builds the systems that keep Namibian businesses and
+              institutions running. Information and communications technology.
+              Applied artificial intelligence. Digital transformation.
+              Strategic consulting. Applied research and development.
             </p>
-            <div className="mt-6 flex gap-3 reveal-delay-4">
-              <Link href="/technology" className="btn-accent">
-                Technology
+            <div className="mt-6 flex flex-col sm:flex-row gap-3 reveal-delay-4">
+              <Link href="/contact" className="btn-accent">
+                Start a conversation
               </Link>
-              <Link href="/company" className="btn-outline border-[rgba(240,237,232,0.3)] text-[var(--teal-text)] hover:bg-[rgba(240,237,232,0.1)]">
-                Company
+              <Link
+                href="/capabilities"
+                className="btn-outline border-[rgba(240,237,232,0.3)] text-[var(--teal-text)] hover:bg-[rgba(240,237,232,0.1)]"
+              >
+                View our capabilities
               </Link>
             </div>
+            <p className="mt-8 text-[11px] md:text-xs uppercase tracking-[0.16em] text-[var(--teal-text)]/70 reveal-delay-4">
+              Registered Close Corporation · BO compliant · 100% Namibian owned
+            </p>
           </div>
         </div>
       </section>
 
-      {/* ─── 2. METHODOLOGY: OBSERVE / DECIDE / OPERATE ─── */}
-      <section ref={methodRef} className="section-spacing bg-[var(--bg)]" aria-label="Methodology">
+      {/* ─── 2. CAPABILITIES INDEX ─── */}
+      <section ref={capsRef} className="section-spacing bg-[var(--bg)]" aria-label="Capabilities">
         <div className="container-tangison">
-          <div className="reveal">
-            <p className="eyebrow mb-2">Methodology</p>
-            <h2 className="display display-md text-[var(--ink)]">
-              Observe. Decide. Operate.
-            </h2>
-            <p className="mt-4 text-[var(--muted-ink)] body-constrained">
-              A single methodology with three connected phases. Each phase
-              handles the gaps the next one will encounter.
+          <div className="mb-10 md:mb-14">
+            <p className="eyebrow mb-2">Capabilities</p>
+            <h2 className="display display-md">Five competencies. One standard.</h2>
+            <p className="body-constrained mt-4">
+              Every capability below is one we deliver today, in-house or
+              through{" "}
+              <a
+                href={SITE.studioUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline underline-offset-4 decoration-[var(--hairline)] hover:decoration-[var(--ink)]"
+              >
+                Tangison Studio
+              </a>
+              , the design and engineering arm of the Tangison group.
             </p>
           </div>
 
-          {/* Phase 1: Observe — text left, image right */}
-          <div className="mt-12 md:mt-16 grid md:grid-cols-2 gap-6 md:gap-12 items-center">
-            <div className="reveal-left reveal-delay-1">
-              <span className="text-[var(--teal)] font-mono text-xs tracking-widest">{METHODOLOGY[0].number}</span>
-              <h3 className="display-sm text-[var(--ink)] mt-2">{METHODOLOGY[0].phase}</h3>
-              <p className="mt-3 text-[var(--muted-ink)] body-constrained">{METHODOLOGY[0].description}</p>
-              <Link href={METHODOLOGY[0].href} className="mt-4 inline-flex text-sm text-[var(--teal)] hover:text-[var(--ink)] transition-colors font-medium">
-                How Observe works
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </Link>
-            </div>
-            <ClipReveal direction="right" delay={0.1} className="reveal-delay-2">
-              <Image
-                src={METHODOLOGY[0].image}
-                alt={METHODOLOGY[0].imageAlt}
-                width={600}
-                height={400}
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className="rounded-md w-full h-auto object-cover"
-                style={{ objectPosition: METHODOLOGY[0].focal }}
-              />
-            </ClipReveal>
-          </div>
-
-          {/* Phase 2: Decide — image left, text right (reversed) */}
-          <div className="mt-12 md:mt-20 grid md:grid-cols-2 gap-6 md:gap-12 items-center">
-            <ClipReveal direction="left" delay={0.1} className="order-2 md:order-1">
-              <Image
-                src={METHODOLOGY[1].image}
-                alt={METHODOLOGY[1].imageAlt}
-                width={600}
-                height={400}
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className="rounded-md w-full h-auto object-cover"
-                style={{ objectPosition: METHODOLOGY[1].focal }}
-              />
-            </ClipReveal>
-            <div className="reveal reveal-delay-2 order-1 md:order-2">
-              <span className="text-[var(--teal)] font-mono text-xs tracking-widest">{METHODOLOGY[1].number}</span>
-              <h3 className="display-sm text-[var(--ink)] mt-2">{METHODOLOGY[1].phase}</h3>
-              <p className="mt-3 text-[var(--muted-ink)] body-constrained">{METHODOLOGY[1].description}</p>
-              <Link href={METHODOLOGY[1].href} className="mt-4 inline-flex text-sm text-[var(--teal)] hover:text-[var(--ink)] transition-colors font-medium">
-                Decide under constraints
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </Link>
-            </div>
-          </div>
-
-          {/* Phase 3: Operate — full-width editorial image with overlay text */}
-          <div className="mt-12 md:mt-20 relative">
-            <ZoomReveal origin="bottom" className="rounded-md overflow-hidden">
-              <Image
-                src={METHODOLOGY[2].image}
-                alt={METHODOLOGY[2].imageAlt}
-                width={1200}
-                height={600}
-                sizes="100vw"
-                className="w-full h-auto object-cover"
-                style={{ objectPosition: METHODOLOGY[2].focal }}
-              />
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[rgba(26,26,24,0.5)] via-[rgba(26,26,24,0.2)] to-transparent p-6 md:p-10">
-                <span className="text-[var(--teal)] font-mono text-xs tracking-widest">{METHODOLOGY[2].number}</span>
-                <h3 className="display-sm text-[var(--teal-text)] mt-2">{METHODOLOGY[2].phase}</h3>
-                <p className="mt-2 text-[var(--teal-text)]/80 body-constrained text-sm">{METHODOLOGY[2].description}</p>
-                <Link href={METHODOLOGY[2].href} className="mt-4 inline-flex text-sm text-[var(--teal)] hover:text-[var(--teal-text)] transition-colors font-medium">
-                  Operate in the field
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          <ul className="border-t border-[var(--hairline)]">
+            {CAPABILITIES.map((cap, i) => (
+              <li key={cap.id} className="border-b border-[var(--hairline)]">
+                <Link
+                  href={cap.href}
+                  className="group grid grid-cols-[auto_1fr] md:grid-cols-[80px_1fr_1fr_auto] gap-x-6 gap-y-2 py-6 md:py-8 items-baseline transition-colors hover:bg-[var(--surface)]"
+                >
+                  <span className="font-mono text-xs text-[var(--muted-ink)] pt-1">
+                    0{i + 1}
+                  </span>
+                  <span className="text-lg md:text-2xl font-medium text-[var(--ink)] group-hover:text-[var(--teal)] transition-colors">
+                    {cap.name}
+                  </span>
+                  <span className="col-span-2 md:col-span-1 text-sm text-[var(--muted-ink)]">
+                    {cap.line}
+                  </span>
+                  <span aria-hidden="true" className="hidden md:block text-[var(--muted-ink)] group-hover:text-[var(--teal)] transition-all group-hover:translate-x-1">
+                    →
+                  </span>
                 </Link>
-              </div>
-            </ZoomReveal>
+              </li>
+            ))}
+          </ul>
+
+          <div className="mt-8">
+            <Link href="/capabilities" className="btn-outline text-xs">
+              All capabilities in detail
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* ─── 3. EDITORIAL CAROUSEL ─── */}
-      <section className="section-spacing bg-[var(--surface-2)]" aria-label="Visual sequence">
+      {/* ─── 3. WORK WE STAND BEHIND ─── */}
+      <section ref={workRef} className="section-spacing bg-[var(--surface-2)]" aria-label="Selected work">
         <div className="container-tangison">
-          <div className="reveal">
-            <p className="eyebrow mb-2">Conditions</p>
-            <h2 className="display-sm text-[var(--ink)]">
-              The landscape that shapes the method
-            </h2>
-            <p className="mt-3 text-[var(--muted-ink)] body-constrained">
-              The Skeleton Coast, the Namib dune systems, the mineral thresholds where
-              fog meets rust. These are not exotic exceptions. They are the environments
-              that prove the methodology works.
+          <div className="mb-10 md:mb-14">
+            <p className="eyebrow mb-2">Work we stand behind</p>
+            <h2 className="display display-md">Selected work, described as it stands.</h2>
+            <p className="body-constrained mt-4">
+              No invented metrics, no anonymous case studies. Each entry is
+              real work, with its honest status.
             </p>
+          </div>
+
+          <div className="grid gap-px bg-[var(--hairline)] border border-[var(--hairline)] md:grid-cols-2">
+            {FEATURED_PROJECTS.map((p) => (
+              <article key={p.name} className="bg-[var(--surface)] p-8 md:p-10 reveal">
+                <p className="eyebrow mb-3">{p.kind}</p>
+                <h3 className="text-xl md:text-2xl font-medium text-[var(--ink)]">
+                  {p.name}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-[var(--muted-ink)]">
+                  {p.description}
+                </p>
+                <div className="mt-5 flex flex-wrap items-center gap-4">
+                  {p.status && (
+                    <span className="text-xs uppercase tracking-[0.14em] text-[var(--destructive)]">
+                      Status: {p.status}
+                    </span>
+                  )}
+                  {p.href && (
+                    <a
+                      href={p.href}
+                      target={p.href.startsWith("http") ? "_blank" : undefined}
+                      rel={p.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                      className="text-sm text-[var(--ink)] underline underline-offset-4 decoration-[var(--hairline)] hover:decoration-[var(--ink)] [overflow-wrap:anywhere]"
+                    >
+                      {p.hrefLabel ?? "View"}
+                    </a>
+                  )}
+                </div>
+              </article>
+            ))}
           </div>
 
           <div className="mt-8">
-            <Carousel items={CAROUSEL_ITEMS} autoplay={true} interval={6000} />
+            <Link href="/projects" className="btn-outline text-xs">
+              All projects and R&D
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* ─── 4. NAMIBIA CONTEXT ─── */}
-      <section ref={namibiaRef} className="section-spacing bg-[var(--bg)]" aria-label="Namibia context">
+      {/* ─── 4. CLIENT STRIP ─── */}
+      <section ref={clientsRef} className="section-spacing bg-[var(--bg)]" aria-label="Client work">
         <div className="container-tangison">
-          <div className="grid md:grid-cols-2 gap-6 md:gap-12 items-center">
-            <ClipReveal direction="right" className="reveal-delay-1">
-              <Image
-                src="/images/tangison/webp/10-about-namibia-signal.webp"
-                alt="A single distant signal mast on a vast Namibian gravel horizon"
-                width={600}
-                height={450}
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className="rounded-md w-full h-auto object-cover"
-                style={{ objectPosition: "right center" }}
-              />
-            </ClipReveal>
-            <div className="reveal reveal-delay-2">
-              <p className="eyebrow mb-2">Namibia</p>
-              <h2 className="display-md text-[var(--ink)]">
-                Where the conditions<br/>that teach the method<br/>are everyday reality.
-              </h2>
-              <p className="mt-4 text-[var(--muted-ink)] body-constrained">
-                Namibia is a country where vast distances, sparse connectivity
-                and extreme conditions are everyday reality, not edge cases.
-                The Skeleton Coast, the Namib Desert, the gravel plains:
-                these are the environments that shaped the Observe, Decide,
-                Operate methodology.
-              </p>
-              <p className="mt-3 text-[var(--muted-ink)] body-constrained">
-                Tangison Technologies operates from Windhoek, building systems
-                that run where others assume they cannot. When connectivity
-                drops on the gravel plains, when data arrives late from
-                remote stations, when hardware ages under coastal fog:
-                these are the conditions that prove the method works.
-              </p>
-              <Link href="/company" className="mt-5 inline-flex text-sm text-[var(--teal)] hover:text-[var(--ink)] transition-colors font-medium">
-                About the company
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── 5. ECOSYSTEM with stagger reveal ─── */}
-      <section className="section-spacing bg-[var(--surface)]" aria-label="Ecosystem">
-        <div className="container-tangison">
-          <ZoomReveal origin="center">
-            <h2 className="display-md text-[var(--ink)]">
-              One purpose across three capabilities
-            </h2>
-            <p className="mt-3 text-[var(--muted-ink)] body-constrained">
-              Tangison operates as a connected ecosystem: an AI agent platform,
-              a design and engineering studio, and a research lab. Each
-              capability builds systems that work without assuming perfect
-              conditions.
+          <div className="mb-10 md:mb-14">
+            <p className="eyebrow mb-2">Clients</p>
+            <h2 className="display display-md">Selected client work, delivered through Tangison Studio.</h2>
+            <p className="body-constrained mt-4">
+              The Tangison group delivers client projects through{" "}
+              <a
+                href={SITE.studioUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline underline-offset-4 decoration-[var(--hairline)] hover:decoration-[var(--ink)]"
+              >
+                Tangison Studio
+              </a>
+              . Fifteen selected projects, each linked to its full case study.
             </p>
-          </ZoomReveal>
+          </div>
 
-          <StaggerReveal staggerDelay={0.12} className="mt-8 grid md:grid-cols-3 gap-6">
-            {EcosystemEntities.map((entity) => (
-              <StaggerItem key={entity.name}>
-                <Link
-                  href={entity.href}
-                  target={entity.href.startsWith("http") ? "_blank" : undefined}
-                  rel={entity.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="group block rounded-md overflow-hidden bg-[var(--surface-2)] border border-[var(--hairline)] ecosystem-card min-w-0"
+          <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-px bg-[var(--hairline)] border border-[var(--hairline)]">
+            {CLIENT_WORK.map((w) => (
+              <li key={w.slug} className="bg-[var(--surface)] reveal">
+                <a
+                  href={STUDIO_CASE_HREF(w.slug)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block"
+                  aria-label={`${w.name}, case study at Tangison Studio`}
                 >
-                  <div className="aspect-[4/3] overflow-hidden">
+                  <div className="relative aspect-[4/3] overflow-hidden bg-[var(--surface-2)]">
                     <Image
-                      src={entity.image}
-                      alt={entity.name}
-                      width={400}
-                      height={300}
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                      className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
-                      style={{ objectPosition: entity.focal }}
+                      src={w.image}
+                      alt={`Project artwork for ${w.name}`}
+                      fill
+                      sizes="(max-width: 768px) 50vw, 20vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   </div>
                   <div className="p-4">
-                    <h3 className="text-sm font-semibold text-[var(--ink)] group-hover:text-[var(--teal)] transition-colors">
-                      {entity.name}
-                    </h3>
-                    <p className="mt-1 text-xs text-[var(--muted-ink)]">
-                      {entity.description}
+                    <p className="text-sm font-medium text-[var(--ink)] group-hover:text-[var(--teal)] transition-colors">
+                      {w.name}
+                    </p>
+                    <p className="mt-1 text-xs leading-relaxed text-[var(--muted-ink)]">
+                      {w.line}
                     </p>
                   </div>
-                </Link>
-              </StaggerItem>
+                </a>
+              </li>
             ))}
-          </StaggerReveal>
+          </ul>
+
+          <div className="mt-8">
+            <a
+              href={STUDIO_PORTFOLIO_HREF}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-outline text-xs"
+            >
+              View the full portfolio at studio.tangison.com
+            </a>
+          </div>
         </div>
       </section>
 
-      {/* ─── 6. CONTACT CLOSING ─── */}
-      <section ref={contactRef} className="section-spacing noise-overlay reveal" aria-label="Contact statement">
-        <div className="relative">
-          <div className="absolute inset-0">
-            <Image
-              src="/images/tangison/webp/11-contact-coast-horizon.webp"
-              alt="A quiet fog horizon where the Atlantic meets a dark Skeleton Coast beach"
-              fill
-              sizes="100vw"
-              className="object-cover"
-              style={{ objectPosition: "center" }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-[rgba(26,26,24,0.55)] via-[rgba(26,26,24,0.3)] to-transparent" />
-          </div>
-
-          <div className="container-tangison relative z-10 py-16 md:py-24">
-            <p className="eyebrow mb-4">Contact</p>
-            <h2 className="display display-md text-[var(--teal-text)]">
-              Tell us what conditions you face.
-            </h2>
-            <p className="mt-4 text-[var(--teal-text)]/80 body-constrained max-w-md">
-              If your operations run where connectivity drops and
-              conditions shift without warning, Tangison can help.
-              Describe your environment and we will tell you what
-              is possible.
-            </p>
-            <div className="mt-6 flex gap-3">
-              <Link href="/contact" className="btn-accent">
-                Get in touch
-              </Link>
-            </div>
+      {/* ─── 5. COMPLIANCE ─── */}
+      <section ref={complianceRef} className="section-spacing relative noise-overlay reveal" aria-label="Compliance and contact">
+        <div className="absolute inset-0 bg-[var(--ink)]" aria-hidden="true" />
+        <div className="container-tangison relative z-10 py-16 md:py-24">
+          <p className="eyebrow mb-2 text-[var(--bg)]/60">Tangison Technologies CC</p>
+          <h2 className="display display-lg text-[var(--bg)] max-w-2xl">
+            Tell us what you need to run.
+          </h2>
+          <p className="body-constrained mt-5 text-[var(--bg)]/80">
+            {SITE.legalName} is a registered Close Corporation in Namibia,
+            registered 20 August 2026, 100% Namibian owned, and founded and
+            operated in Windhoek.
+          </p>
+          <div className="mt-8 flex flex-col sm:flex-row gap-3">
+            <Link href="/contact" className="btn-accent">
+              Contact and compliance
+            </Link>
+            <Link href="/profile" className="btn-outline btn-outline-invert">
+              Company profile
+            </Link>
           </div>
         </div>
       </section>

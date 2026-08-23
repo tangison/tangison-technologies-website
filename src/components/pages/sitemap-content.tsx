@@ -2,109 +2,62 @@
 
 import Link from "next/link";
 import { PageShell } from "@/components/site/page-shell";
-import { useRevealChildren } from "@/hooks/use-reveal";
-import { SITE, NAV_PRIMARY, NAV_SECONDARY, EcosystemEntities } from "@/lib/site";
+import { SITE } from "@/lib/site";
 
-const SITEMAP_STRUCTURE = [
-  {
-    group: "Primary pages",
-    items: [
-      { label: "Homepage", href: "/", description: "Tangison Technologies. Operational intelligence without assumptions." },
-      ...NAV_PRIMARY.map((n) => ({
-        label: n.label,
-        href: n.href,
-        description: n.label === "Technology" ? "Observe, Decide, Operate methodology and technology ecosystem." : n.label === "Company" ? "About Tangison Technologies, philosophy and Namibian context." : "Start a conversation with Tangison Technologies.",
-      })),
-    ],
-  },
-  {
-    group: "Technology detail",
-    items: [
-      { label: "Observe", href: "/technology#observe", description: "Gather signals from environments where connectivity drops and data arrives late." },
-      { label: "Decide", href: "/technology#decide", description: "Turn observations into operational decisions." },
-      { label: "Operate", href: "/technology#operate", description: "Execute decisions under real constraints." },
-      { label: "Tangison Agent", href: "/technology#agent", description: "Self-hosted AI agent platform." },
-      { label: "Tangison Labs", href: "/technology#labs", description: "Research and experimental systems." },
-    ],
-  },
-  {
-    group: "Company detail",
-    items: [
-      { label: "Philosophy", href: "/company#philosophy", description: "Conditions shape the method." },
-      { label: "Namibia", href: "/company#namibia", description: "Namibia as design brief, not edge case." },
-    ],
-  },
-  {
-    group: "Brand and legal",
-    items: [
-      ...NAV_SECONDARY.map((n) => ({
-        label: n.label,
-        href: n.href,
-        description: n.label === "Brand" ? "Visual identity and guidelines." : n.label === "Privacy" ? "What we collect and how we handle your data." : "Terms for using the Tangison Technologies website.",
-      })),
-    ],
-  },
-  {
-    group: "Ecosystem",
-    items: EcosystemEntities.map((e) => ({
-      label: e.name,
-      href: e.href,
-      description: e.description,
-    })),
-  },
+const PAGES = [
+  { label: "Home", href: "/", description: "Executive summary and company overview" },
+  { label: "Capabilities", href: "/capabilities", description: "ICT, AI, digital transformation, consulting, and R&D" },
+  { label: "Company Profile", href: "/profile", description: "Ownership, registration, mission, leadership, and local presence" },
+  { label: "Projects and R&D", href: "/projects", description: "Selected work and fifteen client projects through Tangison Studio" },
+  { label: "Contact and Compliance", href: "/contact", description: "Address, phone, email, and registration details" },
+  { label: "Careers", href: "/careers", description: "Working with Tangison Technologies" },
+  { label: "Privacy Policy", href: "/privacy", description: "How this website handles visitor data" },
+  { label: "Terms of Service", href: "/terms", description: "Terms for using this website" },
 ];
 
-export default function SitemapPage() {
-  const contentRef = useRevealChildren<HTMLElement>();
+const RELATED = [
+  { label: "Tangison Studio", href: SITE.studioUrl, description: "The design and engineering arm of the Tangison group" },
+];
 
+export default function SitemapContent() {
   return (
     <PageShell>
-      <section ref={contentRef} className="section-spacing bg-[var(--bg)]" aria-label="Site map">
-        <div className="container-tangison">
-          <div className="reveal">
-            <p className="eyebrow mb-2">Navigation</p>
-            <h1 className="display display-md text-[var(--ink)]">Site Map</h1>
-            <p className="mt-3 text-[var(--muted-ink)] text-sm">
-              A complete index of all pages on {SITE.siteUrl}.
-            </p>
-          </div>
+      <section className="section-spacing bg-[var(--bg)]" aria-label="Site map">
+        <div className="container-tangison max-w-3xl">
+          <p className="eyebrow mb-2">Site map</p>
+          <h1 className="display display-md">Every page on this site.</h1>
 
-          <hr className="hairline my-8" />
-
-          <div className="space-y-10 max-w-2xl">
-            {SITEMAP_STRUCTURE.map((group) => (
-              <div key={group.group} className="reveal">
-                <h2 className="text-sm font-semibold text-[var(--ink)] mb-4">{group.group}</h2>
-                <ul className="space-y-3">
-                  {group.items.map((item) => (
-                    <li key={item.href}>
-                      <Link
-                        href={item.href}
-                        target={item.href.startsWith("http") ? "_blank" : undefined}
-                        rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                        className="text-sm text-[var(--teal)] hover:text-[var(--ink)] transition-colors font-medium"
-                      >
-                        {item.label}
-                        {item.href.startsWith("http") && (
-                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1 inline"><path d="M7 17L17 7M7 7h10v10"/></svg>
-                        )}
-                      </Link>
-                      <p className="text-xs text-[var(--muted-ink)] mt-0.5">{item.description}</p>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+          <ul className="mt-10 border-t border-[var(--hairline)]">
+            {PAGES.map((p) => (
+              <li key={p.href} className="border-b border-[var(--hairline)]">
+                <Link href={p.href} className="group py-4 flex flex-col gap-1">
+                  <span className="text-base font-medium text-[var(--ink)] group-hover:text-[var(--teal)] transition-colors">
+                    {p.label}
+                  </span>
+                  <span className="text-sm text-[var(--muted-ink)]">{p.description}</span>
+                </Link>
+              </li>
             ))}
-          </div>
+          </ul>
 
-          <hr className="hairline my-8" />
-
-          <p className="text-xs text-[var(--muted-ink)] reveal">
-            Machine-readable sitemap:{" "}
-            <Link href="/sitemap.xml" className="text-[var(--teal)] hover:text-[var(--ink)] transition-colors">
-              sitemap.xml
-            </Link>
-          </p>
+          <p className="eyebrow mt-10 mb-4">Related properties</p>
+          <ul>
+            {RELATED.map((r) => (
+              <li key={r.href} className="py-3 border-b border-[var(--hairline)]">
+                <a
+                  href={r.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex flex-col gap-1"
+                >
+                  <span className="text-base font-medium text-[var(--ink)] group-hover:text-[var(--teal)] transition-colors">
+                    {r.label} ↗
+                  </span>
+                  <span className="text-sm text-[var(--muted-ink)]">{r.description}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
     </PageShell>

@@ -11,16 +11,19 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
-      // Obsolete Agent product routes → corporate equivalents
-      { source: "/features", destination: "/technology", permanent: true },
-      { source: "/use-cases", destination: "/technology", permanent: true },
-      { source: "/pricing", destination: "/technology", permanent: true },
-      { source: "/docs", destination: "/technology", permanent: true },
-      { source: "/faq", destination: "/technology", permanent: true },
-      { source: "/blog", destination: "/company", permanent: true },
-      { source: "/about", destination: "/company", permanent: true },
+      // Corporate rebuild (2026-08): old corporate routes -> new routes
+      { source: "/technology", destination: "/capabilities", permanent: true },
+      { source: "/company", destination: "/profile", permanent: true },
+      // Obsolete Agent product routes -> capabilities
+      { source: "/features", destination: "/capabilities", permanent: true },
+      { source: "/use-cases", destination: "/capabilities", permanent: true },
+      { source: "/pricing", destination: "/capabilities", permanent: true },
+      { source: "/docs", destination: "/capabilities", permanent: true },
+      { source: "/faq", destination: "/capabilities", permanent: true },
+      { source: "/blog", destination: "/profile", permanent: true },
+      { source: "/about", destination: "/profile", permanent: true },
       { source: "/cookies", destination: "/privacy", permanent: true },
-      // Old sitemap-overview route → canonical /sitemap
+      // Old sitemap-overview route -> canonical /sitemap
       { source: "/sitemap-overview", destination: "/sitemap", permanent: true },
     ];
   },

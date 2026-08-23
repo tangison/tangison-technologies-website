@@ -34,19 +34,21 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: SITE.name,
-    template: `%s: ${SITE.name}`,
+    default: SITE.legalName,
+    template: `%s: ${SITE.legalName}`,
   },
   description: SITE.description,
   keywords: [
     "Tangison",
-    "operational intelligence",
+    "Tangison Technologies CC",
     "Namibia",
-    "without assumptions",
-    "AI agent",
-    "resilient systems",
-    "decision systems",
-    "observation systems",
+    "ICT",
+    "artificial intelligence",
+    "digital transformation",
+    "consulting",
+    "research and development",
+    "government tenders Namibia",
+    "Windhoek technology company",
   ],
   authors: [{ name: SITE.owner }],
   creator: SITE.owner,
@@ -74,10 +76,10 @@ export const metadata: Metadata = {
     ],
   },
   openGraph: {
-    title: SITE.name,
+    title: SITE.legalName,
     description: SITE.description,
     url: SITE.siteUrl,
-    siteName: SITE.name,
+    siteName: SITE.legalName,
     locale: "en_NA",
     type: "website",
     images: [
@@ -91,7 +93,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: SITE.name,
+    title: SITE.legalName,
     description: SITE.description,
     images: ["/images/tangison/webp/02-skeleton-coast-signal-og-1200x630.webp"],
   },

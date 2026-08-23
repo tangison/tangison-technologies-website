@@ -3,7 +3,7 @@ import { pageJsonLd, JsonLdScript } from "@/lib/seo";
 import CareersContent from "@/components/pages/careers-content";
 
 const DESCRIPTION =
-  "Work with Tangison Technologies in Windhoek. Engineering, design and operations roles building systems for environments where infrastructure is uneven.";
+  "Work with Tangison Technologies CC in Windhoek. We build systems for conditions that do not cooperate.";
 
 export const metadata: Metadata = {
   title: "Careers",
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/careers" },
   openGraph: {
     images: [{ url: "/images/tangison/webp/02-skeleton-coast-signal-og-1200x630.webp", width: 1200, height: 630 }],
-    title: "Careers: Tangison Technologies",
+    title: "Careers: Tangison Technologies CC",
     description: DESCRIPTION,
   },
 };
