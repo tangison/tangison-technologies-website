@@ -498,3 +498,98 @@ Exit condition met: critic picks ours blind on every marketing route after one w
 - Live: https://www.tangison.com, minimalist capability statement, COLLINS-bar copy, five new-style images, studio portfolio surfaced as one button
 - Quality gates: lint=0, typecheck=0, build=16 routes, live verification all PASS
 - Open: founder portrait PNG pending owner file; legal review of Privacy/Terms; framer-motion cleanup (hidden /brand page); next 16.3.x Vercel revisit
+
+---
+
+# PROOF.md — Rebuild Ledger (package-driven rebuild, 2026-08-24)
+
+**Spec source**: rebuild-spec/ (the filebin package, staged in-repo)
+**Fact base note**: the package's 00-IP/compliance.md, contacts.md,
+brand-identity.md, and team.md were missing from the zip (only the CV PDF is
+present). Per the master prompt rule, facts come from: the BIPA public
+registry (queried live 2026-08-23), the CV PDF, the page briefs (client's
+own documents), and owner instructions given in this session. Anything not
+traceable is marked [NEEDS CLIENT VERIFICATION] here, never stated as fact.
+
+## Owner decisions this session
+
+- Careers page: actively looking for interns (owner statement 2026-08-24).
+- Contact forms: added on the site (owner instruction 2026-08-24); no-backend
+  WhatsApp/mailto delivery (DESIGN.md, upgrade path noted).
+- Case-study attribution: team's continuous delivery history, previously
+  trading as GemsWeb Digital (history.json framing rule + CV).
+- Queue management: no deployed client named, so the brief's fallback applies:
+  build capability with a clearly labeled concept.
+- Open-source tools: all seven owner-named (Ubuntu, Debian, Docker,
+  PostgreSQL, Nginx, Nextcloud, Fedora), official marks only.
+- Founder photo: package's rough cutout ships as PLACEHOLDER (DESIGN.md).
+
+## Page ledger (one row per page in sitemap.json)
+
+| Page | Built | Checked against | Result | Status |
+|---|---|---|---|---|
+| / (home.json) | Wave 8: one-sentence hero, solutions rows, real case-study strip, recognition band, tools band, compliance anchor | wearecollins.com (fetched) + anti-ai-patterns.md + home.json brief | lint 0, tsc 0, build 10 routes, 30-point crawl ALL PASS (one-sentence hero, no em dashes, no exclamation points, 7 official tool marks with alt, 4 pending marks text-only, real case assets, registry footer, imagery 200s) | DONE |
+| /company (about.json) | not started | wearecollins.com + about.json | pending | PENDING |
+| /company/history | not started | history.json + CV | pending | PENDING |
+| /company/founder | not started | founder.json + CV + 05-assets note | pending | PENDING |
+| /company/team | not started | team.json (names/roles/emails from brief) | pending | PENDING |
+| /company/recognition | not started | recognition.json logo rules | pending | PENDING |
+| /company/compliance | not started | BIPA registry (verified) + compliance.json | pending | PENDING |
+| /company/careers | not started | owner instruction (interns) + careers.json | pending | PENDING |
+| /company/contact | not started | contact.json + central contacts + form instruction | pending | PENDING |
+| /solutions | not started | vercel.com/digitalocean.com (fetched) + solutions briefs | pending | PENDING |
+| /solutions/self-hosted-infrastructure | not started | systems bar + brief | pending | PENDING |
+| /solutions/custom-software | not started | systems bar + brief | pending | PENDING |
+| /solutions/custom-software/queue-management | not started | systems bar + brief (labeled-concept rule) | pending | PENDING |
+| /solutions/public-sector-readiness | not started | systems bar + BIPA facts | pending | PENDING |
+| /products | not started | products briefs + live product URLs | pending | PENDING |
+| /products/hola-credit | not started | hola.tangison.com (live) + brief | pending | PENDING |
+| /products/agent | not started | brief (discontinued-build-history framing) | pending | PENDING |
+| /case-studies | not started | wearecollins.com + real project assets | pending | PENDING |
+| /case-studies/times-of-namibia | not started | live site ton.tangison.com + brief | pending | PENDING |
+| /case-studies/oryx-institute | not started | live site oryxinstitute.org + brief | pending | PENDING |
+| /case-studies/feorm | not started | live site feorm.vercel.app + brief | pending | PENDING |
+| /case-studies/hola-credit | not started | live site hola.tangison.com + brief | pending | PENDING |
+| /process | not started | systems bar + process.json | pending | PENDING |
+| /studio | not started | studio/bridge.json + studio.tangison.com | pending | PENDING |
+| /open-source | not started | systems bar + official tool marks (fetched) | pending | PENDING |
+| /insights | not started | wearecollins.com editorial bar + _index.json | pending | PENDING |
+| /insights/* (20 articles) | not started | per-article source_status rule | pending | PENDING |
+| /privacy | not started | legal.json + actual implementation | pending | PENDING |
+| /terms | not started | terms.json + actual implementation | pending | PENDING |
+
+## Pause marker (interactive session)
+
+Wave 8 complete and committed. Resumes at Wave 9: the company cluster
+(/company, /company/history, /company/founder, /company/team,
+/company/recognition, /company/compliance, /company/careers,
+/company/contact) against the Collins bar. No other routes are in flight.
+
+## Wave 8 (foundation + home) evidence
+
+| Phase | Action | Target | Command or method | Result | Evidence | Timestamp | Status |
+|---|---|---|---|---|---|---|---|
+| Rebuild | Package download + staging | rebuild-spec/ | filebin fetch + unzip + copy | 6 spec dirs staged in-repo | rebuild-spec/ tree | 2026-08-24T03:30 | PASS |
+| Rebuild | Fact base | src/lib/facts.ts, src/lib/contacts.ts | BIPA registry query (2026-08-23), CV PDF extraction (pypdf, internal tool only), briefs, owner instructions | Every exported fact carries a source | facts.ts comments | 2026-08-24T03:45 | PASS |
+| Rebuild | Missing-IP handling | 00-IP | Inspection | compliance.md, contacts.md, brand-identity.md, team.md absent from zip; logged; fact fallback applied per master prompt rule | this file, top | 2026-08-24T03:45 | LOGGED |
+| Rebuild | Bar references | rebuild-spec/bars/ | curl fetch | wearecollins.com home+programs, vercel.com, digitalocean.com fetched | bars/*.html | 2026-08-24T03:40 | PASS |
+| Rebuild | Tool marks | public/images/tools/ | curl from official sources (provenance in DESIGN.md) | 7 tools, 8 files (Nginx both variants) | DESIGN.md table | 2026-08-24T03:45 | PASS |
+| Rebuild | Case-study assets | public/images/case-studies/ | curl from the four live project sites | ton-og, oryx-hero, feorm-logo, hola-logo+og (real assets) | DESIGN.md table | 2026-08-24T03:45 | PASS |
+| Rebuild | Generated imagery | public/images/generated/ | generate_image, 4 new files | windhoek-architecture, namib-dune-ridge, server-room-dark, cabling-macro; logged as generated | DESIGN.md imagery table | 2026-08-24T03:35 | PASS |
+| Rebuild | Cluster tokens | globals.css | CSS variable scopes [data-cluster] | Namib + systems light/dark palettes, 2px radius lock | globals.css cluster section | 2026-08-24T03:50 | PASS |
+| Rebuild | Seven footers | components/site/footers.tsx | 7 distinct components, contact data from central module | registry, minimal, systems (cluster prop), product, proof, studio, editorial | footers.tsx | 2026-08-24T03:52 | PASS |
+| Rebuild | Cluster shell | components/site/cluster-shell.tsx | nav + theme toggle (systems only) + footer dispatch | 9 clusters wired | cluster-shell.tsx | 2026-08-24T03:53 | PASS |
+| Rebuild | Contact form | components/shared/contact-form.tsx | no-backend WhatsApp/mailto delivery | general + tender variants | DESIGN.md | 2026-08-24T03:55 | PASS |
+| Rebuild | Home page | src/app/page.tsx + rebuild-home.tsx | full implementation | one-sentence hero, solutions rows, real case strip, recognition band, tools band, compliance anchor | page.tsx, rebuild-home.tsx | 2026-08-24T04:00 | BUILT (gate below) |
+| Rebuild | Old routes retired | src/app/* | rm of technology, profile, projects, contact, careers, brand, company (rebuilt as clusters) | old site routes removed from tree | git status | 2026-08-24T04:00 | PASS |
+
+### [NEEDS CLIENT VERIFICATION] items (not shipped as fact)
+
+- NCRST logo file (status confirmed usable, but no logo asset supplied;
+  renders as typographic mark).
+- NIPDB / GEN / Basecamp / MWF marks and written permission (text-only).
+- Founder photo permanent version (placeholder in force).
+- Queue-management deployed client (labeled-concept fallback in force).
+- Exact intern role titles (owner said "common roles"; page will list
+  internships by area: development, design, operations, flagged for
+  confirmation).
